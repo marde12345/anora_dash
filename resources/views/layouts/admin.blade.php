@@ -62,8 +62,8 @@
             </div>
 
             <!-- Nav Item - Profile -->
-            <li class="nav-item {{ Nav::isRoute('profile') }}">
-                <a class="nav-link" href="{{ route('profile') }}">
+            <li class="nav-item {{ Nav::isRoute('admin.profile') }}">
+                <a class="nav-link" href="{{ route('admin.profile') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>{{ __('Profile') }}</span>
                 </a>
@@ -81,8 +81,8 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Nav Item - List Users -->
-            <li class="nav-item {{ Nav::isRoute('list') }}">
-                <a class="nav-link" href="{{ route('list') }}">
+            <li class="nav-item {{ Nav::isRoute('admin.list') }}">
+                <a class="nav-link" href="{{ route('admin.list') }}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>{{ __('List Users') }}</span>
                 </a>
@@ -263,7 +263,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                <a class="dropdown-item" href="{{ route('admin.profile') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Profile') }}
                                 </a>
