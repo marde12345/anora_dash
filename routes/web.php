@@ -17,20 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::prefix('dashboard')->group(function () {
+    Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('', 'Auth\LoginController@showLoginForm')->name('login');
 
-Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::put('/profile', 'ProfileController@update')->name('profile.update');
+    Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::get('', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::get('home', 'HomeController@index')->name('home');
-Route::get('/list', 'HomeController@listUsers')->name('list');
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
-// Route::get('profile', 'ProfileController@index')->name('profile');
-// Route::put('profile', 'ProfileController@update')->name('profile.update');
-Route::prefix('dashboard')->group(function () { });
+    Route::get('/list', 'HomeController@listUsers')->name('list');
+});
 
 
 Route::get('/about', function () {
