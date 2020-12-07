@@ -31,7 +31,7 @@ class AdminController extends Controller
             //...
         ];
 
-        return view('home', compact('widget'));
+        return view('admin/home', compact('widget'));
     }
 
     public function listUsers()
@@ -42,7 +42,7 @@ class AdminController extends Controller
             'ListUsers' => $users,
         ];
 
-        return view('list_users', compact('widget'));
+        return view('admin/list_users', compact('widget'));
     }
 
     public function listUserSts()
@@ -53,6 +53,6 @@ class AdminController extends Controller
             'ListUserSts' => $users_st
         ];
 
-        return view('list_user_sts', compact('widget'));
+        return view('admin/list_user_sts', compact('widget'));
     }
 }

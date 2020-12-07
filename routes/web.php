@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/logout', 'Auth\LoginController@logout');
+
 Route::prefix('dashboard')->group(function () {
     Auth::routes();
     Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
@@ -25,8 +27,8 @@ Route::prefix('dashboard')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('', 'AdminController@index')->name('admin.root');
 
-    Route::get('/profile', 'ProfileController@index')->name('admin.profile');
-    Route::put('/profile', 'ProfileController@update')->name('admin.profile.update');
+    Route::get('/profile', 'AdminProfileController@index')->name('admin.profile');
+    Route::put('/profile', 'AdminProfileController@update')->name('admin.profile.update');
 
     Route::get('/list', 'AdminController@listUsers')->name('admin.list');
 });

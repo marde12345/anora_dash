@@ -37,6 +37,12 @@ class RedirectIfAuthenticated
                 case 'st_user':
                     return redirect('/st_user');
                     break;
+                case 'customer':
+                    return redirect('/customer');
+                    break;
+                default:
+                    return redirect('/');
+                    break;
             }
         }
         return $next($request);

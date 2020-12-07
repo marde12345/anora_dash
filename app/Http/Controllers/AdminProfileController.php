@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class AdminProfileController extends Controller
 {
     public function __construct()
     {
@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profile');
+        return view('admin/profile');
     }
 
     public function update(Request $request)
@@ -47,6 +47,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile')->withSuccess('Profile updated successfully.');
+        return redirect()->route('admin.profile')->withSuccess('Profile updated successfully.');
     }
 }
