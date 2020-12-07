@@ -19,16 +19,16 @@ Route::get('/', function () {
 
 Route::prefix('dashboard')->group(function () {
     Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('', 'HomeController@index')->name('admin.root');
+    Route::get('', 'AdminController@index')->name('admin.root');
 
     Route::get('/profile', 'ProfileController@index')->name('admin.profile');
     Route::put('/profile', 'ProfileController@update')->name('admin.profile.update');
 
-    Route::get('/list', 'HomeController@listUsers')->name('admin.list');
+    Route::get('/list', 'AdminController@listUsers')->name('admin.list');
 });
 
 Route::prefix('st_user')->group(function () { });
