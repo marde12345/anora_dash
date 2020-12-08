@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
+
 Route::prefix('dashboard')->group(function () {
     // Auth::routes();
     Auth::routes(['verify' => true]);
@@ -26,6 +27,7 @@ Route::prefix('dashboard')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/laporan', 'AdminController@generatePerjanjianKerjasama')->name('laporan');
     Route::get('', 'AdminController@index')->name('root');
 
     Route::get('/profile', 'AdminProfileController@index')->name('profile');

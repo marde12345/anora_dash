@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -46,14 +47,12 @@ class AdminController extends Controller
         return view('admin/list_users', compact('widget'));
     }
 
-    public function listUserSts()
+    public function generatePerjanjianKerjasama()
     {
-        $users_st = User::all();
+        $data = ['title' => 'Welcome to belajarphp.net'];
 
-        $widget = [
-            'ListUserSts' => $users_st
-        ];
-
-        return view('admin/list_user_sts', compact('widget'));
+        $pdf = PDF::loadView('laporan/perjanjian_kerjasama', $data);
+        // return $pdf->download('laporan-pdf.pdf');
+        return $pdf->stream();
     }
 }

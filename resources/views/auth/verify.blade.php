@@ -15,13 +15,17 @@
                                 </div>
 
                                 @if (session('resent'))
-                                    <div class="alert alert-success border-left-success" role="alert">
-                                        {{ __('A fresh verification link has been sent to your email address.') }}
-                                    </div>
+                                <div class="alert alert-success border-left-success" role="alert">
+                                    {{ __('A fresh verification link has been sent to your email address.') }}
+                                </div>
                                 @endif
 
                                 {{ __('Before proceeding, please check your email for a verification link.') }}
-                                {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                                {{ __('If you did not receive the email') }},
+                                <form id="my_form" method="post" action="{{ route('verification.resend')}}">
+                                    {{ csrf_field() }}
+                                    <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"> {{ __('click here to request another') }}</a>.
+                                </form>
                             </div>
                         </div>
                     </div>
