@@ -80,11 +80,24 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Users') }}
+            </div>
+
             <!-- Nav Item - List Users -->
-            <li class="nav-item {{ Nav::isRoute('admin.list') }}">
-                <a class="nav-link" href="{{ route('admin.list') }}">
+            <li class="nav-item {{ Nav::isRoute('admin.user.index') }}">
+                <a class="nav-link" href="{{ route('admin.user.index') }}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>{{ __('List Users') }}</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - List Users -->
+            <li class="nav-item {{ Nav::isRoute('admin.user.create') }}">
+                <a class="nav-link" href="{{ route('admin.user.create') }}">
+                    <i class="fas fa-fw fa-user-plus"></i>
+                    <span>{{ __('Tambah User') }}</span>
                 </a>
             </li>
 
