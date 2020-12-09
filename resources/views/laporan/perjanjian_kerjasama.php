@@ -1,8 +1,6 @@
 <html>
 
 <head>
-    <link href="../public/css/sb-admin-2.min.css" rel="stylesheet">
-
     <style>
         /** 
                 Set the margins of the page to 0, so the footer and the header
@@ -70,20 +68,32 @@
                 <li style="text-align: justify;">Mitra usaha mengetahui, memahami, dan menyetujui penggunaan dan pemanfaatan layanan ANORA serta tunduk kepada Syarat dan Ketentuan ANORA.</li>
                 <li style="text-align: justify;">Mitra usaha mengetahui bahwa Perjanjian beserta seluruh bagian-bagian dan lampiran-lampiran daripadanya (apabila ada) merupakan suatu kesatuan dan bagian yang tidak terpisahkan dari Perjanjian.</li>
             </ol>
-            <table>
+            <table style="width: 100%;">
                 <tr>
-                    <td>Untuk dan atas nama ANORA</td>
-                    <td>Untuk dan atas nama Mitra Usaha</td>
+                    <td style="text-align: center;">
+                        <b>Untuk dan atas nama ANORA</b><br><br><br><br>
+                        <b>_______________________________</b>
+                    </td>
+                    <td style="text-align: center;">
+                        <b>Untuk dan atas nama Mitra Usaha</b><br><br><br><br>
+                        <b>_______________________________</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <b>Nama&emsp;:</b><br>
+                        Jabatan&emsp;:
+                    </td>
+                    <td>
+                        <br>
+                        <b>Nama&emsp;:</b><br>
+                        Jabatan&emsp;: Pemilik
+                    </td>
                 </tr>
             </table>
-            <div class="row">
-                <div class="col-xs-6">Untuk dan atas nama ANORA</div>
-                <div class="col-xs-6">Untuk dan atas nama Mitra Usaha</div>
-            </div>
         </p>
     </main>
-    <script src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../public/js/sb-admin-2.min.js"></script>
 </body>
 
 </html>
