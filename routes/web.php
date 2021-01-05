@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.landing.home');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout');
