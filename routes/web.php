@@ -13,33 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home.landing.home');
-});
+Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dashboard.php'));
 
+Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'));
 
-Route::prefix('dashboard')->group(function () {
-    // Auth::routes();
-    Auth::routes(['verify' => true]);
-    Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
-});
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/laporan', 'AdminController@generatePerjanjianKerjasama')->name('laporan');
-    Route::get('', 'AdminController@index')->name('root');
-
-    Route::get('/profile', 'AdminProfileController@index')->name('profile');
-    Route::put('/profile', 'AdminProfileController@update')->name('profile.update');
-
-    // Route::get('/list', 'AdminUserController@index')->name('user');
-    Route::resource('user', 'AdminUserController');
-});
-
-Route::prefix('st_user')->group(function () { });
-
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::prefix('st_user')->name('st_user.')->group(base_path('routes/web_st_user.php'));
