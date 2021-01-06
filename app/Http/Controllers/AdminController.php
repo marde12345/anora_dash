@@ -14,6 +14,9 @@ class AdminController extends Controller
      *
      * @return void
      */
+
+    private $TAG = "Admin ";
+
     public function __construct()
     {
         $this->middleware(['auth', 'verified']);
@@ -29,8 +32,8 @@ class AdminController extends Controller
         $users = User::count();
 
         $widget = [
+            'title' => $this->TAG . 'Home',
             'users' => $users,
-            //...
         ];
 
         return view('admin/home', compact('widget'));
@@ -41,6 +44,7 @@ class AdminController extends Controller
         $users = User::all()->except(Auth::id());;
 
         $widget = [
+            'title' => $this->TAG . 'List User',
             'ListUsers' => $users,
         ];
 
@@ -49,7 +53,9 @@ class AdminController extends Controller
 
     public function generatePerjanjianKerjasama()
     {
-        $data = ['title' => 'Welcome to belajarphp.net'];
+        $data = [
+            'title' => $this->TAG . 'Home',
+        ];
 
         $pdf = PDF::loadView('laporan/perjanjian_kerjasama', $data);
         // return $pdf->download('laporan-pdf.pdf');
