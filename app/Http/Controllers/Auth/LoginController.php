@@ -40,29 +40,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function redirectTo()
-    {
-        session()->flash('success', 'You are logged in!');
-        return $this->redirectTo;
-    }
-
-    // public function redirectTo()
+    // protected function redirectTo()
     // {
-    //     $role = Auth::user()->role;
-    //     // dd($role);
-    //     switch ($role) {
-    //         case 'admin':
-    //             session()->flash('success', 'Selamat datang ADMIN!!!');
-    //             return '/admin';
-    //             break;
-    //         case 'st_user':
-    //             session()->flash('success', 'Selamat datang!');
-    //             return '/st_user';
-    //             break;
-    //         case 'customer':
-    //             session()->flash('success', 'Selamat datang!');
-    //             return '/customer';
-    //             break;
-    //     }
+    //     session()->flash('success', 'You are logged in!');
+    //     return $this->redirectTo;
     // }
+
+    public function redirectTo()
+    {
+        $role = Auth::user()->role;
+        // dd($role);
+        switch ($role) {
+            case 'admin':
+                session()->flash('success', 'Selamat datang ADMIN!!!');
+                return '/dashboard';
+                break;
+            case 'st_user':
+                session()->flash('success', 'Selamat datang!');
+                return '/dashboard';
+                break;
+            case 'customer':
+                session()->flash('success', 'Selamat datang!');
+                return '/';
+                break;
+            default:
+                return '/';
+                break;
+        }
+    }
 }
