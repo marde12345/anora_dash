@@ -345,8 +345,8 @@
                 <div class="modal-body">Tekan "Logout" dibawah untuk mengakhiri session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Batal') }}</button>
-                    <a class="btn btn-danger" href="{{ route('dashboard.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                    <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST" style="display: none;">
+                    <a class="btn btn-danger" href="{{ route('root.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                    <form id="logout-form" action="{{ route('root.logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
                 </div>

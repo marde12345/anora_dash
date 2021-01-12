@@ -20,7 +20,7 @@ block content
               for error, i in errors
                 div.alert.alert-danger
                   strong #{ error }
-          form(action=route('login') method="post")
+          form(action='/login' method="post")
             input(type='hidden' name='_token' value=csrf_token())
             .form-group
               label.mb-1 Email atau No. Telepon

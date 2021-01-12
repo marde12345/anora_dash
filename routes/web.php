@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 

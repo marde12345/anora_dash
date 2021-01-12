@@ -20,19 +20,20 @@ block content
               for error, i in errors
                 div.alert.alert-danger
                   strong #{ error }
-          form(action='/auth/register' method='post')
+          form(action='/register' method='post')
+            input(type='hidden' name='_token' value=csrf_token())
             .form-row
               .col
                 .form-group
                   label.mb-1 Nama depan
                   .position-relative.icon-form-control
                     i.mdi.mdi-account.position-absolute
-                    input.form-control(type='text' name='firstname')
+                    input.form-control(type='text' name='name')
               .col
                 .form-group
                   label.mb-1 Nama belakang
                   .position-relative
-                    input.form-control(type='text' name='lastname')
+                    input.form-control(type='text' name='last_name')
             .form-group
               label.mb-1 Email
               .position-relative.icon-form-control
@@ -43,6 +44,11 @@ block content
               .position-relative.icon-form-control
                 i.mdi.mdi-key-variant.position-absolute
                 input.form-control(type='password' name='password')
+            .form-group
+              label.mb-1 Konfirmasi Password
+              .position-relative.icon-form-control
+                i.mdi.mdi-key-variant.position-absolute
+                input.form-control(type='password' name='password_confirmation')
             .form-group
               label.mb-1
                 | Anda setuju dengan 
