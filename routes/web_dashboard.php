@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes(['verify' => true]);
-Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
+// Auth::routes(['verify' => true]);
+// Auth::routes();
+
+Route::get('/', 'DashboardController@index')->name('home');
 
 Route::get('/logout', 'Auth\LoginController@logout');
 

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
 Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dashboard.php'));

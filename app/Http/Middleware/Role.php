@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class Role
 {
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ROOT;
 
     public function handle($request, Closure $next, String $role)
     {
