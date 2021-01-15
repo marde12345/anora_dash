@@ -11,16 +11,18 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function () {
-    return view('home.landing.login', [
-        'title' => "Login | ANORA",
+    $widget = [
+        'title' => "Login",
         // $errors=> req.flash("error")
-    ]);
+    ];
+    return view('home.login', compact('widget'));
 })->name('login');
 
 Route::get('/register', function () {
-    return view('home.landing.register', [
-        'title' => 'Pendaftaran Baru | ANORA'
-    ]);
+    $widget = [
+        'title' => 'Pendaftaran Baru'
+    ];
+    return view('home.register', compact('widget'));
 })->name('register');
 
 Route::get('/forgot', function () {
