@@ -48,9 +48,10 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/statistisi', function () {
-    return view('home.landing.statistisi-portofolio', [
-        'title' => 'Portofolio Statistisi | ANORA'
-    ]);
+    $widget = [
+        'title' => "Portofolio Statistisi",
+    ];
+    return view('home.statistisi-portofolio', compact('widget'));
 })->name('statistisi');
 
 Route::get('/message', function () {
