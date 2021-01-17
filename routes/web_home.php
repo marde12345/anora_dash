@@ -41,9 +41,10 @@ Route::get('/browse', function () {
 })->name('browse');
 
 Route::get('/about', function () {
-    return view('home.landing.about', [
-        'title' => 'Tentang Kami | ANORA'
-    ]);
+    $widget = [
+        'title' => "Tentang Kami",
+    ];
+    return view('home.about', compact('widget'));
 })->name('about');
 
 Route::get('/statistisi', function () {
