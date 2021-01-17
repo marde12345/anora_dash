@@ -27,9 +27,10 @@ Route::get('/register', function () {
 })->name('register');
 
 Route::get('/forgot', function () {
-    return view('home.landing.forgot', [
-        'title' => 'Lupa Kata Sandi | ANORA'
-    ]);
+    $widget = [
+        'title' => "Lupa Kata Sandi",
+    ];
+    return view('home.forgot', compact('widget'));
 })->name('forgot');
 
 Route::get('/browse', function () {
