@@ -34,9 +34,10 @@ Route::get('/forgot', function () {
 })->name('forgot');
 
 Route::get('/browse', function () {
-    return view('home.landing.browse', [
-        'title' => 'Pendaftaran Baru | ANORA'
-    ]);
+    $widget = [
+        'title' => "Cari",
+    ];
+    return view('home.browse', compact('widget'));
 })->name('browse');
 
 Route::get('/about', function () {
