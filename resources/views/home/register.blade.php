@@ -11,10 +11,10 @@
                         <p class="text-muted">Dedikasikan kemampuan professionalmu</p><strong></strong>
                     </div>
                     @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible border-left-danger" role="alert">
+                    <div class="alert alert-danger" role="alert">
                         <ul class="pl-4 my-2">
                             @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li><strong>{{ $error }}</strong></li>
                             @endforeach
                         </ul>
                     </div>
