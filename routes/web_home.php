@@ -62,13 +62,15 @@ Route::get('/message', function () {
 })->name('message');
 
 Route::get('/profile', function () {
-    return view('home.landing.profile', [
-        'title' => 'Profile | ANORA'
-    ]);
+    $widget = [
+        'title' => "FAK GURUNG DADI",
+    ];
+    return view('home.profile', compact('widget'));
 })->name('profile');
 
 Route::get('/notification', function () {
-    return view('home.landing.notification', [
-        'title' => 'Notifikasi | ANORA'
-    ]);
+    $widget = [
+        'title' => "Notifikasi",
+    ];
+    return view('home.notification', compact('widget'));
 })->name('notification');
