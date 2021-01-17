@@ -55,9 +55,10 @@ Route::get('/statistisi', function () {
 })->name('statistisi');
 
 Route::get('/message', function () {
-    return view('home.landing.message', [
-        'title' => 'Kotak Pesan | ANORA'
-    ]);
+    $widget = [
+        'title' => "Kotak Pesan",
+    ];
+    return view('home.message', compact('widget'));
 })->name('message');
 
 Route::get('/profile', function () {
