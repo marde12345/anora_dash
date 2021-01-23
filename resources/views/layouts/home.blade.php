@@ -39,7 +39,8 @@
 </head>
 <nav class="navbar navbar-expand-lg navbar-light topbar static-top shadow-sm bg-white osahan-nav-top px-0">
   <div class="container">
-    <!-- Sidebar Toggle (Topbar)--><a class="navbar-brand" href="/"><img src="/home/images/logo-horizontal.png" alt=""></a>
+    <!-- Sidebar Toggle (Topbar)-->
+    <a class="navbar-brand" href="/"><img src="/home/images/logo-horizontal.png" alt=""></a>
     <!-- Topbar Search-->
     <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
       <div class="input-group">
@@ -64,6 +65,7 @@
           </form>
         </div>
       </li>
+      @auth
       <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications"><a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <svg class="feather feather-bell" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -152,8 +154,8 @@
         <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
           <h6 class="dropdown-header d-flex align-items-center"><img class="dropdown-user-img" src="/home/images/default_user.jpg">
             <div class="dropdown-user-details">
-              <div class="dropdown-user-details-name">Dieka Prastya</div>
-              <div class="dropdown-user-details-email">dieks1995@gmail.com</div>
+              <div class="dropdown-user-details-name">{{ auth()->user()->name }}</div>
+              <div class="dropdown-user-details-email">{{ auth()->user()->email }}</div>
             </div>
           </h6>
           <div class="dropdown-divider"></div><a class="dropdown-item" href="account.html">
@@ -163,7 +165,8 @@
                 <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
               </svg>
             </div>Profil
-          </a><a class="dropdown-item" href="#">
+          </a>
+          <a class="dropdown-item" href="#" data-target="#logoutModal" data-toggle="modal">
             <div class="dropdown-item-icon">
               <svg class="feather feather-log-out" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -175,6 +178,7 @@
         </div>
       </li>
     </ul>
+    @endauth
   </div>
 </nav>
 <!-- Navigation-->
@@ -189,8 +193,13 @@
       </ul>
     </div>
     <ul class="navbar-nav ml-auto">
+      @guest
       <li class="nav-item"><a class="nav-link" href="/login"><span>Login</span></a></li>
       <li class="nav-item"><a class="nav-link" href="/register"><span>Daftar Baru</span></a></li>
+      @endguest
+      @auth
+      <li class="nav-item"><a class="nav-link" href="/dashboard"><span>Dashboard</span></a></li>
+      @endauth
     </ul>
   </div>
 </nav>
@@ -213,6 +222,28 @@
   </div>
 </footer>
 <!-- footer-->
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ __('Mau logout?') }}</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Tekan "Logout" dibawah untuk mengakhiri session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Batal') }}</button>
+        <a class="btn btn-danger" href="{{ route('root.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+        <form id="logout-form" action="{{ route('root.logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="/home/vendor/jquery/jquery.min.js"></script>
