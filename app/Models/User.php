@@ -10,13 +10,15 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'email', 'password',
+        'name', 'last_name', 'email', 'password', 'role', 'photo_profile_id'
     ];
 
     /**
@@ -64,6 +66,43 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return "{$this->name} {$this->last_name}";
+    }
+
+    /**
+     * Get the user's role name.
+     *
+     * @return string
+     */
+    public function getRoleNameAttribute()
+    {
+        switch ($this->role) {
+            case 'admin':
+                $roleName = 'Administrator';
+                break;
+
+            case 'st_user':
+                $roleName = 'Statistikan';
+                break;
+
+            default:
+                $roleName = 'Pelanggan';
+                break;
+        }
+        return $roleName;
+    }
+
+    /**
+     * Get the user's photo profile.
+     *
+     * @return string
+     */
+    public function getPhotoProfileAttribute()
+    {
+        if (is_null($this->photo_profile_id)) {
+            return $this->DEFAULT_PHOTO_PROFILE;
+        }
+
+        return Image_uploaded::find($this->photo_profile_id)->name;
     }
 
     /**

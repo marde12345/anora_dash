@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AdminProfileController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {
@@ -19,7 +20,7 @@ class AdminProfileController extends Controller
         $widget = [
             'title' => "Profile",
         ];
-        return view('admin/profile', compact('widget'));
+        return view('dashboard/profile', compact('widget'));
     }
 
     public function update(Request $request)
@@ -32,7 +33,6 @@ class AdminProfileController extends Controller
             'new_password' => 'nullable|min:8|max:12|required_with:current_password',
             'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
         ]);
-
 
         $user = User::findOrFail(Auth::user()->id);
 
@@ -50,6 +50,6 @@ class AdminProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.profile')->withSuccess('Profile updated successfully.');
+        return redirect()->route('dashboard.profile')->withSuccess('Profile updated successfully.');
     }
 }

@@ -23,6 +23,6 @@ class DashboardController extends Controller
             'users' => $users,
         ];
 
-        return view('admin/home', compact('widget'));
+        return view('dashboard/home', compact('widget'));
     }
 }
