@@ -45,7 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     // notice that here the attribute name is in snake_case
-    protected $appends = [];
+    protected $appends = [
+        'avatar'
+    ];
 
     /**
      * The attributes that should be visible in arrays.
@@ -114,5 +116,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getAvatarAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email));
+    }
+    public function messagesTo()
+    {
+        return $this->hasOne(Message::class, 'to_id')->latest();
+    }
+    public function messagesFrom()
+    {
+        return $this->hasOne(Message::class, 'from_id')->latest();
     }
 }
