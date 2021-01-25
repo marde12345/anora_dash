@@ -22,6 +22,13 @@ Route::get('vue', function () {
     return view('layouts.vue');
 });
 
+Route::group(['prefix' => 'message'], function () {
+    Route::get('user/{query}', 'MessageController@user');
+    Route::get('user-message/{id}', 'MessageController@message');
+    Route::get('user-message/{id}/read', 'MessageController@read');
+    Route::post('user-message', 'MessageController@send');
+});
+
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
 Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dashboard.php'));
