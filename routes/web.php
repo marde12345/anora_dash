@@ -19,8 +19,8 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::get('vue', function () {
-    return view('layouts.vue');
-});
+    return view('vuem');
+})->name('vuem');
 
 Route::group(['prefix' => 'message'], function () {
     Route::get('user/{query}', 'MessageController@user');

@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Events\MessageEvent;
 use App\Http\Resources\MessageResource;
 use App\Http\Resources\UserResource;
-use App\Message;
-use App\User;
+use App\Models\Message;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
@@ -16,7 +17,7 @@ class MessageController extends Controller
     protected function user($query)
     {
         $field = ['id', 'name', 'email'];
-        $id = auth()->user()->id;
+        $id = Auth::user()->id;
         if ($query === 'all') {
             $users = Message::with(['userFrom', 'userTo'])
                 ->where('messages.to_id', $id)
@@ -46,7 +47,7 @@ class MessageController extends Controller
     {
         $to = [
             ['from_id', $id],
-            ['to_id', auth()->user()->id]
+            ['to_id', Auth::user()->id]
         ];
         $messages = Message::with('users')->where($to);
         $first = $messages;
@@ -54,7 +55,7 @@ class MessageController extends Controller
             DB::table('messages')->where($to)->update(['read_at' => now()]);
         }
         $messages = $messages->orWhere([
-            ['from_id', auth()->user()->id],
+            ['from_id', Auth::user()->id],
             ['to_id', $id]
         ])->get();
         $messages = MessageResource::collection($messages);
@@ -62,7 +63,7 @@ class MessageController extends Controller
     }
     protected function send(Request $request)
     {
-        $request->merge(['from_id' => auth()->user()->id]);
+        $request->merge(['from_id' => Auth::user()->id]);
         $message = Message::create($request->all());
         event(new MessageEvent($message));
         $message = new MessageResource($message);
@@ -72,7 +73,7 @@ class MessageController extends Controller
     {
         $to = [
             ['from_id', $id],
-            ['to_id', auth()->user()->id]
+            ['to_id', Auth::user()->id]
         ];
         DB::table('messages')->where($to)->update(['read_at' => now()]);
     }

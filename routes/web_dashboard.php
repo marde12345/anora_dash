@@ -13,7 +13,7 @@ Route::post('/uploadimage', 'UploadImageController@uploadPhotoProfile')->name('p
 
 Route::resource('user', 'Dashboard\UserController');
 
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/about', function () {
