@@ -18,6 +18,10 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
+Route::get('vue', function () {
+    return view('layouts.vue');
+});
+
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
 Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dashboard.php'));
