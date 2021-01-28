@@ -13,10 +13,10 @@ class User extends Authenticatable implements MustVerifyEmail
     private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
 
     protected $fillable = [
-        'name', 'last_name', 'email', 'password', 'role', 'photo_profile_id'
+        'name', 'last_name', 'email', 'password', 'role', 'photo_profile_id', 'photo_url', 'socialite_name', 'socialite_id', 'email_verified_at'
     ];
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'socialite_name', 'socialite_id', 'email_verified_at'
     ];
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -55,11 +55,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getPhotoProfileAttribute()
     {
-        if (is_null($this->photo_profile_id)) {
-            return $this->DEFAULT_PHOTO_PROFILE;
+        // Jika ada photo dari avatar
+        if ($this->photo_url) {
+            return $this->photo_url;
         }
 
-        return Image_uploaded::find($this->photo_profile_id)->name;
+        // Jika tidak ada photo avatar
+        if (is_null($this->photo_profile_id)) {
+            // maka foto profile default
+            $photoProfile = $this->DEFAULT_PHOTO_PROFILE;
+        } else {
+            // maka foto dari id
+            $photoProfile = Image_uploaded::find($this->photo_profile_id)->name;
+        }
+
+        return asset('storage/images/PhotoProfile/300/' . $photoProfile);
     }
 
     public function setPasswordAttribute($value)

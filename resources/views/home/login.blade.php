@@ -42,7 +42,8 @@
                             <p class="small text-muted">Atau login menggunakan</p>
                             <div class="row">
                                 <div class="col-6">
-                                    <button class="btn btn-outline-instagram btn-block" type="button"><i class="mdi mdi-instagram"></i> Instagram</button>
+                                    <a href="{{ route('login.provider', 'google') }}" class="btn btn-danger">{{ __('Google Sign in') }}</a>
+                                    <!-- <button class="btn btn-outline-instagram btn-block" type="button"><i class="mdi mdi-instagram"></i> Instagram</button> -->
                                 </div>
                                 <div class="col-6">
                                     <button class="btn btn-outline-facebook btn-block" type="button"><i class="mdi mdi-facebook"></i> Facebook</button>

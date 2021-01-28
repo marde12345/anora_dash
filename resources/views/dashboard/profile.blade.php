@@ -13,7 +13,7 @@
         <div class="card shadow mb-4">
             <div class="card-profile-image mt-4">
                 <!-- <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->name[0] }}"></figure> -->
-                <img src="{{ asset('storage/images/PhotoProfile/300/'.auth()->user()->photoProfile) }}" alt="" class="rounded-circle avatar avatar font-weight-bold" style="height: auto; min-width: 180px;">
+                <img src="{{ auth()->user()->photoProfile }}" alt="" class="rounded-circle avatar avatar font-weight-bold" style="height: auto; min-width: 180px;">
                 <form action="{{ route('dashboard.profile.upload.image') }}" method="post" enctype="multipart/form-data">
                     @csrf
 

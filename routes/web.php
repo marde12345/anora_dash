@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
+Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
 Route::get('vue', function () {
     return view('vuem');
