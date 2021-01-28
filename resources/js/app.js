@@ -49,13 +49,15 @@ new Vue({
         // fungsi untuk push laravel echo dan pusher
         fetchPusher() {
             Echo.channel('user-message.' + this.id)
-                .listen('MessageEvent', (e) => {
+                .listen('.MessageEvent', (e) => {
+                    console.log('pusher lewat');
                     this.pushMessage(e, e.from_id, 'push')
                 })
         },
         // semua akan di eksekusi disini
         pushMessage(data, user_id, action = '') {
             let index = this.users.findIndex((s) => s.id === user_id)
+
             if (index != -1 && action == 'push') {
                 this.users.splice(index, 1) // menghapus user
             }

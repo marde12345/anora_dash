@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Http\Resources\MessageResource;
+use App\Models\Message;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageEvent
+class MessageEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -32,6 +34,7 @@ class MessageEvent
      */
     public function broadcastOn()
     {
+        // dd($this->field->to_id);
         return new Channel('user-message.' . $this->field->to_id);
     }
 

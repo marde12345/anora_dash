@@ -55778,7 +55778,9 @@ new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
     fetchPusher: function fetchPusher() {
       var _this4 = this;
 
-      Echo.channel('user-message.' + this.id).listen('MessageEvent', function (e) {
+      Echo.channel('user-message.' + this.id).listen('.MessageEvent', function (e) {
+        console.log('pusher lewat');
+
         _this4.pushMessage(e, e.from_id, 'push');
       });
     },
