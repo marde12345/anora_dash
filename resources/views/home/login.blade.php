@@ -35,7 +35,7 @@
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
                             <input class="custom-control-input" id="customCheck1" type="checkbox" />
-                            <label class="custom-control-label" for="customCheck1">Ingat kata sandi</label>
+                            <!-- <label class="custom-control-label" for="customCheck1">Ingat kata sandi</label> -->
                         </div>
                         <button class="btn btn-success btn-block text-uppercase" type="submit"> Masuk</button>
                         <div class="text-center mt-3 border-bottom pb-3">
@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <a href="{{ route('login.provider', 'google') }}">
-                                        <button class="btn btn-primary btn-outline-google btn-block" type="button"><i class="mdi mdi-google"></i>
+                                        <button class="btn btn-outline-google btn-block" type="button"><i class="mdi mdi-google"></i>
                                             Google
                                         </button>
                                     </a>
@@ -58,8 +58,18 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="py-3 d-flex align-item-center"><a href="forgot-password.html">Lupa kata sandi?</a><span class="ml-auto">Baru di ANORA? <a href="/register">Daftar Baru</a></span></div>
+                            <!-- <br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{{ route('login.provider', 'twitter') }}">
+                                        <button class="btn btn-outline-twitter btn-block" type="button"><i class="mdi mdi-twitter"></i>
+                                            Twitter
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> -->
+                            <div class="py-3 d-flex align-item-center"><a href="forgot-password.html">Lupa kata sandi?</a><span class="ml-auto">Baru di ANORA? <a href="/register">Daftar Baru</a></span></div>
                     </form>
                 </div>
             </div>
