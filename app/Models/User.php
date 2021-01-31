@@ -72,6 +72,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return asset('storage/images/PhotoProfile/300/' . $photoProfile);
     }
 
+    public function getCountMessageUnreadAttribute()
+    {
+        $count = Message::where('to_id', $this->id)->whereNull('read_at')->count();
+
+        return $count;
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

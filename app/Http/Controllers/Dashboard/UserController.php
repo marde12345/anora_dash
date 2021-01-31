@@ -131,8 +131,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->delete();
+        if ($user->role == "admin") {
+            return redirect()->route('dashboard.user.index')
+                ->with('error', $user->name . ' adalah admin!');
+        } else {
+            $user->delete();
 
-        return redirect()->route('dashboard.user.index')->with('success', $user->name . ' berhasil dihapus!');
+            return redirect()->route('dashboard.user.index')->with('success', $user->name . ' berhasil dihapus!');
+        }
     }
 }
