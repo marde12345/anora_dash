@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Resources\UserNotificationResource;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('coba/{id}', function ($id) {
+    return new UserNotificationResource(User::findOrFail($id));
+});
 
 // Auth::routes(['verify' => true]);
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');

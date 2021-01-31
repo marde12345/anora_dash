@@ -139,7 +139,7 @@
         </div>
       </li>
       <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications">
-        <a class="btn btn-icon btn-transparent-dark dropdown-toggle nav-link" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :badge="notif">
+        <a class="btn btn-icon btn-transparent-dark dropdown-toggle nav-link" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <svg class="feather feather-mail" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
@@ -275,8 +275,8 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="/home/vendor/jquery/jquery.min.js"></script>
 <script src="/home/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/home/vendor/jquery/jquery.min.js"></script>
 
 <!-- Contact form JavaScript-->
 <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file.-->

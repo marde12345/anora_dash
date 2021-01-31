@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\UserNotificationResource;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -77,6 +78,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $count = Message::where('to_id', $this->id)->whereNull('read_at')->count();
 
         return $count;
+    }
+
+    public function getUserNotificationAttribute()
+    {
+        return false;
     }
 
     public function setPasswordAttribute($value)

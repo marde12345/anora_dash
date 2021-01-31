@@ -8,6 +8,10 @@ Version: 1.0
 $(document).ready(function () {
 	"use strict";
 
+	$('#navbarDropdownAlerts, #navbarDropdownMessages').click(function () {
+		alert("Handler for .click() called.");
+	});
+
 	/* Select2 */
 	$('select').select2();
 
@@ -21,23 +25,23 @@ $(document).ready(function () {
 		arrows: true,
 		fade: false,
 		responsive: [{
-				breakpoint: 1099,
-				settings: {
-					slidesToShow: 4,
-				}
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-				}
+			breakpoint: 1099,
+			settings: {
+				slidesToShow: 4,
 			}
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 3,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 1,
+			}
+		}
 
 		]
 	});
@@ -48,23 +52,23 @@ $(document).ready(function () {
 		arrows: true,
 		fade: false,
 		responsive: [{
-				breakpoint: 1099,
-				settings: {
-					slidesToShow: 4,
-				}
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-				}
+			breakpoint: 1099,
+			settings: {
+				slidesToShow: 4,
 			}
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 2,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 1,
+			}
+		}
 
 		]
 	});
@@ -74,23 +78,23 @@ $(document).ready(function () {
 		arrows: true,
 		fade: false,
 		responsive: [{
-				breakpoint: 1099,
-				settings: {
-					slidesToShow: 4,
-				}
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 2,
-				}
+			breakpoint: 1099,
+			settings: {
+				slidesToShow: 4,
 			}
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 3,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 2,
+			}
+		}
 
 		]
 	});
@@ -127,23 +131,23 @@ $(document).ready(function () {
 			focusOnSelect: true,
 			variableWidth: true,
 			responsive: [{
-					breakpoint: 1099,
-					settings: {
-						slidesToShow: 4,
-					}
-				},
-				{
-					breakpoint: 1024,
-					settings: {
-						slidesToShow: 2,
-					}
-				},
-				{
-					breakpoint: 600,
-					settings: {
-						slidesToShow: 1,
-					}
+				breakpoint: 1099,
+				settings: {
+					slidesToShow: 4,
 				}
+			},
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 2,
+				}
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 1,
+				}
+			}
 
 			]
 		});
@@ -171,11 +175,11 @@ $(document).ready(function () {
 		arrows: true,
 		fade: false,
 		responsive: [{
-				breakpoint: 767,
-				settings: {
-					slidesToShow: 1,
-				}
+			breakpoint: 767,
+			settings: {
+				slidesToShow: 1,
 			}
+		}
 
 		]
 	});
@@ -186,23 +190,23 @@ $(document).ready(function () {
 		arrows: true,
 		fade: false,
 		responsive: [{
-				breakpoint: 1099,
-				settings: {
-					slidesToShow: 4,
-				}
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 2,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-				}
+			breakpoint: 1099,
+			settings: {
+				slidesToShow: 4,
 			}
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 2,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 1,
+			}
+		}
 
 		]
 	});
@@ -216,23 +220,23 @@ $(document).ready(function () {
 		focusOnSelect: true,
 		variableWidth: true,
 		responsive: [{
-				breakpoint: 1099,
-				settings: {
-					slidesToShow: 4,
-				}
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 1,
-				}
+			breakpoint: 1099,
+			settings: {
+				slidesToShow: 4,
 			}
+		},
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 3,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 1,
+			}
+		}
 
 		]
 	});
