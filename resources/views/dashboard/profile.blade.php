@@ -4,8 +4,6 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
 
-@include('layouts.notification')
-
 <div class="row">
 
     <div class="col-lg-4 order-lg-2">

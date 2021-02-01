@@ -11,7 +11,10 @@ Route::get('/profile', 'Dashboard\ProfileController@index')->name('profile');
 Route::put('/profile', 'Dashboard\ProfileController@update')->name('profile.update');
 Route::post('/uploadimage', 'UploadImageController@uploadPhotoProfile')->name('profile.upload.image');
 
-Route::resource('user', 'Dashboard\UserController');
+Route::resources([
+    'user' => 'Dashboard\UserController',
+    'userupgraderole' => 'Dashboard\UserUpgradeRoleController',
+]);
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 

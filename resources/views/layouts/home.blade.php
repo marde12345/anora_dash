@@ -144,7 +144,11 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          <span class="badge badge-danger badge-counter">{{ auth()->user()->countMessageUnread }}</span>
+          @if(auth()->user()->countMessageUnread)
+          <span class="badge badge-danger badge-counter">
+            {{auth()->user()->countMessageUnread}}
+          </span>
+          @endif
         </a>
         <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
           <h6 class="dropdown-header dropdown-notifications-header">
@@ -176,7 +180,7 @@
           </h6>
           <div class="dropdown-divider"></div>
           @if(auth()->user()->role === "customer")
-          <a class="dropdown-item" href="{{ route('dashboard.profile') }}">
+          <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('upgrade-user-role-form').submit();">
             <div class="dropdown-item-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
                 <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -185,6 +189,9 @@
                 <line x1="23" y1="11" x2="17" y2="11"></line>
               </svg>
             </div>Jadikan saya mitra <span class="badge badge-primary">Daftar</span>
+            <form id="upgrade-user-role-form" action="{{ route('dashboard.userupgraderole.store') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
           </a>
           @endif
           <a class="dropdown-item" href="{{ route('dashboard.profile') }}">
@@ -233,6 +240,11 @@
   </div>
 </nav>
 <!-- Begin Page Content-->
+<section class="py-1 bg-white">
+  <div class="container">
+    @include('layouts.notification')
+  </div>
+</section>
 @yield('main-content')
 <!-- footer-->
 <footer class="bg-white" style="padding-top: 0px !important">

@@ -5,8 +5,6 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('User') }}</h1>
 
-@include('layouts.notification')
-
 <div class="row">
 
     <!-- Content Column -->

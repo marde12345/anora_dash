@@ -215,7 +215,11 @@
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                @if(auth()->user()->countMessageUnread)
+                                <span class="badge badge-danger badge-counter">
+                                    {{auth()->user()->countMessageUnread}}
+                                </span>
+                                @endif
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
@@ -301,6 +305,8 @@
 
                 </nav>
                 <!-- End of Topbar -->
+
+                @include('layouts.notification')
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
