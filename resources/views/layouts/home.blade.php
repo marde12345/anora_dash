@@ -15,13 +15,13 @@
   @endauth
 
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
   <!-- Favicon Icon-->
   <link rel="icon" type="image/png" href="{{ asset('img/anora_small.png') }}">
 
   <!-- Styles -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 
   <!-- Bootstrap core CSS-->
   <link href="/home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -144,7 +144,11 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          @if(count(auth()->user()->countMessageUnread))
+          @if(count(auth()->user()->countMessageUnread) > 3)
+          <span class="badge badge-danger badge-counter">
+            3+
+          </span>
+          @else
           <span class="badge badge-danger badge-counter">
             {{count(auth()->user()->countMessageUnread)}}
           </span>
@@ -157,17 +161,16 @@
               <polyline points="22,6 12,13 2,6"></polyline>
             </svg> Kotak Pesan
           </h6>
-          <a class="dropdown-item dropdown-notifications-item" href="#!"><img class="dropdown-notifications-item-img" src="/home/images/default_user.jpg">
+          @foreach(auth()->user()->countMessageUnread as $message)
+          <a class="dropdown-item dropdown-notifications-item" href="#!">
+            <img class="dropdown-notifications-item-img" src="{{$message->from->photo_url}}">
             <div class="dropdown-notifications-item-content">
-              <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-              <div class="dropdown-notifications-item-content-details">Emily Fowler &middot; 58m</div>
+              <div class="dropdown-notifications-item-content-text">{{$message->content}}</div>
+              <div class="dropdown-notifications-item-content-details">{{$message->from->name ." ". $message->from->last_name}} &middot; {{$message->send_at}}</div>
             </div>
-          </a><a class="dropdown-item dropdown-notifications-item" href="#!"><img class="dropdown-notifications-item-img" src="/home/images/default_user.jpg">
-            <div class="dropdown-notifications-item-content">
-              <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-              <div class="dropdown-notifications-item-content-details">Diane Chambers &middot; 2d</div>
-            </div>
-          </a><a class="dropdown-item dropdown-notifications-footer" href="/user/message">Baca Semua Pesan</a>
+          </a>
+          @endforeach
+          <a class="dropdown-item dropdown-notifications-footer" href="/user/message">Baca Semua Pesan</a>
         </div>
       </li>
       <li class="nav-item dropdown no-arrow no-caret dropdown-user"><a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="{{ auth()->user()->photoProfile }}"></a>
@@ -287,8 +290,8 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="/home/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/home/vendor/jquery/jquery.min.js"></script>
+<script src="/home/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Contact form JavaScript-->
 <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file.-->

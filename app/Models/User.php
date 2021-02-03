@@ -78,7 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getCountMessageUnreadAttribute()
     {
         // $count = Message::where('to_id', $this->id)->whereNull('read_at')->count();
-        $message_resource = MessagesNotificationResource::collection(Message::where('to_id', $this->id)->whereNull('read_at')->get());
+        $message_resource = MessagesNotificationResource::collection(
+            Message::where('to_id', $this->id)
+                ->whereNull('read_at')
+                ->limit(3)
+                ->get()
+        );
         $res = json_decode(json_encode($message_resource));
 
         return $res;

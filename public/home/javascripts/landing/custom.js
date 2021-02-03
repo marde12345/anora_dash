@@ -8,10 +8,6 @@ Version: 1.0
 $(document).ready(function () {
 	"use strict";
 
-	$('#navbarDropdownAlerts, #navbarDropdownMessages').click(function () {
-		alert("Handler for .click() called.");
-	});
-
 	/* Select2 */
 	$('select').select2();
 
