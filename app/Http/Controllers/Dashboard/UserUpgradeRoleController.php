@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserUpgradeRoleResource;
 use App\Models\UserUpgradeRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use League\OAuth1\Client\Server\User;
 
 class UserUpgradeRoleController extends Controller
 {
@@ -16,7 +18,17 @@ class UserUpgradeRoleController extends Controller
      */
     public function index()
     {
-        //
+        $users = UserUpgradeRoleResource::collection(UserUpgradeRole::where('from_id', 21)->get());
+        $users = json_decode(json_encode($users));
+        // $users = UserUpgradeRole::orderBy('read_at', 'desc')
+        //     ->join('users', 'users.id', '=', 'user_upgrade_roles.from_id')->get();
+        // return $users;
+        $widget = [
+            'title' => 'User Upgrade',
+            'ListUsers' => $users,
+        ];
+
+        return view('dashboard.user_index', compact('widget'));
     }
 
     /**
