@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Resources\MessagesNotificationResource;
 use App\Http\Resources\UserNotificationResource;
+use App\Http\Resources\UserUpgradeRoleResource;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -75,14 +77,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getCountMessageUnreadAttribute()
     {
-        $count = Message::where('to_id', $this->id)->whereNull('read_at')->count();
+        // $count = Message::where('to_id', $this->id)->whereNull('read_at')->count();
+        $message_resource = MessagesNotificationResource::collection(Message::where('to_id', $this->id)->whereNull('read_at')->get());
+        $res = json_decode(json_encode($message_resource));
 
-        return $count;
+        return $res;
     }
 
     public function getUserNotificationAttribute()
     {
-        return false;
+        $count = UserUpgradeRoleResource::collection(UserUpgradeRole::where('from_id', 21)->get());
+        $res = json_decode(json_encode($count));
+
+        return $res;
     }
 
     public function setPasswordAttribute($value)

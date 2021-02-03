@@ -144,9 +144,9 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          @if(auth()->user()->countMessageUnread)
+          @if(count(auth()->user()->countMessageUnread))
           <span class="badge badge-danger badge-counter">
-            {{auth()->user()->countMessageUnread}}
+            {{count(auth()->user()->countMessageUnread)}}
           </span>
           @endif
         </a>
