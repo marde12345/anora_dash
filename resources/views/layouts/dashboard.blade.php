@@ -70,12 +70,14 @@
             </li>
 
             <!-- Nav Item - About -->
+            @if (0)
             <li class="nav-item {{ Nav::isRoute('dashboard.about') }}">
                 <a class="nav-link" href="{{ route('dashboard.about') }}">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>{{ __('About') }}</span>
                 </a>
             </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -98,6 +100,14 @@
                 <a class="nav-link" href="{{ route('dashboard.user.create') }}">
                     <i class="fas fa-fw fa-user-plus"></i>
                     <span>{{ __('Tambah User') }}</span>
+                </a>
+            </li>
+
+            <li class="nav-item {{ Nav::isRoute('dashboard.userupgraderole.index') }}">
+                <a class="nav-link" href="{{ route('dashboard.userupgraderole.index') }}">
+                    <span class="badge badge-danger badge-counter">3+</span>
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>{{ __('Permintaan Update') }}</span>
                 </a>
             </li>
 

@@ -28,7 +28,7 @@ class UserUpgradeRoleController extends Controller
             'ListUsers' => $users,
         ];
 
-        return view('dashboard.user_index', compact('widget'));
+        return view('dashboard.userupgraderole_index', compact('widget'));
     }
 
     /**
