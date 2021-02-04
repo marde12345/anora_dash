@@ -20,7 +20,9 @@ class UserUpgradeRoleResource extends JsonResource
             'from' => User::findOrFail($this->from_id),
             'status' => $this->status,
             'description' => $this->description,
-            'read_at' => $this->read_at
+            'read_at' => $this->read_at,
+            'from_role' => $this->from_role,
+            'to_role' => $this->to_role
         ];
     }
 }

@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserUpgradeRoleResource;
+use App\Models\User;
 use App\Models\UserUpgradeRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use League\OAuth1\Client\Server\User;
+use Illuminate\Support\Facades\DB;
 
 class UserUpgradeRoleController extends Controller
 {
+    private $ROLES = ['customer', 'st_users', 'admin'];
+
     /**
      * Display a listing of the resource.
      *
@@ -18,11 +21,16 @@ class UserUpgradeRoleController extends Controller
      */
     public function index()
     {
-        $users = UserUpgradeRoleResource::collection(UserUpgradeRole::where('from_id', 21)->get());
+        $users = UserUpgradeRoleResource::collection(
+            UserUpgradeRole::orderBy('read_at', 'asc')
+                ->orderBy('created_at', 'desc')
+                ->orderBy('status', 'asc')
+                ->get()
+        );
         $users = json_decode(json_encode($users));
-        // $users = UserUpgradeRole::orderBy('read_at', 'desc')
-        //     ->join('users', 'users.id', '=', 'user_upgrade_roles.from_id')->get();
-        // return $users;
+
+        UserUpgradeRole::where('read_at', null)->update(["read_at" => now()]);
+
         $widget = [
             'title' => 'User Upgrade',
             'ListUsers' => $users,
@@ -53,9 +61,20 @@ class UserUpgradeRoleController extends Controller
         $user_upgrade = UserUpgradeRole::where('from_id', $user_id)->first();
 
         if (is_null($user_upgrade)) {
+            $from_role = Auth::user()->role;
+            if ($from_role == "admin") {
+                return redirect()->back()
+                    ->withError("Anda sudah memiliki role tertinggi");
+            }
+
+            $pos_from_role = array_search($from_role, $this->ROLES, true);
+            $to_role = $this->ROLES[$pos_from_role + 1];
+
             $status_create = UserUpgradeRole::create([
                 "from_id" => Auth::user()->id,
                 "status" => "review",
+                "from_role" => $from_role,
+                "to_role" => $to_role,
             ]);
 
             if ($status_create) {
@@ -68,9 +87,6 @@ class UserUpgradeRoleController extends Controller
         } elseif ($user_upgrade->status == "review") {
             return redirect()->back()
                 ->withStatus("Silahkan tunggu, akun anda sedang direview!");
-        } elseif ($user_upgrade->status == "accepted") {
-            return redirect()->back()
-                ->withSuccess("Selamat, akun anda telah menjadi statistikan");
         } elseif ($user_upgrade->status == "rejected") {
             return redirect()->back()
                 ->withError("Akun anda ditolak untuk menjadi statistikan, karena " . $user_upgrade->description);
@@ -111,7 +127,49 @@ class UserUpgradeRoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataRole = UserUpgradeRole::findOrFail($id);
+        $user = User::findOrFail($dataRole->from_id);
+
+        if ($request->action == "accept") {
+            if ($user->role == "admin") {
+                return redirect()->back()
+                    ->withError("Anda sudah memiliki role tertinggi");
+            }
+
+            DB::transaction(function () use ($dataRole, $user) {
+                try {
+                    $dataRole->update([
+                        "status" => "accepted",
+                        "description" => "Diterima",
+                        "action_at" => now()
+                    ]);
+
+                    $user->update([
+                        'role' => $dataRole->to_role
+                    ]);
+                } catch (\Throwable $th) {
+                    return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+                }
+            });
+
+            // DB::beginTransaction();
+            // try {
+            //     $dataRole->update([
+            //         "status" => "accepted",
+            //         "description" => "Diterima",
+            //         "action_at" => now()
+            //     ]);
+
+            //     $user->update([
+            //         'role' => $dataRole->to_role
+            //     ]);
+            //     DB::commit();
+            // } catch (\Throwable $th) {
+            //     DB::rollBack();
+            // }
+
+            return redirect()->route('dashboard.userupgraderole.index')->with('success', $user->name . ' telah diberikan hak akses sebagai ' . $dataRole->to_role . '!');
+        } elseif ($request->action == "tolak") { } elseif ($request->action == "blok") { }
     }
 
     /**

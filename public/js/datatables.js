@@ -6,4 +6,11 @@ $(document).ready(function () {
             ],
         }
     );
+    $('#list_userupgraderole_table').DataTable(
+        {
+            columnDefs: [
+                { width: 100, targets: -1 }
+            ],
+        }
+    );
 });

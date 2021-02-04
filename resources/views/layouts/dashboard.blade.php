@@ -10,6 +10,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @auth
+    <meta name="user_id" content="{{ auth()->user()->id }}">
+    @endauth
 
     <title>{{ config('app.name', 'Laravel') . ' | ' .  $widget['title'] }}</title>
 

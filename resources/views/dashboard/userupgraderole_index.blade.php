@@ -3,7 +3,7 @@
 @section('main-content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('User') }}</h1>
+<h1 class="h3 mb-4 text-gray-800">{{ __('User Role') }}</h1>
 
 <div class="row">
 
@@ -13,24 +13,16 @@
         <!-- Project Card Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List user</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Permintaan update role</h6>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="{{ route('dashboard.user.create') }}" class="btn btn-primary" role="button">Tambahkan user</a>
-                    </div>
-                </div>
-
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <div class="row">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="list_users_table" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="list_userupgraderole_table" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Informasi</th>
-                                    <th>Role</th>
+                                    <th>Permintaan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -46,38 +38,41 @@
                                         {{ $user->description }}
                                     </td>
                                     <td>
-                                        @if ($user->from->role == 'admin')
-                                        <span class="badge badge-light">{{ "Admin" }}</span>
-                                        @elseif ($user->from->role == 'st_user')
-                                        <span class="badge badge-primary">{{ "Mitra" }}</span>
-                                        @else ($user->from->role == 'customer')
-                                        <span class="badge badge-success">{{ "Pelanggan" }}</span>
+                                        @if ($user->from_role == 'admin')
+                                        <button class="badge badge-light">{{ "Admin" }}</button>
+                                        @elseif ($user->from_role == 'st_user')
+                                        <button class="badge badge-primary">{{ "Mitra" }}</button>
+                                        @else ($user->from_role == 'customer')
+                                        <button class="badge badge-success">{{ "Pelanggan" }}</button>
+                                        @endif
+                                        ->
+                                        @if ($user->to_role == 'admin')
+                                        <button class="badge badge-light">{{ "Admin" }}</button>
+                                        @elseif ($user->to_role == 'st_user')
+                                        <button class="badge badge-primary">{{ "Mitra" }}</button>
+                                        @else ($user->to_role == 'customer')
+                                        <button class="badge badge-success">{{ "Pelanggan" }}</button>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($user->status == 'review')
-                                        <span class="badge badge-info">{{ "Review" }}</span>
+                                        <button class="btn btn-info">{{ "Review" }}</button>
                                         @elseif ($user->status == 'accepted')
-                                        <span class="badge badge-success">{{ "Diterima" }}</span>
+                                        <button class="btn btn-success">{{ "Diterima" }}</button>
                                         @elseif ($user->status == 'rejected')
-                                        <span class="badge badge-danger">{{ "Ditolak" }}</span>
+                                        <button class="btn btn-danger">{{ "Ditolak" }}</button>
                                         @else ($user->status == 'blocked')
-                                        <span class="badge badge-secondary">{{ "Block" }}</span>
+                                        <button class="btn btn-secondary">{{ "Block" }}</button>
                                         @endif
                                     </td>
                                     <td>
-                                        <div class="row" style="text-align: center;">
-                                            <div class="col-md-12" style="margin: 3px;">
-                                                <div class="btn btn-primary"><i class="fa fa-pen"></i> Update</div>
-                                            </div>
-                                            <!-- <div class="col-md-12" style="margin: 3px;">
-                                                <div class="btn btn-success">Submit</div>
-                                            </div> -->
-                                            <div class="col-md-12" style="margin: 3px;">
-                                                {{Form::open(['method' => 'DELETE', 'route' => ['dashboard.user.destroy', $user->from->id]])}}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin menghapus {{$user->from->name}}?');"><i class="fa fa-trash"></i> Hapus</button>
-                                                {{Form::close()}}
-                                            </div>
+                                        <div class="btn-group" role="group">
+                                            {{Form::open(['method' => 'POST', 'route' => ['dashboard.userupgraderole.update', $user->id]])}}
+                                            @method('PATCH')
+                                            <input type="hidden" name="action" value="accept">
+                                            <button type="submit" class="btn btn-success">Setuju</button>
+                                            {{Form::close()}}
+                                            <button type="button" class="btn btn-danger">Tolak</button>
                                         </div>
                                     </td>
                                 </tr>
