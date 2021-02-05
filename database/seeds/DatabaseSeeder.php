@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\St_user;
 use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
         // $user = factory(\App\User::class, 10)->make();
         $this->call([
             UserSeeder::class,
+            St_user::class,
         ]);
     }
 }
