@@ -34,6 +34,7 @@ class MessagesNotificationResource extends JsonResource
         } else {
             $timeDif .= " detik yang lalu";
         }
+
         return [
             'id' => $this->id,
             'from' => User::findOrFail($this->from_id),

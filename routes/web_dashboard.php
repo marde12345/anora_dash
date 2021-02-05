@@ -14,6 +14,7 @@ Route::post('/uploadimage', 'UploadImageController@uploadPhotoProfile')->name('p
 Route::resources([
     'user' => 'Dashboard\UserController',
     'userupgraderole' => 'Dashboard\UserUpgradeRoleController',
+    'userchat' => 'Dashboard\MessageController',
 ]);
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

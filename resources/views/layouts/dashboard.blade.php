@@ -117,6 +117,21 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
+            <div class="sidebar-heading">
+                {{ __('Chat') }}
+            </div>
+
+            <!-- Nav Item - List Users -->
+            <li class="nav-item {{ Nav::isRoute('dashboard.userchat.index') }}">
+                <a class="nav-link" href="{{ route('dashboard.userchat.index') }}">
+                    <i class="fas fa-fw fa-comments"></i>
+                    <span>{{ __('User Chat') }}</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
