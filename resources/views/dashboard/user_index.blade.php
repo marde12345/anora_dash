@@ -52,14 +52,13 @@
                                     </td>
                                     <td>{{ __('Ini informasi') }}</td>
                                     <td>
-                                        <div class="row" style="text-align: center;">
-                                            <div class="col-md-12" style="margin: 3px;">
-                                                <div class="btn btn-primary"><i class="fa fa-pen"></i> Update</div>
+                                        <div class="btn-group" role="group">
+                                            <div style="margin: 3px;">
+                                                <a href="{{route('dashboard.user.edit',$user->id)}}">
+                                                    <div class="btn btn-primary"><i class="fa fa-pen"></i> Update</div>
+                                                </a>
                                             </div>
-                                            <!-- <div class="col-md-12" style="margin: 3px;">
-                                                <div class="btn btn-success">Submit</div>
-                                            </div> -->
-                                            <div class="col-md-12" style="margin: 3px;">
+                                            <div style="margin: 3px;">
                                                 {{Form::open(['method' => 'DELETE', 'route' => ['dashboard.user.destroy', $user->id]])}}
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin menghapus {{$user->fullName}}?');"><i class="fa fa-trash"></i> Hapus</button>
                                                 {{Form::close()}}

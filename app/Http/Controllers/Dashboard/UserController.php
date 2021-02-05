@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -98,9 +99,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $user = new UserResource(User::find($id));
+        $user = json_decode(json_encode($user));
         $widget = [
             'title' => 'User',
-            'user' => User::find($id)
+            'user' => $user
         ];
 
         return view('dashboard.user_edit', compact('widget'));
@@ -115,6 +118,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+        ]);
+
         $data = User::find($id);
 
         $data->update($request->all());

@@ -29,14 +29,39 @@ class UserResource extends JsonResource
 
         $count = Message::where($to)->whereNull('read_at')->count();
 
+        $photo = $this->getPhotoProfileAttribute();
+
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'last_name' => $this->last_name,
             'avatar' => $this->avatar,
+            'photo' => $photo,
+            'email' => $this->email,
+            'role' => $this->role,
             'from_id' => $message->from_id ?? '',
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
             'count' => $count
         ];
+    }
+
+    public function getPhotoProfileAttribute()
+    {
+        // Jika ada photo dari avatar
+        if ($this->photo_url) {
+            return $this->photo_url;
+        }
+
+        // Jika tidak ada photo avatar
+        if (is_null($this->photo_profile_id)) {
+            // maka foto profile default
+            $photoProfile = $this->DEFAULT_PHOTO_PROFILE;
+        } else {
+            // maka foto dari id
+            $photoProfile = Image_uploaded::find($this->photo_profile_id)->name;
+        }
+
+        return asset('storage/images/PhotoProfile/300/' . $photoProfile);
     }
 }
