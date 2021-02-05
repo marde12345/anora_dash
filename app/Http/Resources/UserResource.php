@@ -19,22 +19,25 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        $to = [
-            ['to_id', Auth::user()->id],
-            ['from_id', $this->id]
-        ];
+        if (!is_null(Auth::user())) {
 
-        $message = Message::where([
-            ['from_id', auth()->user()->id],
-            ['to_id', $this->id]
-        ])->orWhere($to)->latest()->first();
+            $to = [
+                ['to_id', Auth::user()->id],
+                ['from_id', $this->id]
+            ];
+
+            $message = Message::where([
+                ['from_id', auth()->user()->id],
+                ['to_id', $this->id]
+            ])->orWhere($to)->latest()->first();
 
 
-        $count = Message::where($to)->whereNull('read_at')->count();
+            $count = Message::where($to)->whereNull('read_at')->count();
 
+            // $st_user = new StUserResource(St_user::where('user_id', $this->id)->first());
+            // $st_user = json_decode(json_encode($st_user));
+        }
         $photo = $this->getPhotoProfileAttribute();
-        // $st_user = new StUserResource(St_user::where('user_id', $this->id)->first());
-        // $st_user = json_decode(json_encode($st_user));
 
         return [
             'id' => $this->id,
@@ -48,7 +51,7 @@ class UserResource extends JsonResource
             'from_id' => $message->from_id ?? '',
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
-            'count' => $count,
+            'count' => $count ?? '',
         ];
     }
 
