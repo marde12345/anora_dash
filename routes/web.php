@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('coba/{id}', function ($id) {
-    return new UserNotificationResource(User::findOrFail($id));
+Route::get('coba', function () {
+    return User::paginate(15);
 });
 
 // Auth::routes(['verify' => true]);

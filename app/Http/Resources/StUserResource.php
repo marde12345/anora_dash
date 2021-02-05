@@ -19,12 +19,12 @@ class StUserResource extends JsonResource
     public function toArray($request)
     {
         $photo_backcover = $this->getPhotoBackcoverAttribute();
-        // $user = new UserResource(User::find($this->user_id));
+        $user = new UserResource(User::find($this->user_id));
         // $user = json_decode(json_encode($user));
 
         return [
             'id' => $this->id,
-            // 'user' => $user,
+            'user' => $user ?? '',
             'level' => $this->level,
             'cover_letter' => $this->cover_letter,
             'tools' => explode('|', $this->tools),

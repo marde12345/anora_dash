@@ -33,7 +33,7 @@ class UserResource extends JsonResource
         $count = Message::where($to)->whereNull('read_at')->count();
 
         $photo = $this->getPhotoProfileAttribute();
-        $st_user = new StUserResource(St_user::where('user_id', $this->id)->first());
+        // $st_user = new StUserResource(St_user::where('user_id', $this->id)->first());
         // $st_user = json_decode(json_encode($st_user));
 
         return [
@@ -44,11 +44,11 @@ class UserResource extends JsonResource
             'photo' => $photo,
             'email' => $this->email,
             'role' => $this->role,
-            'st_user' => $st_user ?? '',
+            // 'st_user' => $st_user ?? '',
             'from_id' => $message->from_id ?? '',
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
-            'count' => $count
+            'count' => $count,
         ];
     }
 

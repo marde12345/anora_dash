@@ -137,49 +137,65 @@
                         </div>
                     </div>
                     <div class="row">
+                        @foreach($widget['statistisis']->data as $statistisi)
                         <div class="col-md-4">
-                            <a href="#"><img class="img-fluid" src='/home/images/default_user.jpg' /></a>
+                            <a href="#">
+                                <img class="img-fluid" src="{{$statistisi->photo_backcover}}" />
+                            </a>
                             <div class="inner-slider">
                                 <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
                                         <span class="seller-image">
-                                            <img class="img-fluid" src="/home/images/default_user.jpg" alt="" />
+                                            <img class="img-fluid" src="{{$statistisi->user->photo}}" alt="" />
                                         </span>
                                         <span class="seller-name">
-                                            <a href="#">Username</a>
-                                            <span class="level hint--top level-one-seller">Level 3 Statistisi</span>
+                                            <a href="#">{{$statistisi->user->name . " " . $statistisi->user->last_name}}</a>
+                                            <span class="level hint--top level-one-seller">Level {{$statistisi->level}} Statistisi</span>
                                         </span>
                                     </div>
-                                    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel quaerat deserunt necessitatibus reprehenderit, minus beatae est ipsam aut itaque voluptate officiis rerum ratione eum, saepe repudiandae omnis maiores voluptatem repellendus.</h3>
+                                    <h3>{{$statistisi->cover_letter}}</h3>
                                     <div class="content-info">
                                         <div class="rating-wrapper">
                                             <span class="gig-rating text-body-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
                                                     <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                                </svg>
-                                                Rating
-                                                <span>(Jml Review)</span>
+                                                </svg> 5.0<span>(7)</span>
                                             </span>
+                                            @foreach ($statistisi->tools as $tool)
+                                            @switch($tool)
+                                            @case('SPSS')
+                                            <span class="badge badge-primary">SPSS</span>
+                                            @break
+
+                                            @case('R')
+                                            <span class="badge badge-danger">R</span>
+                                            @break
+
+                                            @default
+                                            <span class="badge badge-secondary">Python</span>
+                                            @endswitch
+                                            @endforeach
                                         </div>
                                     </div>
-                                    <div class="footer">
-                                        <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </div>
+                                    <div class="footer"><i class="fa fa-heart" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                     <div class="footer-pagination text-center">
                         <nav class="mb-0 mt-0" aria-label="Page navigation example">
                             <ul class="pagination mb-0">
-                                <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span>
-                                        <!-- <span class="sr-only"></span>--></a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
-                                        <!-- <span class="sr-only"></span>--></a></li>
+                                @foreach($widget['statistisis']->meta->links as $link)
+                                @if ($link->active)
+                                <li class="page-item active">
+                                    @else
+                                <li class="page-item">
+                                    @endif
+                                    <a class="page-link" href="{{$link->url}}">{{$link->label}}</a>
+                                </li>
+                                @endforeach
+
                             </ul>
                         </nav>
                     </div>

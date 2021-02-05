@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/browse', 'HomeController@browse')->name('browse');
 
 Route::get('/login', function () {
     $widget = [
@@ -27,13 +28,6 @@ Route::get('/forgot', function () {
     ];
     return view('home.forgot', compact('widget'));
 })->name('forgot');
-
-Route::get('/browse', function () {
-    $widget = [
-        'title' => "Cari",
-    ];
-    return view('home.browse', compact('widget'));
-})->name('browse');
 
 Route::get('/about', function () {
     $widget = [
