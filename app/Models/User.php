@@ -27,6 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'avatar'
     ];
+    protected $guarded = []; //tambahkan baris ini
+
     protected $visible = [];
 
     public function getFullNameAttribute()

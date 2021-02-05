@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $users = User::count();
 
-        $statistisi_terbaik = UserResource::collection(User::all()->random(5));
+        $statistisi_terbaik = UserResource::collection(User::all()->random(10));
         $statistisi_terbaik = json_decode(json_encode($statistisi_terbaik));
 
         $widget = [
