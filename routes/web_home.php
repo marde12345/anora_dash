@@ -4,12 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    $widget = [
-        'title' => "Your Data Solution",
-    ];
-    return view('home.home', compact('widget'));
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/login', function () {
     $widget = [

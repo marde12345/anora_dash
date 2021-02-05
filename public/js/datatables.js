@@ -13,5 +13,5 @@ $(document).ready(function () {
             ],
         }
     );
-    $('#list_userchat_table').DataTable();
+    $('#list_chat').DataTable();
 });

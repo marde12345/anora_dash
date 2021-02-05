@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,12 +27,15 @@ class HomeController extends Controller
     {
         $users = User::count();
 
+        $statistisi_terbaik = UserResource::collection(User::all()->random(5));
+        $statistisi_terbaik = json_decode(json_encode($statistisi_terbaik));
+
         $widget = [
-            'users' => $users,
-            //...
+            'title' => "Home",
+            'statistisi_terbaik' => $statistisi_terbaik,
         ];
 
-        return view('home', compact('widget'));
+        return view('home.home', compact('widget'));
     }
 
     public function listUsers()

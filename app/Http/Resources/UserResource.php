@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserResource extends JsonResource
 {
+    private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
+
     /**
      * Transform the resource into an array.
      *
