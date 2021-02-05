@@ -80,7 +80,7 @@
                     <h3>Statisisi Terbaik</h3>
                     <div class="view recent-slider recommended-slider">
                         @foreach($widget['statistisi_terbaik'] as $statistisi_baik)
-                        <div><a href="#"><img class="img-fluid" src="/home/images/default_user.jpg" /></a>
+                        <div><a href="#"><img class="img-fluid" src="{{$statistisi_baik->st_user->photo_backcover}}" /></a>
                             <div class="inner-slider">
                                 <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
@@ -89,10 +89,10 @@
                                         </span>
                                         <span class="seller-name">
                                             <a href="#">{{$statistisi_baik->name . " " . $statistisi_baik->last_name}}</a>
-                                            <span class="level hint--top level-one-seller">Level 1 Statistisi</span>
+                                            <span class="level hint--top level-one-seller">Level {{$statistisi_baik->st_user->level}} Statistisi</span>
                                         </span>
                                     </div>
-                                    <h3>Saya akan membantu pengelolaan data anda, dan memberikan pengelolaan data dengan kualitas terbaik yang dapat saya berikan</h3>
+                                    <h3>{{$statistisi_baik->st_user->cover_letter}}</h3>
                                     <div class="content-info">
                                         <div class="rating-wrapper"><span class="gig-rating text-body-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">

@@ -15,7 +15,8 @@ class UploadImageController extends Controller
     public $path;
     public $dimensions;
     public $imageCodes = [
-        '1' => 'PhotoProfile'
+        '1' => 'PhotoProfile',
+        '2' => 'PhotoBackcover'
     ];
 
     public function __construct()
