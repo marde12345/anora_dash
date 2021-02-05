@@ -108,7 +108,7 @@
 
             <li class="nav-item {{ Nav::isRoute('dashboard.userupgraderole.index') }}">
                 <a class="nav-link" href="{{ route('dashboard.userupgraderole.index') }}">
-                    <span class="badge badge-danger badge-counter">3+</span>
+                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
                     <i class="fas fa-fw fa-users"></i>
                     <span>{{ __('Permintaan Update') }}</span>
                 </a>

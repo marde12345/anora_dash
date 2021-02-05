@@ -34,8 +34,6 @@
                                         {{ $user->from->name . " " . $user->from->last_name }}
                                         <br>
                                         {{ $user->from->email }}
-                                        <br>
-                                        {{ $user->description }}
                                     </td>
                                     <td>
                                         @if ($user->from_role == 'admin')
@@ -61,18 +59,26 @@
                                         <button class="btn btn-success">{{ "Diterima" }}</button>
                                         @elseif ($user->status == 'rejected')
                                         <button class="btn btn-danger">{{ "Ditolak" }}</button>
+                                        <br>
+                                        {{ $user->description }}
                                         @else ($user->status == 'blocked')
                                         <button class="btn btn-secondary">{{ "Block" }}</button>
+                                        <br>
+                                        {{ $user->description }}
                                         @endif
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
+                                            @if ($user->status == "review")
                                             {{Form::open(['method' => 'POST', 'route' => ['dashboard.userupgraderole.update', $user->id]])}}
                                             @method('PATCH')
                                             <input type="hidden" name="action" value="accept">
                                             <button type="submit" class="btn btn-success">Setuju</button>
                                             {{Form::close()}}
-                                            <button type="button" class="btn btn-danger">Tolak</button>
+                                            <button type="button" class="btn btn-danger open_userUpgradeModalTolak" href="#" data-toggle="modal" data-target="#userUpgradeModalTolak" data-id="{{$user->id}}">Tolak</button>
+                                            @else
+                                            <button class="btn btn-info">Review telah diberikan</button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -82,6 +88,54 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tolak Modal-->
+<div class="modal fade" id="userUpgradeModalTolak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('Upgrade akses ditolak') }}</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- form -->
+                <form method="POST" id="formTolak" action="">
+                    @csrf
+                    @method('PATCH')
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="action">Status</label><br>
+                                <input type="radio" id="mitra" name="action" value="tolak" checked />
+                                <label class="radio">Tolak
+                                </label>
+                                <br>
+                                <input type="radio" id="pelanggan" name="action" value="blok">
+                                <label class="radio">Blok
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="form-control-label" for="desc">Alasan</label>
+                                <input type="description" id="description" class="form-control" name="description" placeholder="Tidak diijinkan">
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Batal') }}</button>
+                <button class="btn btn-danger" type="submit">Selesai</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
