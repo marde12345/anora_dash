@@ -23,6 +23,7 @@
                     </div>
                     <div class="filters-body">
                         <div id="accordion">
+                            {{Form::open(['method' => 'GET', 'route' => ['root.browse']])}}
                             <div class="filters-card border-bottom p-4">
                                 <div class="filters-card-header" id="headingOne">
                                     <h6 class="mb-0"><a class="btn-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Populer <i class="mdi mdi-chevron-down float-right"></i></a></h6>
@@ -30,26 +31,26 @@
                                 <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb1" type="checkbox" />
+                                            <input class="custom-control-input" id="cb1" type="checkbox" name="isSpss" @if (request()->get('isSpss')) {{"checked"}} @endif />
                                             <label class="custom-control-label" for="cb1">SPSS</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb2" type="checkbox" />
+                                            <input class="custom-control-input" id="cb2" type="checkbox" name="isPython" @if (request()->get('isPython')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb2">Python</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb3" type="checkbox" />
+                                            <input class="custom-control-input" id="cb3" type="checkbox" name="isR" @if (request()->get('isR')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb3">R</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb4" type="checkbox" />
+                                            <input class="custom-control-input" id="cb4" type="checkbox" name="isService1" @if (request()->get('isService1')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb4">Analisis Regresi</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb3" type="checkbox" />
-                                            <label class="custom-control-label" for="cb3">Olah Data</label>
+                                            <input class="custom-control-input" id="cb6" type="checkbox" name="isService2" @if (request()->get('isService2')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cb6">Olah Data</label>
                                         </div>
-                                        <div class="mt-2"><a class="link" href="#">Lihat semua</a></div>
+                                        <!-- <div class="mt-2"><a class="link" href="#">Lihat semua</a></div> -->
                                     </div>
                                 </div>
                             </div>
@@ -59,28 +60,28 @@
                                 </div>
                                 <div class="collapse show" id="collapsetwo" aria-labelledby="headingTwo" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
-                                        <form class="filters-search mb-3">
+                                        <!-- <form class="filters-search mb-3">
                                             <div class="form-group"><i class="fa fa-search"></i>
                                                 <input class="form-control" type="text" placeholder="Cari Kategori" />
                                             </div>
-                                        </form>
+                                        </form> -->
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb6" type="checkbox" />
+                                            <input class="custom-control-input" id="cb6" type="checkbox" name="isService2" @if (request()->get('isService2')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb6">Olah Data</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb7" type="checkbox" />
+                                            <input class="custom-control-input" id="cb7" type="checkbox" name="isService3" @if (request()->get('isService3')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb7">Data Entry</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb8" type="checkbox" />
+                                            <input class="custom-control-input" id="cb8" type="checkbox" name="isService4" @if (request()->get('isService4')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb8">Jasa Pembuatan Kuisioner</label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb9" type="checkbox" />
+                                            <input class="custom-control-input" id="cb9" type="checkbox" name="isService5" @if (request()->get('isService5')) {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cb9">Konsultasi Statistik</label>
                                         </div>
-                                        <div class="mt-2"><a class="link" href="#">Lihat semua</a></div>
+                                        <!-- <div class="mt-2"><a class="link" href="#">Lihat semua</a></div> -->
                                     </div>
                                 </div>
                             </div>
@@ -88,32 +89,38 @@
                                 <div class="filters-card-header" id="headingOffer">
                                     <h6 class="mb-0"><a class="btn-link" href="#" data-toggle="collapse" data-target="#collapseOffer" aria-expanded="true" aria-controls="collapseOffer">Rating Statistisi <i class="mdi mdi-chevron-down float-right"></i></a></h6>
                                 </div>
-                                <div class="collapse" id="collapseOffer" aria-labelledby="headingOffer" data-parent="#accordion">
+                                <div class="collapse show" id="collapseOffer" aria-labelledby="headingOffer" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb6" type="checkbox" />
-                                            <label class="custom-control-label" for="cb6">Top Rated Seller <small class="text-danger float-right">80</small></label>
+                                            <input class="custom-control-input" id="cblevel1" type="checkbox" name="isLevel1" @if (request()->get('isLevel1')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cblevel1">Top Rated Statistik <small class="text-danger float-right">81-100</small></label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb7" type="checkbox" />
-                                            <label class="custom-control-label" for="cb7">Level One <small class="text-danger float-right">34</small></label>
+                                            <input class="custom-control-input" id="cblevel2" type="checkbox" name="isLevel2" @if (request()->get('isLevel2')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cblevel2">Statistik Tinggi <small class="text-danger float-right">61-80</small></label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb8" type="checkbox" />
-                                            <label class="custom-control-label" for="cb8">Level Two <small class="text-danger float-right">56</small></label>
+                                            <input class="custom-control-input" id="cblevel3" type="checkbox" name="isLevel3" @if (request()->get('isLevel3')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cblevel3">Statistik Medium <small class="text-danger float-right">41-60</small></label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb9" type="checkbox" />
-                                            <label class="custom-control-label" for="cb9">New Seller <small class="text-danger float-right">98</small></label>
+                                            <input class="custom-control-input" id="cblevel4" type="checkbox" name="isLevel4" @if (request()->get('isLevel4')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cblevel4">Statistik Entry <small class="text-danger float-right">21-40</small></label>
                                         </div>
                                         <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" id="cb10" type="checkbox" />
-                                            <label class="custom-control-label" for="cb10">Seller <small class="text-danger float-right">21</small></label>
+                                            <input class="custom-control-input" id="cblevel5" type="checkbox" name="isLevel5" @if (request()->get('isLevel5')) {{"checked"}} @endif/>
+                                            <label class="custom-control-label" for="cblevel5">Statistik Baru <small class="text-danger float-right">0-20</small></label>
                                         </div>
-                                        <div class="mt-2"><a class="link" href="#">See all</a></div>
+                                        <!-- <div class="mt-2"><a class="link" href="#">See all</a></div> -->
                                     </div>
                                 </div>
                             </div>
+                            <div class="filters-card p-4 border-bottom">
+                                <div class="filters-card-header" id="headingOffer">
+                                    <button class="btn btn-primary" type="submit">Filter</button>
+                                </div>
+                            </div>
+                            {{Form::close()}}
                         </div>
                     </div>
                 </div>
@@ -123,15 +130,15 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="sorting-div d-flex align-items-center justify-content-between">
-                                <p class="mb-2">463 Statistisi ditemukan</p>
-                                <div class="sorting d-flex align-items-center">
+                                <p class="mb-2">{{$widget['statistisis']->meta->total}} Statistisi ditemukan</p>
+                                <!-- <div class="sorting d-flex align-items-center">
                                     <p>Urutkan</p>
                                     <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
                                         <option>Paling Dicari</option>
                                         <option>Rating Terbaik</option>
                                         <option>Statistisi Terbaru</option>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                             <h3>Jasa Olah Data</h3>
                         </div>

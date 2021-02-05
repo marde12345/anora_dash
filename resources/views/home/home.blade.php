@@ -43,11 +43,11 @@
                 </div>
                 <div class="popular"><span class="text-body-2" style="color:white">Populer</span>
                     <ul>
-                        <li><a class="text-body-2" href="#" style="color:white">SPSS</a></li>
-                        <li><a class="text-body-2" href="#" style="color:white">Python</a></li>
-                        <li><a class="text-body-2" href="#" style="color:white">R</a></li>
-                        <li><a class="text-body-2" href="#" style="color:white">Analisis Regresi</a></li>
-                        <li><a class="text-body-2" href="#" style="color:white">Olah Data</a></li>
+                        <li><a class="text-body-2" href="{{route('root.browse',['isSpss'=>'on'])}}" style="color:white">SPSS</a></li>
+                        <li><a class="text-body-2" href="{{route('root.browse',['isPython'=>'on'])}}" style="color:white">Python</a></li>
+                        <li><a class="text-body-2" href="{{route('root.browse',['isR'=>'on'])}}" style="color:white">R</a></li>
+                        <li><a class="text-body-2" href="{{route('root.browse',['isService1'=>'on'])}}" style="color:white">Analisis Regresi</a></li>
+                        <li><a class="text-body-2" href="{{route('root.browse',['isService2'=>'on'])}}" style="color:white">Olah Data</a></li>
                     </ul>
                 </div>
             </div>
@@ -79,20 +79,23 @@
                 <div class="col-lg-12">
                     <h3>Statisisi Terbaik</h3>
                     <div class="view recent-slider recommended-slider">
-                        @foreach($widget['statistisi_terbaik'] as $statistisi_baik)
-                        <div><a href="#"><img class="img-fluid" src="{{$statistisi_baik->st_user->photo_backcover}}" /></a>
+                        @foreach($widget['statistisi_terbaik']->data as $statistisi)
+                        <div class="col-md-12">
+                            <a href="#">
+                                <img class="img-fluid" src="{{$statistisi->photo_backcover}}" />
+                            </a>
                             <div class="inner-slider">
                                 <div class="inner-wrapper">
                                     <div class="d-flex align-items-center">
                                         <span class="seller-image">
-                                            <img class="img-fluid" src="{{$statistisi_baik->photo}}" alt="" />
+                                            <img class="img-fluid" src="{{$statistisi->user->photo}}" alt="" />
                                         </span>
                                         <span class="seller-name">
-                                            <a href="#">{{$statistisi_baik->name . " " . $statistisi_baik->last_name}}</a>
-                                            <span class="level hint--top level-one-seller">Level {{$statistisi_baik->st_user->level}} Statistisi</span>
+                                            <a href="#">{{$statistisi->user->name . " " . $statistisi->user->last_name}}</a>
+                                            <span class="level hint--top level-one-seller">Level {{$statistisi->level}} Statistisi</span>
                                         </span>
                                     </div>
-                                    <h3>{{$statistisi_baik->st_user->cover_letter}}</h3>
+                                    <h3>{{$statistisi->cover_letter}}</h3>
                                     <div class="content-info">
                                         <div class="rating-wrapper">
                                             <span class="gig-rating text-body-2">
@@ -100,7 +103,7 @@
                                                     <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
                                                 </svg> 5.0<span>(7)</span>
                                             </span>
-                                            @foreach ($statistisi_baik->st_user->tools as $tool)
+                                            @foreach ($statistisi->tools as $tool)
                                             @switch($tool)
                                             @case('SPSS')
                                             <span class="badge badge-primary">SPSS</span>
@@ -131,7 +134,7 @@
     <div class="get-started" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
         <div class="content">
             <h2 class="text-white">Cari Statistisi untuk Pekerjaan Anda Sekarang</h2>
-            <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm" href="#">Mulai Sekarang</a>
+            <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm" href="{{route('root.browse')}}">Mulai Sekarang</a>
         </div>
     </div>
 </div>

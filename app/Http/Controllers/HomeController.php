@@ -29,8 +29,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $statistisi_terbaik = UserResource::collection(User::where('role', 'st_user')->inRandomOrder()->limit(10)->get());
-        $statistisi_terbaik = json_decode(json_encode($statistisi_terbaik));
+        $statistisi_terbaik = StUserResource::collection(
+            St_user::where('level', '>', '80')->inRandomOrder()->limit(10)->get()
+        )->response()->getData();
+        // dd($statistisi_terbaik);
+        // $statistisi_terbaik = json_decode(json_encode($statistisi_terbaik));
 
         $widget = [
             'title' => "Home",
@@ -44,10 +47,60 @@ class HomeController extends Controller
     {
         // DB::enableQueryLog();
         $st = St_user::whereNotNull('user_id');
+        $get_param_link = "";
         // dd($st);
 
         if ($request->isSpss) {
             $st = $st->where('tools', 'like', '%SPSS%');
+            $get_param_link .= "&isSpss=on";
+        }
+        if ($request->isPython) {
+            $st = $st->where('tools', 'like', '%Python%');
+            $get_param_link .= "&isPython=on";
+        }
+        if ($request->isR) {
+            $st = $st->where('tools', 'like', '%R%');
+            $get_param_link .= "&isR=on";
+        }
+        if ($request->isService1) {
+            $st = $st->where('services', 'like', '%Analisis Regresi%');
+            $get_param_link .= "&isisService1=on";
+        }
+        if ($request->isService2) {
+            $st = $st->where('services', 'like', '%Olah Data%');
+            $get_param_link .= "&isisService2=on";
+        }
+        if ($request->isService3) {
+            $st = $st->where('services', 'like', '%Data Entry%');
+            $get_param_link .= "&isisService3=on";
+        }
+        if ($request->isService4) {
+            $st = $st->where('services', 'like', '%Pembuatan Kuisioner%');
+            $get_param_link .= "&isisService4=on";
+        }
+        if ($request->isService5) {
+            $st = $st->where('services', 'like', '%Konsultasi Statistik%');
+            $get_param_link .= "&isisService5=on";
+        }
+        if ($request->isLevel1) {
+            $st = $st->whereBetween('level', [81, 100]);
+            $get_param_link .= "&isisLevel1=on";
+        }
+        if ($request->isLevel2) {
+            $st = $st->whereBetween('level', [61, 80]);
+            $get_param_link .= "&isisLevel2=on";
+        }
+        if ($request->isLevel3) {
+            $st = $st->whereBetween('level', [41, 60]);
+            $get_param_link .= "&isisLevel3=on";
+        }
+        if ($request->isLevel4) {
+            $st = $st->whereBetween('level', [21, 40]);
+            $get_param_link .= "&isisLevel4=on";
+        }
+        if ($request->isLevel5) {
+            $st = $st->whereBetween('level', [0, 20]);
+            $get_param_link .= "&isisLevel5=on";
         }
 
         $st = $st->paginate(15);
@@ -56,6 +109,13 @@ class HomeController extends Controller
         // dd($statistisis);
 
         $len_meta_links = count($statistisis->meta->links);
+        if ($get_param_link) {
+            foreach ($statistisis->meta->links as $link) {
+                if ($link->url) {
+                    $link->url .= $get_param_link;
+                }
+            }
+        }
         $statistisis->meta->links[0]->label = "Sebelum";
         $statistisis->meta->links[$len_meta_links - 1]->label = "Sesudah";
 
