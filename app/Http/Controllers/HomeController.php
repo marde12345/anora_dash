@@ -48,38 +48,58 @@ class HomeController extends Controller
         // DB::enableQueryLog();
         $st = St_user::whereNotNull('user_id');
         $get_param_link = "";
-        // dd($st);
 
+        if ($request->q) {
+            $st_user = User::where(function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->q . '%')
+                    ->orWhere('last_name', 'LIKE', '%' . $request->q . '%');
+            })
+                ->where('role', 'st_user')
+                ->pluck('id')
+                ->toArray();
+
+            $st = $st->where(function ($query) use ($request, $st_user) {
+                $query->where('tools', 'LIKE', '%' . $request->q . '%')
+                    ->orWhere('services', 'LIKE', '%' . $request->q . '%')
+                    ->orWhere('level', 'LIKE', '%' . $request->q . '%')
+                    ->orWhere('cover_letter', 'LIKE', '%' . $request->q . '%');
+                if ($st_user) {
+                    $query->orWhereIn('user_id', $st_user);
+                }
+            });
+
+            $get_param_link .= "&q=" . $request->q;
+        }
         if ($request->isSpss) {
-            $st = $st->where('tools', 'like', '%SPSS%');
+            $st = $st->where('tools', 'LIKE', '%SPSS%');
             $get_param_link .= "&isSpss=on";
         }
         if ($request->isPython) {
-            $st = $st->where('tools', 'like', '%Python%');
+            $st = $st->where('tools', 'LIKE', '%Python%');
             $get_param_link .= "&isPython=on";
         }
         if ($request->isR) {
-            $st = $st->where('tools', 'like', '%R%');
+            $st = $st->where('tools', 'LIKE', '%R%');
             $get_param_link .= "&isR=on";
         }
-        if ($request->isService1) {
-            $st = $st->where('services', 'like', '%Analisis Regresi%');
+        if ($request->isService1 || $request->services == 'service1') {
+            $st = $st->where('services', 'LIKE', '%Analisis Regresi%');
             $get_param_link .= "&isisService1=on";
         }
-        if ($request->isService2) {
-            $st = $st->where('services', 'like', '%Olah Data%');
+        if ($request->isService2 || $request->services == 'service2') {
+            $st = $st->where('services', 'LIKE', '%Olah Data%');
             $get_param_link .= "&isisService2=on";
         }
-        if ($request->isService3) {
-            $st = $st->where('services', 'like', '%Data Entry%');
+        if ($request->isService3 || $request->services == 'service3') {
+            $st = $st->where('services', 'LIKE', '%Data Entry%');
             $get_param_link .= "&isisService3=on";
         }
-        if ($request->isService4) {
-            $st = $st->where('services', 'like', '%Pembuatan Kuisioner%');
+        if ($request->isService4 || $request->services == 'service4') {
+            $st = $st->where('services', 'LIKE', '%Pembuatan Kuisioner%');
             $get_param_link .= "&isisService4=on";
         }
-        if ($request->isService5) {
-            $st = $st->where('services', 'like', '%Konsultasi Statistik%');
+        if ($request->isService5 || $request->services == 'service5') {
+            $st = $st->where('services', 'LIKE', '%Konsultasi Statistik%');
             $get_param_link .= "&isisService5=on";
         }
         if ($request->isLevel1) {

@@ -51,14 +51,14 @@
     <!-- Sidebar Toggle (Topbar)-->
     <a class="navbar-brand" href="/"><img src="/home/images/logo-horizontal.png" alt=""></a>
     <!-- Topbar Search-->
-    <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
-      <div class="input-group">
-        <input class="form-control bg-white small" type="text" placeholder="Cari Statistisi..." aria-label="Search" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-success" type="button"><i class="fa fa-search fa-sm"></i></button>
-        </div>
+    {{Form::open(['method' => 'GET', 'route' => ['root.browse'], 'class' => 'd-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search'])}}
+    <div class="input-group">
+      <input class="form-control bg-white small" name="q" type="text" placeholder="Cari Statistisi..." aria-label="Search" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-success" type="submit"><i class="fa fa-search fa-sm"></i></button>
       </div>
-    </form>
+    </div>
+    {{Form::close()}}
     <!-- Topbar Navbar-->
     <ul class="navbar-nav align-items-center ml-auto">
       <li class="nav-item dropdown no-arrow no-caret mr-3 dropdown-notifications d-sm-none"><a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search fa-fw"></i></a>
@@ -254,7 +254,7 @@
   <div class="container">
     <div class="copyright" style="border-top: none">
       <div class="logo"><a href="index.html"><img src="/home/images/logo-horizontal.png"></a></div>
-      <p>&copy; Copyright 2020 ANORAs. All Rights Reserved</p>
+      <p>&copy; Copyright {{date("Y")}} ANORAs. All Rights Reserved</p>
       <ul class="social">
         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
         <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>

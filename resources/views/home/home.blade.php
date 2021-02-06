@@ -19,27 +19,28 @@
                     <h5 class="mb-5 text-shadow text-gray-800 font-weight-normal" style="color:white">Temukan statistisi sesuai kebutuhan Anda. Terdapat semua jenis jasa layanan statistika baik olah data, data entry, jasa pembuatan kuisioner, konsultasi statistik, dan sebagainya.</h5>
                 </div>
                 <div class="homepage-search-form">
-                    <form class="form-noborder">
-                        <div class="form-row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 form-group">
-                                <div class="location-dropdown"><i class="icofont-location-arrow"></i>
-                                    <select class="custom-select form-control border-0 shadow-sm form-control-lg">
-                                        <option> Semua </option>
-                                        <option> Olah Data</option>
-                                        <option> Data Entry</option>
-                                        <option> Jasa Pembuatan Kuisioner</option>
-                                        <option> Konsultasi Statistik</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-7 col-sm-12 form-group">
-                                <input class="form-control border-0 form-control-lg shadow-sm" type="text" placeholder="Cari Statistisi atau Keahliannya..." />
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-12 form-group">
-                                <button class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-search"></i></button>
+                    {{Form::open(['method' => 'GET', 'route' => ['root.browse']])}}
+                    <div class="form-row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 form-group">
+                            <div class="location-dropdown"><i class="icofont-location-arrow"></i>
+                                <select name=services class="custom-select form-control border-0 shadow-sm form-control-lg">
+                                    <option value="all"> Semua </option>
+                                    <option value="service1"> Analisis Regresi</option>
+                                    <option value="service2"> Olah Data</option>
+                                    <option value="service3"> Data Entry</option>
+                                    <option value="service4"> Jasa Pembuatan Kuisioner</option>
+                                    <option value="service5"> Konsultasi Statistik</option>
+                                </select>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-lg-7 col-md-7 col-sm-12 form-group">
+                            <input class="form-control border-0 form-control-lg shadow-sm" type="text" name="q" placeholder="Cari Statistisi atau Keahliannya..." />
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 form-group">
+                            <button class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    {{Form::close()}}
                 </div>
                 <div class="popular"><span class="text-body-2" style="color:white">Populer</span>
                     <ul>
