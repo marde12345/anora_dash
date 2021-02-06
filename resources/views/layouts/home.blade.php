@@ -308,4 +308,4 @@
 <script src="/home/vendor/select2/js/select2.min.js"></script>
 
 <!-- Custom-->
-<script src="/home/javascripts/landing/custom.js"></script>
+<script src="/home/js/custom_home.js"></script>
