@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('coba', function () {
-    return User::paginate(15);
+    $widget = [
+        'title' => "Home",
+    ];
+
+    // return view('home.home', compact('widget'));
+    return view('coba_map', compact('widget'));
 });
 
 // Auth::routes(['verify' => true]);

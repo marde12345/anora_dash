@@ -1,10 +1,4 @@
-/*
-Template Name: Miver - LMS & Freelance Services Marketplace for Businesses HTML Template
-Author: Askbootstrap
-Author URI: https://themeforest.net/user/askbootstrap
-Version: 1.0
-*/
-
+// Default
 $(document).ready(function () {
 	"use strict";
 
