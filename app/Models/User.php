@@ -13,7 +13,10 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-    private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
+    private const DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
+    private const DEFAULT_PASSWORD = 'anora12345';
+    private const ROLES = ['customer', 'st_users', 'admin'];
+
 
     protected $fillable = [
         'name', 'last_name', 'email', 'password', 'role', 'photo_profile_id', 'photo_url', 'socialite_name', 'socialite_id', 'email_verified_at'
@@ -68,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
         // Jika tidak ada photo avatar
         if (is_null($this->photo_profile_id)) {
             // maka foto profile default
-            $photoProfile = $this->DEFAULT_PHOTO_PROFILE;
+            $photoProfile = self::DEFAULT_PHOTO_PROFILE;
         } else {
             // maka foto dari id
             $photoProfile = Image_uploaded::find($this->photo_profile_id)->name;
@@ -108,6 +111,24 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'https://www.gravatar.com/avatar/' . md5(strtolower($this->email));
     }
+
+    // Per get an
+    public static function getDefaultPassword()
+    {
+        return self::DEFAULT_PASSWORD;
+    }
+
+    public static function getDefaultPhotoProfile()
+    {
+        return self::DEFAULT_PHOTO_PROFILE;
+    }
+
+    public static function getRoles()
+    {
+        return self::ROLES;
+    }
+
+    // Per message an
     public function messagesTo()
     {
         return $this->hasOne(Message::class, 'to_id')->latest();

@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserUpgradeRoleController extends Controller
 {
-    private $ROLES = ['customer', 'st_users', 'admin'];
-
     /**
      * Display a listing of the resource.
      *
@@ -64,8 +62,9 @@ class UserUpgradeRoleController extends Controller
                 ->withError("Anda sudah memiliki role tertinggi");
         }
 
-        $pos_from_role = array_search($from_role, $this->ROLES, true);
-        $to_role = $this->ROLES[$pos_from_role + 1];
+        $roles = User::getRoles();
+        $pos_from_role = array_search($from_role, $roles, true);
+        $to_role = $roles[$pos_from_role + 1];
 
         if (is_null($user_upgrade)) {
             $status_create = UserUpgradeRole::create([

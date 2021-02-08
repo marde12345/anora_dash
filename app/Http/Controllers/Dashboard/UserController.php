@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public const DEFAULT_PASSWORD = 'anora12345';
+    private const DEFAULT_PASSWORD = 'anora12345';
 
     /**
      * Create a new controller instance.
@@ -70,10 +70,10 @@ class UserController extends Controller
         ]);
 
         // dd($request->all());
-        User::create($request->all() + ['password' => self::DEFAULT_PASSWORD]);
+        User::create($request->all() + ['password' => User::getDefaultPassword()]);
 
         return redirect()->route('dashboard.user.index')
-            ->with('success', 'Data berhasil ditambahkan! Password default: ' . self::DEFAULT_PASSWORD);
+            ->with('success', 'Data berhasil ditambahkan! Password default: ' . User::getDefaultPassword());
     }
 
     /**

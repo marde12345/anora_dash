@@ -4,12 +4,12 @@ namespace App\Http\Resources;
 
 use App\Models\Message;
 use App\Models\St_user;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 class UserResource extends JsonResource
 {
-    private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
 
     /**
      * Transform the resource into an array.
@@ -65,7 +65,7 @@ class UserResource extends JsonResource
         // Jika tidak ada photo avatar
         if (is_null($this->photo_profile_id)) {
             // maka foto profile default
-            $photoProfile = $this->DEFAULT_PHOTO_PROFILE;
+            $photoProfile = User::getDefaultPhotoProfile();
         } else {
             // maka foto dari id
             $photoProfile = Image_uploaded::find($this->photo_profile_id)->name;

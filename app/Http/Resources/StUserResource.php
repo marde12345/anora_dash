@@ -13,7 +13,6 @@ class StUserResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    private $DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
 
 
     public function toArray($request)
@@ -39,7 +38,7 @@ class StUserResource extends JsonResource
         // Jika tidak ada photo backcover
         if (is_null($this->photo_backcover_id)) {
             // maka foto profile default
-            $photoBackcover = $this->DEFAULT_PHOTO_PROFILE;
+            $photoBackcover = User::getDefaultPhotoProfile();
         } else {
             // maka foto dari id
             $photoBackcover = Image_uploaded::find($this->photo_backcover_id)->name;
