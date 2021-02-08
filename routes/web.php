@@ -50,5 +50,3 @@ Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dash
 Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'));
 
 Route::prefix('st_user')->name('st_user.')->group(base_path('routes/web_st_user.php'));
-
-URL::forceScheme('https');
