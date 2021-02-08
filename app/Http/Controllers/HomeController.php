@@ -84,43 +84,43 @@ class HomeController extends Controller
         }
         if ($request->isService1 || $request->services == 'service1') {
             $st = $st->where('services', 'LIKE', '%Analisis Regresi%');
-            $get_param_link .= "&isisService1=on";
+            $get_param_link .= "&isService1=on";
         }
         if ($request->isService2 || $request->services == 'service2') {
             $st = $st->where('services', 'LIKE', '%Olah Data%');
-            $get_param_link .= "&isisService2=on";
+            $get_param_link .= "&isService2=on";
         }
         if ($request->isService3 || $request->services == 'service3') {
             $st = $st->where('services', 'LIKE', '%Data Entry%');
-            $get_param_link .= "&isisService3=on";
+            $get_param_link .= "&isService3=on";
         }
         if ($request->isService4 || $request->services == 'service4') {
             $st = $st->where('services', 'LIKE', '%Pembuatan Kuisioner%');
-            $get_param_link .= "&isisService4=on";
+            $get_param_link .= "&isService4=on";
         }
         if ($request->isService5 || $request->services == 'service5') {
             $st = $st->where('services', 'LIKE', '%Konsultasi Statistik%');
-            $get_param_link .= "&isisService5=on";
+            $get_param_link .= "&isService5=on";
         }
         if ($request->isLevel1) {
             $st = $st->whereBetween('level', [81, 100]);
-            $get_param_link .= "&isisLevel1=on";
+            $get_param_link .= "&isLevel1=on";
         }
         if ($request->isLevel2) {
             $st = $st->whereBetween('level', [61, 80]);
-            $get_param_link .= "&isisLevel2=on";
+            $get_param_link .= "&isLevel2=on";
         }
         if ($request->isLevel3) {
             $st = $st->whereBetween('level', [41, 60]);
-            $get_param_link .= "&isisLevel3=on";
+            $get_param_link .= "&isLevel3=on";
         }
         if ($request->isLevel4) {
             $st = $st->whereBetween('level', [21, 40]);
-            $get_param_link .= "&isisLevel4=on";
+            $get_param_link .= "&isLevel4=on";
         }
         if ($request->isLevel5) {
             $st = $st->whereBetween('level', [0, 20]);
-            $get_param_link .= "&isisLevel5=on";
+            $get_param_link .= "&isLevel5=on";
         }
 
         $st = $st->paginate(15);
