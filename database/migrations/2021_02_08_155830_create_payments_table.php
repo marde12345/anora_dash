@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContractsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,12 @@ class CreateContractsTable extends Migration
      * @return void
      */
     public function up()
-    { }
+    {
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -20,5 +25,7 @@ class CreateContractsTable extends Migration
      * @return void
      */
     public function down()
-    { }
+    {
+        Schema::dropIfExists('payments');
+    }
 }
