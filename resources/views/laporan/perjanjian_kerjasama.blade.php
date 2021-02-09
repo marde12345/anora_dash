@@ -94,39 +94,29 @@
             <tr>
                 <td style="width: 30%; text-align: left; vertical-align: top;">1. Nomor</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
-                    2020/XII/08/id-001/0003
+                    {{$widget['contract']->number_contract}}
                 </td>
             </tr>
             <tr>
                 <td style="width: 30%; text-align: left; vertical-align: top;">2. Tanggal Kerja Sama</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
-                    Selasa, 08 Desember 2020
+                    {{$widget['contract']->created_at_isoformat}}
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">3. ANORA</td>
+                <td style="width: 30%; text-align: left; vertical-align: top;">3. Mitra ANORA</td>
                 <td style="width: 20%;" class="td_perjanjian">
                     Nama : <br>
-                    Alamat :
+                    Email :
                 </td>
                 <td style="width: 50%;" class="td_perjanjian">
-                    Marde Fasma <br>
-                    Jl Jalanan
+                    {{$widget['contract']->user->name.' '.$widget['contract']->user->last_name}}
+                    <br>
+                    {{$widget['contract']->user->email}}
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">4. Perwakilan ANORA</td>
-                <td style="width: 20%;" class="td_perjanjian">
-                    Nama : <br>
-                    Alamat :
-                </td>
-                <td style="width: 50%;" class="td_perjanjian">
-                    Siapa ini? <br>
-                    Jl Raya
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">5. Mitra Jasa Layanan Statistik</td>
+                <td style="width: 30%; text-align: left; vertical-align: top;">4. Mitra Jasa Layanan Statistik</td>
                 <td style="width: 20%;" class="td_perjanjian">
                     Nama Pemilik : <br>
                     Pekerjaan : <br>
@@ -137,23 +127,29 @@
                     Alamat : <br>
                 </td>
                 <td style="width: 50%;" class="td_perjanjian">
-                    Budi Setyawan <br>
+                    {{$widget['contract']->st_user->user->name.' '.$widget['contract']->st_user->user->last_name}}
+                    <br>
                     Mahasiswa, Paruh waktu <br>
                     00000000000 <br>
                     088888888 <br>
                     088888888 <br>
-                    budisetyawan@gmail.com <br>
+                    {{$widget['contract']->st_user->user->email}}
+                    <br>
                     Jl Kanan Kiri
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">6. Bersedia <i>Home Service</i></td>
+                <td style="width: 30%; text-align: left; vertical-align: top;">5. Bersedia <i>Home Service</i></td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
+                    @if($widget['contract']->job->is_home_service)
+                    <b>IYA</b>
+                    @else
                     <b>TIDAK</b>
+                    @endif
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">7. Jenis Pembayaran</td>
+                <td style="width: 30%; text-align: left; vertical-align: top;">6. Jenis Pembayaran</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
                     Transfer Bank,<br>
                     Mandiri A.N. ANORA <br>
@@ -161,7 +157,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%; text-align: left; vertical-align: top;">8. Biaya Jasa</td>
+                <td style="width: 30%; text-align: left; vertical-align: top;">7. Biaya Jasa</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
                     20,00%
                 </td>
@@ -177,13 +173,13 @@
             <tr>
                 <td style="width: 30%; text-align: left; vertical-align: top;">1. Nama Jasa</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
-                    Entry Data
+                    {{$widget['contract']->job->name_job}}
                 </td>
             </tr>
             <tr>
                 <td style="width: 30%; text-align: left; vertical-align: top;">2. Deskripsi Jasa</td>
                 <td colspan="2" style="width: 70%;" class="td_perjanjian">
-                    Dibutuhkan seseorang untuk melakukan entry data dari hasil scan survei data kedalam bentuk excel
+                    {{$widget['contract']->job->description}}
                 </td>
             </tr>
         </table>
@@ -200,31 +196,15 @@
                 <li style="text-align: justify;">Mitra usaha mengetahui, memahami, dan menyetujui penggunaan dan pemanfaatan layanan ANORA serta tunduk kepada Syarat dan Ketentuan ANORA.</li>
                 <li style="text-align: justify;">Mitra usaha mengetahui bahwa Perjanjian beserta seluruh bagian-bagian dan lampiran-lampiran daripadanya (apabila ada) merupakan suatu kesatuan dan bagian yang tidak terpisahkan dari Perjanjian.</li>
             </ol>
-            <table style="width: 100%;">
-                <tr>
-                    <td style="text-align: center;">
-                        <b>Untuk dan atas nama ANORA</b><br><br><br><br><br>
-                        <b>_______________________________</b>
-                    </td>
-                    <td style="text-align: center;">
-                        <b>Untuk dan atas nama Mitra Usaha</b><br><br><br><br><br>
-                        <b>_______________________________</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <b>Nama&emsp;: Marde Fasma</b><br>
-                        Jabatan&emsp;: Super Admin ANORA
-                    </td>
-                    <td>
-                        <br>
-                        <b>Nama&emsp;: Budi Setyawan</b><br>
-                        Jabatan&emsp;: Pemilik
-                    </td>
-                </tr>
-            </table>
-            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/coba', 'QRCODE')}}" alt="barcode" />
+            Mengetahui :
+            <ol type="3">
+                <li style="text-align: justify;">Pihak 1 : Anora</li>
+                <li style="text-align: justify;">Pihak 2 : {{$widget['contract']->user->name.' '.$widget['contract']->user->last_name}}</li>
+                <li style="text-align: justify;">Pihak 3 : {{$widget['contract']->st_user->user->name.' '.$widget['contract']->st_user->user->last_name}}</li>
+            </ol>
+            <br><br><br>
+            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/contract/'.$widget['contract']->barcode, 'QRCODE')}}" alt="barcode" />
+            QRcode verifikasi dokumen sebagai bukti keabsahan perjanjian kerjasama ini.
         </p>
     </main>
 </body>

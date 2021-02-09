@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ContractResource;
 use App\Http\Resources\StUserResource;
 use App\Models\Contract;
 use App\Models\Job;
@@ -10,10 +11,31 @@ use App\Models\St_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Faker\Factory as Faker;
+use PDF;
 
 class PlaygroundController extends Controller
 {
     public function playground()
+    {
+        // return new ContractResource(Contract::inRandomOrder()->first());
+        return $this->createContract(new ContractResource(Contract::inRandomOrder()->first()));
+    }
+
+    public function createContract(ContractResource $contractResource)
+    {
+        // dd($contractResource->created_at->isoFormat('dddd, D MMMM Y'));
+        $contract = json_decode(json_encode($contractResource));
+        $widget = [
+            'title' => 'Home',
+            'contract' => $contract
+        ];
+        // dd($widget);
+        $pdf = PDF::loadView('laporan/perjanjian_kerjasama', compact('widget'));
+        // return $pdf->download('laporan-pdf.pdf');
+        return $pdf->stream();
+    }
+
+    public function contractSeeder()
     {
         $faker = Faker::create('id_ID');
 
