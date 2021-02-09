@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StUserResource;
 use App\Models\Job;
+use App\Models\Proposal;
+use App\Models\St_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Faker\Factory as Faker;
@@ -11,54 +14,45 @@ class PlaygroundController extends Controller
 {
     public function playground()
     {
-        $users = User::where('role', 'customer')->get();
+        $jobs = Job::where('type', 'open')->get();
+        $st_users = St_user::all();
         $faker = Faker::create('id_ID');
         $res = [];
 
-        for ($i = 0; $i < 20; $i++) {
-            $user_rand_id = rand(0, count($users) - 1);
-            $tool_count = rand(0, count(Job::TOOLS) - 1);
-            $service_count = rand(0, count(Job::SERVICES) - 1);
-            $tools = [];
-            $services = [];
+        foreach ($jobs as $job) {
+            $proposal_count = rand(0, 10);
 
-            for ($j = 0; $j < $tool_count; $j++) {
-                $temp = Job::TOOLS[rand(0, count(Job::TOOLS) - 1)];
-                if (!in_array($temp, $tools)) {
-                    array_push($tools, $temp);
+            for ($i = 0; $i < $proposal_count; $i++) {
+                $st_user = $st_users[rand(0, count($st_users) - 1)];
+                // $st_user = new StUserResource(St_user::inRandomOrder()->first());
+                // dd(json_decode(json_encode($st_user)));
+
+                $status = Proposal::STATUS[rand(0, count(Proposal::STATUS) - 1)];
+                switch ($status) {
+                    case 'rejected':
+                        $answer_job = $faker->text;
+                        break;
+
+                    default:
+                        $answer_job = '-';
+                        break;
                 }
+
+                $bid_price = $faker->numberBetween(0, $job->open_price);
+
+                array_push($res, [
+                    'job_id' => $job->id,
+                    'st_user' => $st_user->id,
+                    'status' => $status,
+                    'answer_job' => $answer_job,
+                    'bid_price' => $bid_price,
+                    'cover_letter' => $faker->text,
+                    'is_seeder' => 1,
+                ]);
             }
-            for ($j = 0; $j < $service_count; $j++) {
-                $temp = Job::SERVICES[rand(0, count(Job::SERVICES) - 1)];
-                if (!in_array($temp, $services)) {
-                    array_push($services, $temp);
-                }
-            }
-
-            $type = Job::TYPES[rand(0, count(Job::TYPES) - 1)];
-            $level_need = Job::LEVELS[rand(0, count(Job::LEVELS) - 1)];
-            $tool_need = implode('|', $tools);
-            $service_need = implode('|', $services);
-
-            array_push($res, [
-                'user_id' => $users[$user_rand_id]->id,
-                'created_at' => $faker->dateTimeBetween('-3 months', 'now'),
-                'updated_at' => $faker->dateTimeBetween('-3 months', 'now'),
-                'status' => 'baru',
-                'type' => $type,
-                'level_need' => $level_need,
-                'tool_need' => $tool_need,
-                'service_need' => $service_need,
-                'name_job' => $faker->jobTitle,
-                'description' => $faker->text,
-                'open_price' => $faker->numberBetween(100000, 10000000),
-                'duration' => $faker->randomNumber(2),
-                'is_home_service' => rand(0, 1),
-
-                'is_seeder' => 1,
-            ]);
         }
 
         dd($res);
+        // Job::insert($res);
     }
 }

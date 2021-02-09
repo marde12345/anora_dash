@@ -9,5 +9,8 @@ class Proposal extends Model
 {
     use HasFactory;
 
-    private const STATUS = ['submitted', 'review', 'invited', 'accepted', 'rejected'];
+    public const STATUS = ['submitted', 'review', 'invited', 'accepted', 'rejected'];
+
+    protected $guarded = []; //tambahkan baris ini
+
 }
