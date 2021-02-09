@@ -67,11 +67,14 @@
             border-collapse: collapse;
         }
     </style>
+
+    <title>{{ config('app.name', 'Laravel') . ' | ' .  $widget['title'] }}</title>
 </head>
 
 <body>
     <!-- Define header and footer blocks before your content -->
     <header>
+        <!-- <img src="{{asset('img/header.png')}}" height="100%" class="center" /> -->
         <img src="../public/img/header.png" height="100%" class="center" />
     </header>
 
@@ -165,7 +168,7 @@
             </tr>
         </table><br>
         <h3>B. Jenis Jasa Layanan Statistik</h3>
-        <table>
+        <table style="width: 100%;">
             <tr>
                 <th style="width: 30%;"></th>
                 <th style="width: 20%;"></th>

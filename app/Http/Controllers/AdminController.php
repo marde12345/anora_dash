@@ -53,11 +53,11 @@ class AdminController extends Controller
 
     public function generatePerjanjianKerjasama()
     {
-        $data = [
+        $widget = [
             'title' => $this->TAG . 'Home',
         ];
 
-        $pdf = PDF::loadView('laporan/perjanjian_kerjasama', $data);
+        $pdf = PDF::loadView('laporan/perjanjian_kerjasama', compact('widget'));
         // return $pdf->download('laporan-pdf.pdf');
         return $pdf->stream();
     }
