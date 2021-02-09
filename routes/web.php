@@ -22,7 +22,7 @@ Route::get('coba', function () {
     ];
 
     // return view('home.home', compact('widget'));
-    return view('coba_map', compact('widget'));
+    return view('laporan/perjanjian_kerjasama', compact('widget'));
 });
 
 // Auth::routes(['verify' => true]);

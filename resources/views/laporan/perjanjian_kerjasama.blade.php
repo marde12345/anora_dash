@@ -221,6 +221,7 @@
                     </td>
                 </tr>
             </table>
+            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/coba', 'QRCODE')}}" alt="barcode" />
         </p>
     </main>
 </body>
