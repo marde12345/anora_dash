@@ -37,6 +37,11 @@
     <link href="/home/stylesheets/landing/style.css" rel="stylesheet">
 </head>
 
+<section class="py-1 bg-white">
+    <div class="container">
+        @include('layouts.notification')
+    </div>
+</section>
 @yield('main-content')
 <!-- End Login-->
 

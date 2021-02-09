@@ -152,8 +152,8 @@ class HomeController extends Controller
     public function contract($barcode)
     {
 
-        $contract = new ContractResource(Contract::where('barcode', $barcode)->first());
-        $contract = json_decode(json_encode($contract));
+        // $contract = new ContractResource(Contract::where('barcode', $barcode)->first());
+        // $contract = json_decode(json_encode($contract));
         // return $contract;
 
         $widget = [
@@ -165,9 +165,14 @@ class HomeController extends Controller
     }
     public function contract_captha(Request $request)
     {
+        $apa = Contract::where('barcode', $request->barcode)->first();
 
-        $contract = new ContractResource(Contract::where('barcode', $request->barcode)->first());
-        // $contract = json_decode(json_encode($contract));
+        if (is_null($apa)) {
+            return redirect()->back()
+                ->withError("Dokumen tidak ditemukan, pastikan keaslian barcode!");
+        }
+
+        $contract = new ContractResource($apa);
         $contract = json_decode(json_encode($contract));
         $widget = [
             'title' => 'Home',
