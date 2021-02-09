@@ -6,6 +6,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/browse', 'HomeController@browse')->name('browse');
+Route::get('/contract/{barcode}', 'HomeController@contract')->name('contract');
+Route::post('/contract', 'HomeController@contract_captha')->name('contract_captha');
 
 Route::get('/login', function () {
     $widget = [

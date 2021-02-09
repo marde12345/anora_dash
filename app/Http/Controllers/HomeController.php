@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ContractResource;
 use App\Http\Resources\StUserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Models\Contract;
 use App\Models\St_user;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -147,25 +149,30 @@ class HomeController extends Controller
         return view('home.browse', compact('widget'));
     }
 
-    public function listUsers()
+    public function contract($barcode)
     {
-        $users = User::all();
+
+        $contract = new ContractResource(Contract::where('barcode', $barcode)->first());
+        $contract = json_decode(json_encode($contract));
+        // return $contract;
 
         $widget = [
-            'ListUsers' => $users,
+            'title' => "Captha",
+            'barcode' => $barcode,
         ];
 
-        return view('list_users', compact('widget'));
+        return view('home.contract_captha', compact('widget'));
     }
-
-    public function listUserSts()
+    public function contract_captha(Request $request)
     {
-        $users_st = User::all();
 
+        $contract = new ContractResource(Contract::where('barcode', $request->barcode)->first());
+        // $contract = json_decode(json_encode($contract));
+        $contract = json_decode(json_encode($contract));
         $widget = [
-            'ListUserSts' => $users_st
+            'title' => 'Home',
+            'contract' => $contract
         ];
-
-        return view('list_user_sts', compact('widget'));
+        return view('laporan.perjanjian_kerjasama', compact('widget'));
     }
 }

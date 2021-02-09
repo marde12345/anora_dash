@@ -203,7 +203,7 @@
                 <li style="text-align: justify;">Pihak 3 : {{$widget['contract']->st_user->user->name.' '.$widget['contract']->st_user->user->last_name}}</li>
             </ol>
             <br><br><br>
-            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/contract/'.$widget['contract']->barcode, 'QRCODE')}}" alt="barcode" />
+            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/contract/'.$widget['contract']->barcode, 'QRCODE')}}" alt="barcode" /><br>
             QRcode verifikasi dokumen sebagai bukti keabsahan perjanjian kerjasama ini.
         </p>
     </main>
