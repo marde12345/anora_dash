@@ -50,6 +50,7 @@ class ProposalSeeder extends Seeder
                     'status' => $status,
                     'answer_job' => $answer_job,
                     'bid_price' => $bid_price,
+                    'bid_duration' => $faker->numberBetween(0, $job->duration),
                     'cover_letter' => $faker->text,
                     'is_seeder' => 1,
                 ]);
