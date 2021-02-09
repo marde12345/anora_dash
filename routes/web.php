@@ -16,14 +16,7 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('coba', function () {
-    $widget = [
-        'title' => "Home",
-    ];
-
-    // return view('home.home', compact('widget'));
-    return view('laporan/perjanjian_kerjasama', compact('widget'));
-});
+Route::get('coba', 'PlaygroundController@playground');
 
 // Auth::routes(['verify' => true]);
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');

@@ -1,27 +1,21 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\User;
-use Illuminate\Database\Seeder;
+use Illuminate\Http\Request;
 use Faker\Factory as Faker;
 
-
-class JobSeeder extends Seeder
+class PlaygroundController extends Controller
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function playground()
     {
         $users = User::where('role', 'customer')->get();
         $faker = Faker::create('id_ID');
         $res = [];
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $user_rand_id = rand(0, count($users) - 1);
             $tool_count = rand(0, count(Job::TOOLS) - 1);
             $service_count = rand(0, count(Job::SERVICES) - 1);
@@ -65,6 +59,6 @@ class JobSeeder extends Seeder
             ]);
         }
 
-        Job::insert($res);
+        dd($res);
     }
 }
