@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                             <div class="user-profile-label">
-                                <div class="username-line"><a class="seller-link" href="#"></a></div>
+                                <div class="username-line"><a class="seller-link" href="#">{{$widget['st_user']->user->name.' '.$widget['st_user']->user->last_name}}</a></div>
                                 <div class="oneliner-wrapper"><small class="oneliner">Professional Statistisi</small>
                                     <div class="ratings-wrapper">
                                         <p class="rating-text"><strong>5.0</strong> (1k+ reviews)</p>
@@ -34,7 +34,7 @@
                         <div class="user-stats-desc">
                             <ul class="user-stats">
                                 <li class="location">Dari<strong>Jakarta</strong></li>
-                                <li class="member-since">Menjadi member sejak<strong>Desember 2012</strong></li>
+                                <li class="member-since">Menjadi member sejak<strong>{{$widget['st_user']->member_sejak}}</strong></li>
                                 <li class="response-time">Waktu Respon<strong>2 jam</strong></li>
                                 <li class="recent-delivery">Order Pekerjaan Terakhir<strong>3 hari yang lalu</strong></li>
                             </ul>

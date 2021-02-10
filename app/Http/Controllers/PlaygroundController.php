@@ -11,11 +11,62 @@ use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Http;
 use PDF;
 
 class PlaygroundController extends Controller
 {
-    public function playground()
+    public function playground($name_code)
+    {
+        $name_code = explode('_', $name_code);
+        $st_user = new StUserResource(StUser::find($name_code[0]));
+        $st_user = json_decode(json_encode($st_user));
+        dd($st_user);
+
+        $widget = [
+            'title' => "Home",
+            'st_user' => $st_user,
+        ];
+
+        return view('home.statistisi-portofolio', compact('widget'));
+    }
+    public function generateNameAndImageUrl()
+    {
+        $faker = Faker::create('id_ID');
+        $users = User::where('is_seeder')->get();
+
+        foreach ($users as $user) {
+            $user->name = $faker->name;
+            $user->last_name = $faker->lastName;
+            $user->photo_url = (!$user->photo_profile_id ? $faker->imageUrl() : null);
+            // dd($user->photo_url);
+            $user->save();
+        }
+
+        return $faker->name;
+    }
+    public function updateLongLatUser()
+    {
+        $faker = Faker::create('id_ID');
+
+        $users = User::where('city', '')->get();
+        $res = [];
+
+        foreach ($users as $user) {
+            $user->longitude = $faker->longitude(111.6748654, 112.860732);
+            $user->latitude = $faker->latitude(-8.339140, -6.897179);
+            $data_osm = Http::get("https://nominatim.openstreetmap.org/reverse?format=json&lat=$user->latitude&lon=$user->longitude");
+            $data_osm_json = $data_osm->json();
+            $user->city = $data_osm_json['address']['county'] ?? '';
+            $user->state = $data_osm_json['address']['state'] ?? '';
+            $user->country = $data_osm_json['address']['country'] ?? '';
+            // dd($user);
+            $user->save();
+        }
+        // dd($res);
+    }
+
+    public function getRandomContract()
     {
         // return new ContractResource(Contract::inRandomOrder()->first());
         return $this->createContract(new ContractResource(Contract::inRandomOrder()->first()));

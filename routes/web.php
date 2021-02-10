@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('coba', 'PlaygroundController@playground');
+Route::get('coba/{name_code}', 'PlaygroundController@playground');
 
 // Auth::routes(['verify' => true]);
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
