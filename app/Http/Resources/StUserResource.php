@@ -30,6 +30,7 @@ class StUserResource extends JsonResource
             'services' => explode('|', $this->services),
             'visitor_count' => $this->visitor,
             'photo_backcover' => $photo_backcover,
+            'st_user_namecode' => implode('_', [$this->id, $this->user_id]),
         ];
     }
 

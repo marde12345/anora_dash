@@ -82,7 +82,7 @@
                     <div class="view recent-slider recommended-slider">
                         @foreach($widget['statistisi_terbaik']->data as $statistisi)
                         <div class="col-md-12">
-                            <a href="#">
+                            <a href="{{route('root.statistisi',['name_code'=>$statistisi->st_user_namecode])}}">
                                 <img class="img-fluid" src="{{$statistisi->photo_backcover}}" />
                             </a>
                             <div class="inner-slider">
@@ -92,7 +92,7 @@
                                             <img class="img-fluid" src="{{$statistisi->user->photo}}" alt="" />
                                         </span>
                                         <span class="seller-name">
-                                            <a href="#">{{$statistisi->user->name . " " . $statistisi->user->last_name}}</a>
+                                            <a href="{{route('root.statistisi',['name_code'=>$statistisi->st_user_namecode])}}">{{$statistisi->user->name . " " . $statistisi->user->last_name}}</a>
                                             <span class="level hint--top level-one-seller">Level {{$statistisi->level}} Statistisi</span>
                                         </span>
                                     </div>

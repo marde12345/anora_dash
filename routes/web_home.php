@@ -8,6 +8,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/browse', 'HomeController@browse')->name('browse');
 Route::get('/contract/{barcode}', 'HomeController@contract')->name('contract');
 Route::post('/contract', 'HomeController@contract_captha')->name('contract_captha');
+Route::get('/statistisi/{name_code}', 'HomeController@statistisi')->name('statistisi');
 
 Route::get('/login', function () {
     $widget = [
@@ -37,13 +38,6 @@ Route::get('/about', function () {
     ];
     return view('home.about', compact('widget'));
 })->name('about');
-
-Route::get('/statistisi', function () {
-    $widget = [
-        'title' => "Portofolio Statistisi",
-    ];
-    return view('home.statistisi-portofolio', compact('widget'));
-})->name('statistisi');
 
 Route::get('/message', function () {
     $widget = [

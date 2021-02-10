@@ -180,4 +180,16 @@ class HomeController extends Controller
         ];
         return view('laporan.perjanjian_kerjasama', compact('widget'));
     }
+
+    public function statistisi($name_code)
+    {
+        $st_user = new StUserResource(St_user::where('name', $name_code));
+
+        $widget = [
+            'title' => "Home",
+            'st_user' => $st_user,
+        ];
+
+        return view('home.statistisi-portofolio', compact('widget'));
+    }
 }
