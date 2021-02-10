@@ -17,6 +17,7 @@ class StUserResource extends JsonResource
 
     public function toArray($request)
     {
+        $member_sejak = $this->created_at->isoFormat('MMMM Y');
         $photo_backcover = $this->getPhotoBackcoverAttribute();
         $user = new UserResource(User::find($this->user_id));
         // $user = json_decode(json_encode($user));
@@ -29,8 +30,9 @@ class StUserResource extends JsonResource
             'tools' => explode('|', $this->tools),
             'services' => explode('|', $this->services),
             'visitor_count' => $this->visitor,
-            'photo_backcover' => $photo_backcover,
+            'photo_backcover' => $photo_backcover ?? '',
             'st_user_namecode' => implode('_', [$this->id, $this->user_id]),
+            'member_sejak' => $member_sejak ?? '',
         ];
     }
 

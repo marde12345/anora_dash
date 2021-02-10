@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Message;
-use App\Models\St_user;
+use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +34,7 @@ class UserResource extends JsonResource
 
             $count = Message::where($to)->whereNull('read_at')->count();
 
-            // $st_user = new StUserResource(St_user::where('user_id', $this->id)->first());
+            // $st_user = new StUserResource(StUser::where('user_id', $this->id)->first());
             // $st_user = json_decode(json_encode($st_user));
         }
         $photo = $this->getPhotoProfileAttribute();

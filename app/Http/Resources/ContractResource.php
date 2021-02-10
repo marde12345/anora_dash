@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Done_job;
 use App\Models\Job;
 use App\Models\Payment;
-use App\Models\St_user;
+use App\Models\StUser;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -31,7 +31,7 @@ class ContractResource extends JsonResource
             'price' => $this->price,
 
             'user' => User::find($this->user_id),
-            'st_user' => new StUserResource(St_user::find($this->st_user_id)),
+            'st_user' => new StUserResource(StUser::find($this->st_user_id)),
             'job' => Job::find($this->job_id),
             'payment' => Payment::find($this->payment_id) ?? '',
             'done_job' => Done_job::find($this->done_job_id) ?? '',

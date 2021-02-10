@@ -7,7 +7,7 @@ use App\Http\Resources\StUserResource;
 use App\Models\Contract;
 use App\Models\Job;
 use App\Models\Proposal;
-use App\Models\St_user;
+use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Faker\Factory as Faker;

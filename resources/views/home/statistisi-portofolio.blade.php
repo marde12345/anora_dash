@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                             <div class="user-profile-label">
-                                <div class="username-line"><a class="seller-link" href="#">Dieka Prastya</a></div>
+                                <div class="username-line"><a class="seller-link" href="#"></a></div>
                                 <div class="oneliner-wrapper"><small class="oneliner">Professional Statistisi</small>
                                     <div class="ratings-wrapper">
                                         <p class="rating-text"><strong>5.0</strong> (1k+ reviews)</p>

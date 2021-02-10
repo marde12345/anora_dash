@@ -7,7 +7,8 @@ use App\Http\Resources\StUserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Contract;
-use App\Models\St_user;
+use App\Models\StUser;
+use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class HomeController extends Controller
     public function index()
     {
         $statistisi_terbaik = StUserResource::collection(
-            St_user::where('level', '>', '80')->inRandomOrder()->limit(10)->get()
+            StUser::where('level', '>', '80')->inRandomOrder()->limit(10)->get()
         )->response()->getData();
         // dd($statistisi_terbaik);
         // $statistisi_terbaik = json_decode(json_encode($statistisi_terbaik));
@@ -48,7 +49,7 @@ class HomeController extends Controller
     public function browse(Request $request)
     {
         // DB::enableQueryLog();
-        $st = St_user::whereNotNull('user_id');
+        $st = StUser::whereNotNull('user_id');
         $get_param_link = "";
 
         if ($request->q) {
@@ -183,7 +184,10 @@ class HomeController extends Controller
 
     public function statistisi($name_code)
     {
-        $st_user = new StUserResource(St_user::where('name', $name_code));
+        $name_code = explode('_', $name_code);
+        $st_user = new StUserResource(StUser::find($name_code[0]));
+        $st_user = json_decode(json_encode($st_user));
+        dd($st_user);
 
         $widget = [
             'title' => "Home",
