@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,7 +21,29 @@ class StUserResource extends JsonResource
         $member_sejak = $this->created_at->isoFormat('MMMM Y');
         $photo_backcover = $this->getPhotoBackcoverAttribute();
         $user = new UserResource(User::find($this->user_id));
-        // $user = json_decode(json_encode($user));
+        $level = (int) $this->level / 20;
+        $level = ($level > 4 ? 4 : $level);
+        switch (Job::LEVELS[$level]) {
+            case 'baru':
+                $level_statistisi = 'Statistisi Baru';
+                break;
+            case 'entry':
+                $level_statistisi = 'Statistisi Pemula';
+                break;
+            case 'medium':
+                $level_statistisi = 'Statistisi Menengah';
+                break;
+            case 'tinggi':
+                $level_statistisi = 'Statistisi Berpengalaman';
+                break;
+            case 'top':
+                $level_statistisi = 'Professional Statistisi';
+                break;
+
+            default:
+                $level_statistisi = 'Statistisi';
+                break;
+        }
 
         return [
             'id' => $this->id,
@@ -33,6 +56,7 @@ class StUserResource extends JsonResource
             'photo_backcover' => $photo_backcover ?? '',
             'st_user_namecode' => implode('_', [$this->id, $this->user_id]),
             'member_sejak' => $member_sejak ?? '',
+            'level_statistisi' => $level_statistisi,
         ];
     }
 

@@ -24,6 +24,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
+        "midtrans/midtrans-php": "^2.3",
         "milon/barcode": "^8.0",
         "pusher/pusher-php-server": "^4.1"
     },

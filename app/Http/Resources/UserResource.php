@@ -52,6 +52,9 @@ class UserResource extends JsonResource
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
             'count' => $count ?? '',
+            'county' => $this->city,
+            'state' => $this->state,
+            'country' => $this->country,
         ];
     }
 

@@ -16,8 +16,12 @@ use PDF;
 
 class PlaygroundController extends Controller
 {
-    public function playground($name_code)
+    public function playground()
     {
+        
+        $config_midtrans = new \Midtrans\Config();
+        // $faker = Faker::create('id_ID');
+
         $name_code = explode('_', $name_code);
         $st_user = new StUserResource(StUser::find($name_code[0]));
         $st_user = json_decode(json_encode($st_user));

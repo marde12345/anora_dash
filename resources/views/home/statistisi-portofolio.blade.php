@@ -7,19 +7,19 @@
             <div class="col-lg-4 left">
                 <div class="profile_info">
                     <div class="seller-card">
-                        <div>
+                        <!-- <div>
                             <div class="user-online-indicator is-online" data-user-id="1152855"><i class="fa fa-circle"></i>online</div>
-                        </div>
-                        <div><a class="ambassadors-badge" href="#">Statistisi</a></div>
+                        </div> -->
+                        <!-- <div><a class="ambassadors-badge" href="#">Statistisi</a></div> -->
                         <div class="user-profile-info">
                             <div>
                                 <div class="user-profile-image">
-                                    <label class="user-pict"><img class="img-fluid user-pict-img" src="/home/images/default_user.jpg" alt="Dieka Prastyas" /><a class="user-badge-round user-badge-round-med locale-en-us top-rated-seller" href="#"></a></label>
+                                    <label class="user-pict"><img class="img-fluid user-pict-img" src="{{$widget['st_user']->user->photo}}" alt="Dieka Prastyas" /><a class="user-badge-round user-badge-round-med locale-en-us top-rated-seller" href="#"></a></label>
                                 </div>
                             </div>
                             <div class="user-profile-label">
                                 <div class="username-line"><a class="seller-link" href="#">{{$widget['st_user']->user->name.' '.$widget['st_user']->user->last_name}}</a></div>
-                                <div class="oneliner-wrapper"><small class="oneliner">Professional Statistisi</small>
+                                <div class="oneliner-wrapper"><small class="oneliner">{{$widget['st_user']->level_statistisi}}</small>
                                     <div class="ratings-wrapper">
                                         <p class="rating-text"><strong>5.0</strong> (1k+ reviews)</p>
                                     </div>
@@ -33,10 +33,10 @@
                         </div>
                         <div class="user-stats-desc">
                             <ul class="user-stats">
-                                <li class="location">Dari<strong>Jakarta</strong></li>
+                                <li class="location">Dari<strong>{{$widget['st_user']->user->county}}</strong></li>
                                 <li class="member-since">Menjadi member sejak<strong>{{$widget['st_user']->member_sejak}}</strong></li>
-                                <li class="response-time">Waktu Respon<strong>2 jam</strong></li>
-                                <li class="recent-delivery">Order Pekerjaan Terakhir<strong>3 hari yang lalu</strong></li>
+                                <!-- <li class="response-time">Waktu Respon<strong>2 jam</strong></li> -->
+                                <!-- <li class="recent-delivery">Order Pekerjaan Terakhir<strong>3 hari yang lalu</strong></li> -->
                             </ul>
                         </div>
                     </div>
@@ -45,13 +45,10 @@
                     <div class="description">
                         <h3>Deskripsi</h3>
                         <p>
-                            I am a Voice Actress with over 16+ years experience in everything from video games to phone
-                            systems to explainer videos to children&apos;s books.
-                            I am originally from the South East of England and have a natural British accent, as well as a
-                            Standard American accent from living in the US for 15 years.
+                            {{$widget['st_user']->cover_letter}}
                         </p>
                     </div>
-                    <div class="languages">
+                    <!-- <div class="languages">
                         <h3>Bahasa</h3>
                         <ul>
                             <li>Indonesia&nbsp;&nbsp;- <span>Fluent</span></li>
@@ -65,19 +62,19 @@
                             <li class="platform social-account facebook"><i class="platform-icon facebook hint--top" aria-hidden="true" data-hint="facebook"></i><span class="text">facebook</span></li>
                             <li class="platform social-account google"><i class="platform-icon google hint--top" aria-hidden="true" data-hint="google"></i><span class="text">google</span></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="skills">
                         <h3>Skills</h3>
                         <ul>
-                            <li><a href="#">SPSS</a></li>
-                            <li><a href="#">Regresi Linear</a></li>
-                            <li><a href="#">Olah Data</a></li>
-                            <li><a href="#">Python</a></li>
-                            <li><a href="#">R</a></li>
-                            <li><a href="#">Machine Learning</a></li>
+                            @foreach($widget['st_user']->tools as $tool)
+                            <li><a href="#">{{$tool}}</a></li>
+                            @endforeach
+                            @foreach($widget['st_user']->services as $service)
+                            <li><a href="#">{{$service}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
-                    <div class="education-list list">
+                    <!-- <div class="education-list list">
                         <h3>Pendidikan</h3>
                         <ul>
                             <li>
@@ -85,7 +82,7 @@
                                 <p>Universitas Indonesia, Indonesia, Lulus 2006</p>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-lg-8 right">
