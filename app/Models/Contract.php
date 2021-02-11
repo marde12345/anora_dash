@@ -9,6 +9,8 @@ class Contract extends Model
 {
     use HasFactory;
 
+    public const STATUS = ['process', 'review', 'end'];
+
     protected $guarded = []; //tambahkan baris ini
 
     public function createContractModel(Proposal $proposal, Job $job)

@@ -23,6 +23,22 @@ class PlaygroundController extends Controller
     {
         $faker = Faker::create('id_ID');
 
+        $contract_dones = Contract::all();
+
+        foreach ($contract_dones as $contract_done) {
+            if ($contract_done->user_review_id && $contract_done->st_user_review_id) {
+                $contract_done->status = Contract::STATUS[2];
+            } else {
+                $contract_done->status = Contract::STATUS[1];
+            }
+            $contract_done->save();
+        }
+    }
+
+    public function generateReview()
+    {
+        $faker = Faker::create('id_ID');
+
         $contract_dones = ContractResource::collection(
             Contract::whereIn('number_contract', function ($query) {
                 $query->select('job_number_contract')
