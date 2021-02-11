@@ -43,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/payment/finish?bc=on&order_id='.urlencode($widget['payment']->payment_id), 'QRCODE')}}" alt="barcode" /><br>
+                            <img src="data:image/png;base64,{{DNS2D::getBarcodePNG('http://anora.id/payment/finish_captha?order_id='.urlencode($widget['payment']->payment_id), 'QRCODE')}}" alt="barcode" /><br>
                         </div>
                         <div class="col-md-8">
                             QRcode verifikasi dokumen sebagai bukti keabsahan transaksi pembayaran biaya jasa.

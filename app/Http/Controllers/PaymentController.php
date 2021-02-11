@@ -61,6 +61,11 @@ class PaymentController extends Controller
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
 
+        $payment = Payment::where('payment_id', $order_id)->first();
+        $payment->payment_status = $transaction;
+        $payment->payment_type = $type;
+        $payment->save();
+
         if ($transaction == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
@@ -91,6 +96,18 @@ class PaymentController extends Controller
         ];
 
         return view('payment.finish', compact('widget'));
+    }
+
+    public function finishCaptha(Request $request)
+    {
+        $order_id = $request->order_id;
+
+        $widget = [
+            'title' => "Pembayaran Berhasil",
+            'payment' => $order_id,
+        ];
+
+        return view('payment.finish_captha', compact('widget'));
     }
 
     public function unfinish()

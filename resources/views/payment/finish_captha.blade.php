@@ -8,11 +8,12 @@
             <div class="col-lg-4 mx-auto">
                 <div class="osahan-login py-4">
                     <div class="text-center mb-4"><a href="index.html"><img src="/images/logo-horizontal.png" style="width: 200px !important" alt="" /></a>
-                        <h5 class="font-weight-bold mt-3">Transaksi Berhasil</h5>
+                        <h5 class="font-weight-bold mt-3">Pembayaran Captha</h5>
                     </div>
-                    {{Form::open(['method' => 'GET', 'id'=>'contract_captha'])}}
+                    {{Form::open(['method' => 'GET', 'id'=>'contract_captha',  'route' => ['payment.finish']])}}
                     <div class="form-group" style="text-align: -webkit-center;">
                         {!! NoCaptcha::display(['data-callback'=>'imNotARobot', 'data-sitekey'=>env('NOCAPTCHA_SITEKEY')]) !!}
+                        <input type="hidden" name="order_id" value="{{$widget['order_id']}}">
                     </div>
                     {{Form::close()}}
                 </div>
