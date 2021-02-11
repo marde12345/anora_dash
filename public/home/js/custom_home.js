@@ -5,6 +5,26 @@ $(document).ready(function () {
 	/* Select2 */
 	$('select').select2();
 
+	$('#select2kota').select2({
+		placeholder: 'Cari kota...',
+		ajax: {
+			url: '/data/kota',
+			dataType: 'json',
+			delay: 250,
+			processResults: function (data) {
+				return {
+					results: $.map(data, function (item) {
+						return {
+							text: item.city,
+							id: item.city
+						}
+					})
+				};
+			},
+			cache: true
+		}
+	});
+
 	/* Tooltip */
 	$('[data-toggle="tooltip"]').tooltip();
 

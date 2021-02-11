@@ -72,6 +72,13 @@ class HomeController extends Controller
 
             $get_param_link .= "&q=" . $request->q;
         }
+        if ($request->city) {
+            $city = $request->city;
+            $st = $st->whereIn('user_id', function ($query) use ($city) {
+                $query->select('id')->from('users')->where('city', $city)->get();
+            });
+            $get_param_link .= "&city=" . $city;
+        }
         if ($request->isSpss) {
             $st = $st->where('tools', 'LIKE', '%SPSS%');
             $get_param_link .= "&isSpss=on";

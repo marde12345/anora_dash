@@ -27,6 +27,10 @@
                                 </div>
                                 <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
+                                        <div class="custom-control ">
+                                            <select name="city" class="custom-select custom-select-sm border-0 shadow-sm ml-2" id="select2kota">
+                                            </select>
+                                        </div>
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" id="cb1" type="checkbox" name="isSpss" @if (request()->get('isSpss')) {{"checked"}} @endif />
                                             <label class="custom-control-label" for="cb1">SPSS</label>
