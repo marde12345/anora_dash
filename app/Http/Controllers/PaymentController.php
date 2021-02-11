@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -22,20 +23,25 @@ class PaymentController extends Controller
     {
         $params = array(
             'transaction_details' => [
-                'order_id' => 'FAS-123123',
+                'order_id' => 'PY-FAS-123123',
                 'gross_amount' => 2000,
             ],
             'customer_details' => [
                 'first_name' => 'Marde',
                 'last_name' => 'Fasma',
                 'email' => 'mardefasma123up@gmail.com',
-                'phone' => '088226344167',
+                // 'phone' => '088226344167',
             ],
-            'enabled_payments' => [
-                "cimb_clicks", "bca_klikbca", "bca_klikpay", "bri_epay",
-                "echannel", "permata_va", "bca_va", "bni_va", "bri_va", "other_va",
-                "gopay", "indomaret", "danamon_online", "akulaku", "shopeepay"
+            "item_details" => [
+                [
+                    "id" => "FAS-123123",
+                    "quantity" => 1,
+                    "price" => 2000,
+                    "name" => "Job Name",
+                    "category" => "Data Entry",
+                ],
             ],
+            'enabled_payments' => Payment::TYPES,
         );
         $snapToken = \Midtrans\Snap::createTransaction($params);
         return response()->json($snapToken);

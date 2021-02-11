@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Resources\ContractResource;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -12,7 +13,5 @@ class PaymentSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        //
-    }
+    { }
 }

@@ -6,6 +6,7 @@ use App\Http\Resources\ContractResource;
 use App\Http\Resources\StUserResource;
 use App\Models\Contract;
 use App\Models\Job;
+use App\Models\Payment;
 use App\Models\Proposal;
 use App\Models\StUser;
 use App\Models\User;
@@ -18,21 +19,30 @@ class PlaygroundController extends Controller
 {
     public function playground()
     {
-        
-        $config_midtrans = new \Midtrans\Config();
-        // $faker = Faker::create('id_ID');
+        $faker = Faker::create('id_ID');
 
-        $name_code = explode('_', $name_code);
-        $st_user = new StUserResource(StUser::find($name_code[0]));
-        $st_user = json_decode(json_encode($st_user));
-        dd($st_user);
-
-        $widget = [
-            'title' => "Home",
-            'st_user' => $st_user,
-        ];
-
-        return view('home.statistisi-portofolio', compact('widget'));
+        $contracts = ContractResource::collection(Contract::where('payment_id', null)->limit(5)->get());
+        $contracts = json_decode(json_encode($contracts));
+        foreach ($contracts as $contract) {
+            // dd($contract);
+            $payment = Payment::create([
+                'is_seeder' => 1,
+                'payment_id' => 'PY-' . $contract->number_contract,
+                'payment_status' => Payment::STATUS[rand(0, 4)],
+                'payment_type' => Payment::TYPES[rand(0, 14)],
+                'customer_name' => $contract->user->name,
+                'customer_last_name' => $contract->user->last_name ?? '',
+                'customer_email' => $contract->user->email ?? '',
+                'job_number_contract' => $contract->number_contract,
+                'job_name' => $contract->job->name_job,
+                'job_category' => $contract->job->service_need ?? '',
+                'gross_amount' => $contract->price
+            ]);
+            // dd($payment->id);
+            $temp = Contract::find($contract->id);
+            $temp->payment_id = $payment->id;
+            $temp->save();
+        }
     }
     public function generateNameAndImageUrl()
     {
