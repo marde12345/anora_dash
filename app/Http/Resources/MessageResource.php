@@ -17,25 +17,6 @@ class MessageResource extends JsonResource
      */
     public function toArray($request)
     {
-        $timeNow = Carbon::now();
-        $timeDif = $timeNow->diffInSeconds($this->created_at);
-        if ($timeDif > 60) {
-            $timeDif = $timeNow->diffInMinutes($this->created_at);
-            if ($timeDif > 60) {
-                $timeDif = $timeNow->diffInHours($this->created_at);
-                if ($timeDif > 24) {
-                    $timeDif = $timeNow->diffInDays($this->created_at);
-                    $timeDif .= " hari yang lalu";
-                } else {
-                    $timeDif .= " jam yang lalu";
-                }
-            } else {
-                $timeDif .= " menit yang lalu";
-            }
-        } else {
-            $timeDif .= " detik yang lalu";
-        }
-
         $count = Message::where([
             ['from_id', $this->from_id],
             ['to_id', $this->to_id],
@@ -53,7 +34,7 @@ class MessageResource extends JsonResource
             'to' => User::find($this->to_id),
             'content' => $this->content,
             'created_at' => $created_at,
-            'time_dif' => $timeDif,
+            'time_dif' => $this->created_at->diffForHumans(),
             'count' => $count
         ];
     }
