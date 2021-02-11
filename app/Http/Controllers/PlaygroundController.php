@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ContractResource;
 use App\Http\Resources\StUserResource;
 use App\Models\Contract;
+use App\Models\Done_job;
 use App\Models\Job;
 use App\Models\Payment;
 use App\Models\Proposal;
@@ -17,11 +18,41 @@ use PDF;
 
 class PlaygroundController extends Controller
 {
-    public function playground()
+
+    public function generateDoneJob()
     {
         $faker = Faker::create('id_ID');
 
-        $contracts = ContractResource::collection(Contract::where('payment_id', null)->limit(5)->get());
+        $contracts = Contract::where('done_job_id', null)->get();
+
+        foreach ($contracts as $contract) {
+            $status = 'rejected';
+            while ($status == 'rejected') {
+                $status = Done_job::STATUS[rand(0, 2)];
+                // dd($status);
+                if ($status == 'rejected') {
+                    $rejected_descrition = $faker->text(160);
+                } else {
+                    $rejected_descrition = null;
+                }
+
+                $done_job = Done_job::create([
+                    'job_id' => $contract->job_id,
+                    'is_seeder' => 1,
+                    'status' => $status,
+                    'url' => $faker->url,
+                    'reject_description' => $rejected_descrition ?? null,
+                ]);
+            }
+
+            $contract->done_job_id = $done_job->id;
+            $contract->save();
+        }
+    }
+
+    public function generatePayment()
+    {
+        $contracts = ContractResource::collection(Contract::where('payment_id', null)->limit(10)->get());
         $contracts = json_decode(json_encode($contracts));
         foreach ($contracts as $contract) {
             // dd($contract);

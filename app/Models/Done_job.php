@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Done_job extends Model
 {
     use HasFactory;
+
+    public const STATUS = ['submitted', 'rejected', 'approval'];
+
+    protected $guarded = []; //tambahkan baris ini
 }
