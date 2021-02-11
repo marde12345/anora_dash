@@ -9,6 +9,7 @@ use App\Models\Done_job;
 use App\Models\Job;
 use App\Models\Payment;
 use App\Models\Proposal;
+use App\Models\Review;
 use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,45 @@ use PDF;
 
 class PlaygroundController extends Controller
 {
+    public function playground()
+    {
+        $faker = Faker::create('id_ID');
+
+        $contract_dones = ContractResource::collection(
+            Contract::whereIn('number_contract', function ($query) {
+                $query->select('job_number_contract')
+                    ->from('payments')->where('payment_status', 'settlement');
+            })
+                ->get()
+        );
+        $contract_dones = json_decode(json_encode($contract_dones));
+        foreach ($contract_dones as $contract_done) {
+            $contract = Contract::find($contract_done->id);
+            // dd($contract);
+
+            // user
+            $user_review = Review::create([
+                'star' => rand(0, 5),
+                'review_description' => $faker->text,
+                'from_id' => $contract_done->user->id,
+                'to_id' => $contract_done->st_user->user->id,
+                'is_seeder' => 1,
+            ]);
+
+            // st_user
+            $st_user_review = Review::create([
+                'star' => rand(0, 5),
+                'review_description' => $faker->text,
+                'to_id' => $contract_done->user->id,
+                'from_id' => $contract_done->st_user->user->id,
+                'is_seeder' => 1,
+            ]);
+
+            $contract->user_review_id = $user_review->id;
+            $contract->st_user_review_id = $st_user_review->id;
+            $contract->save();
+        }
+    }
 
     public function generateDoneJob()
     {
