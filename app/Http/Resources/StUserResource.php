@@ -72,7 +72,8 @@ class StUserResource extends JsonResource
             'level_statistisi' => $level_statistisi,
             'reviews' => $reviews ?? '',
             'avg_star_review' => $avg_star_review ?? 0,
-            'count_star_review' => count($star_review)
+            'count_star_review' => count($star_review),
+            'link_profil' => config('custom.app_url') . '/statistisi/' . implode('_', [$this->id, $this->user_id]),
         ];
     }
 

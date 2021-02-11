@@ -211,8 +211,48 @@ class HomeController extends Controller
 
     public function browseMap(Request $request)
     {
+        // dd($request->lng);
+        $longlat = [112.7520883, -7.2574719];
+
+        if ($request->lng && $request->lat) {
+            $lng = $request->lng;
+            $lat = $request->lat;
+            $longlat = [$lng, $lat];
+            // DB::enableQueryLog();
+            $st_users = StUserResource::collection(
+                StUser::whereIn('user_id', function ($query) use ($lng, $lat) {
+                    $query->select('id')->from('users')
+                        ->where('longitude', '>', $lng - 0.3)
+                        ->where('longitude', '<', $lng + 0.3)
+                        ->where('latitude', '>', $lat - 0.3)
+                        ->where('latitude', '<', $lat + 0.3);
+                })->get()
+            );
+            // dd(DB::getQueryLog());
+        } elseif ($request->q) {
+            $city = $request->q;
+
+            $user = User::where('city', 'LIKE', '%' . $city . '%')->first();
+            $longlat = [$user->longitude - 0.05, $user->latitude - 0.05];
+
+            $st_users = StUserResource::collection(
+                StUser::whereIn('user_id', function ($query) use ($city) {
+                    $query->select('id')->from('users')
+                        ->where('city', 'LIKE', '%' . $city . '%');
+                })->get()
+            );
+            // dd(DB::getQueryLog());
+        } else {
+            $st_users = StUserResource::collection(StUser::inRandomOrder()->limit(20)->get());
+        }
+
+        $st_users = json_decode(json_encode($st_users));
+        // dd($st_users);
+
         $widget = [
             'title' => "Map",
+            'st_users' => $st_users,
+            'longlat' => $longlat
         ];
         return view('coba_map', compact('widget'));
     }
