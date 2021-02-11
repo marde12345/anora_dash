@@ -6,6 +6,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/browse', 'HomeController@browse')->name('browse');
+Route::get('/browse_map', 'HomeController@browseMap')->name('browse_map');
 Route::get('/contract/{barcode}', 'HomeController@contract')->name('contract');
 Route::post('/contract', 'HomeController@contract_captha')->name('contract_captha');
 Route::get('/statistisi/{name_code}', 'HomeController@statistisi')->name('statistisi');

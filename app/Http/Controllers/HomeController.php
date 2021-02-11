@@ -208,4 +208,12 @@ class HomeController extends Controller
 
         return view('home.statistisi-portofolio', compact('widget'));
     }
+
+    public function browseMap(Request $request)
+    {
+        $widget = [
+            'title' => "Map",
+        ];
+        return view('coba_map', compact('widget'));
+    }
 }

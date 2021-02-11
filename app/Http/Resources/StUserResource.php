@@ -66,7 +66,7 @@ class StUserResource extends JsonResource
             'tools' => explode('|', $this->tools),
             'services' => explode('|', $this->services),
             'visitor_count' => $this->visitor,
-            'photo_backcover' => $photo_backcover ?? '',
+            'photo_backcover' => $this->getPhotoBackcoverAttribute() ?? '',
             'st_user_namecode' => implode('_', [$this->id, $this->user_id]),
             'member_sejak' => $member_sejak ?? '',
             'level_statistisi' => $level_statistisi,
@@ -78,6 +78,11 @@ class StUserResource extends JsonResource
 
     public function getPhotoBackcoverAttribute()
     {
+        // Jika ada photo dari avatar
+        if ($this->photo_backcover_url) {
+            return $this->photo_backcover_url;
+        }
+
         // Jika tidak ada photo backcover
         if (is_null($this->photo_backcover_id)) {
             // maka foto profile default

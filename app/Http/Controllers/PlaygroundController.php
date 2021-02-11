@@ -19,7 +19,7 @@ use PDF;
 
 class PlaygroundController extends Controller
 {
-    public function playground()
+    public function playground1()
     {
         $asd = new StUserResource(StUser::find());
         $asd = json_decode(json_encode($asd));
@@ -138,20 +138,20 @@ class PlaygroundController extends Controller
             $temp->save();
         }
     }
-    public function generateNameAndImageUrl()
+    public function playground()
     {
         $faker = Faker::create('id_ID');
-        $users = User::where('is_seeder')->get();
+        $users = StUser::where('is_seeder', 1)->get();
 
         foreach ($users as $user) {
-            $user->name = $faker->name;
-            $user->last_name = $faker->lastName;
-            $user->photo_url = (!$user->photo_profile_id ? $faker->imageUrl() : null);
-            // dd($user->photo_url);
+            // $user->name = $faker->name;
+            // $user->last_name = $faker->lastName;
+            // $user->photo_url = (!$user->photo_profile_id ? $faker->imageUrl() : null);
+            $user->photo_backcover_url = $faker->imageUrl();
+            // dd($user);
             $user->save();
         }
-
-        return $faker->name;
+        // return $faker->name;
     }
     public function updateLongLatUser()
     {

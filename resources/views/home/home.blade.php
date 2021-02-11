@@ -4,13 +4,15 @@
 <section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
     <div class="container">
         <div class="row py-lg-5">
-            <div class="col-lg-7">
-                <iframe type="text/html" width="100%" height="390" frameborder="0" src="https://www.youtube.com/embed/SmKTEVBKKqk?autoplay=1&amp;origin=http://example.com" style="margin-bottom:50px"></iframe>
+            <div class="col-lg-5" style="text-align: center;">
+                <img class="img-fluid" src="/home/images/landing/map.svg" alt="" style="max-width: 80%;" />
             </div>
-            <div class="col-lg-5" style="align-self: center">
+            <div class="col-lg-7" style="align-self: center">
                 <div class="homepage-search-title">
-                    <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;font-style:italic">"The goal is to turn data into information and information into insight"</h1>
-                    <h6 class="mb-5 text-shadow text-gray-800 font-weight-normal" style="color:white;font-style:italic">- Former CEO HP</h6>
+                    <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;">Cobain fitur lokasi kami!!!</h1>
+                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                        <a href="{{route('root.browse_map')}}"><button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-map"></i> Terdekat</button></a>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-7">
@@ -161,12 +163,31 @@
         </div>
     </div>
 </section>
-<div>
+<section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
+    <div class="container">
+        <div class="row py-lg-5">
+            <div class="col-lg-7">
+                <iframe type="text/html" width="100%" height="390" frameborder="0" src="https://www.youtube.com/embed/SmKTEVBKKqk?autoplay=1&amp;origin=http://example.com" style="margin-bottom:50px"></iframe>
+            </div>
+            <div class="col-lg-5" style="align-self: center">
+                <div class="homepage-search-title">
+                    <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;font-style:italic">"The goal is to turn data into information and information into insight"</h1>
+                    <h6 class="mb-5 text-shadow text-gray-800 font-weight-normal" style="color:white;font-style:italic">- Former CEO HP</h6>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <h2 class="text-white">Cari Statistisi untuk Pekerjaan Anda Sekarang</h2>
+            <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm" href="{{route('root.browse')}}">Mulai Sekarang</a>
+        </div>
+    </div>
+</section>
+<!-- <div>
     <div class="get-started" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
         <div class="content">
             <h2 class="text-white">Cari Statistisi untuk Pekerjaan Anda Sekarang</h2>
             <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm" href="{{route('root.browse')}}">Mulai Sekarang</a>
         </div>
     </div>
-</div>
+</div> -->
 @endsection
