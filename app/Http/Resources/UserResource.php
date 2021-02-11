@@ -39,22 +39,12 @@ class UserResource extends JsonResource
         }
         $photo = $this->getPhotoProfileAttribute();
 
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'last_name' => $this->last_name,
-            'avatar' => $this->avatar,
+        return parent::toArray($request) + [
             'photo' => $photo,
-            'email' => $this->email,
-            'role' => $this->role,
-            // 'st_user' => $st_user ?? '',
             'from_id' => $message->from_id ?? '',
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
             'count' => $count ?? '',
-            'county' => $this->city,
-            'state' => $this->state,
-            'country' => $this->country,
         ];
     }
 

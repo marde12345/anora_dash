@@ -15,14 +15,8 @@ class UserUpgradeRoleResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
+        return parent::toArray($request) + [
             'from' => User::findOrFail($this->from_id),
-            'status' => $this->status,
-            'description' => $this->description,
-            'read_at' => $this->read_at,
-            'from_role' => $this->from_role,
-            'to_role' => $this->to_role
         ];
     }
 }

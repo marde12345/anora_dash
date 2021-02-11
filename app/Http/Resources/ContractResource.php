@@ -20,15 +20,8 @@ class ContractResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'created_at' =>  $this->created_at,
+        return parent::toArray($request) + [
             'created_at_isoformat' => $this->created_at->isoFormat('dddd, D MMMM Y'),
-
-            'barcode' => $this->barcode,
-            'number_contract' => $this->number_contract,
-            'status' => $this->status,
-            'price' => $this->price,
 
             'user' => User::find($this->user_id),
             'st_user' => new StUserResource(StUser::find($this->st_user_id)),
