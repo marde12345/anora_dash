@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PaymentResource;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -18,31 +19,36 @@ class PaymentController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
     }
+    public function getRandomPayment()
+    {
+        return $this->createTransaction(Payment::inRandomOrder()->limit(1)->first());
+    }
 
-    public function createTransaction()
+    public function createTransaction(Payment $payment)
     {
         $params = array(
             'transaction_details' => [
-                'order_id' => 'PY-FAS-123123',
-                'gross_amount' => 2000,
+                'order_id' => $payment->payment_id,
+                'gross_amount' => $payment->gross_amount,
             ],
             'customer_details' => [
-                'first_name' => 'Marde',
-                'last_name' => 'Fasma',
-                'email' => 'mardefasma123up@gmail.com',
+                'first_name' => $payment->customer_name,
+                'last_name' => $payment->customer_last_name,
+                'email' => $payment->customer_email,
                 // 'phone' => '088226344167',
             ],
             "item_details" => [
                 [
-                    "id" => "FAS-123123",
+                    "id" => $payment->job_number_contract,
                     "quantity" => 1,
-                    "price" => 2000,
-                    "name" => "Job Name",
-                    "category" => "Data Entry",
+                    "price" => $payment->gross_amount,
+                    "name" => $payment->job_name,
+                    "category" => $payment->job_category,
                 ],
             ],
             'enabled_payments' => Payment::TYPES,
         );
+        // dd($payment);
         $snapToken = \Midtrans\Snap::createTransaction($params);
         return response()->json($snapToken);
     }
@@ -73,11 +79,15 @@ class PaymentController extends Controller
         }
     }
 
-    public function finish()
+    public function finish(Request $request)
     {
-
+        $order_id = $request->order_id;
+        $payment = new PaymentResource(Payment::where('payment_id', $order_id)->first());
+        $payment = json_decode(json_encode($payment));
+        // dd($payment);
         $widget = [
             'title' => "Pembayaran Berhasil",
+            'payment' => $payment,
         ];
 
         return view('payment.finish', compact('widget'));

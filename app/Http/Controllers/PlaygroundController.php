@@ -121,6 +121,7 @@ class PlaygroundController extends Controller
     {
         // dd($contractResource->created_at->isoFormat('dddd, D MMMM Y'));
         $contract = json_decode(json_encode($contractResource));
+        dd($contract);
         $widget = [
             'title' => 'Home',
             'contract' => $contract
