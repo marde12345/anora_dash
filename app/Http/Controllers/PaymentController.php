@@ -104,7 +104,7 @@ class PaymentController extends Controller
 
         $widget = [
             'title' => "Pembayaran Berhasil",
-            'payment' => $order_id,
+            'order_id' => $order_id,
         ];
 
         return view('payment.finish_captha', compact('widget'));
