@@ -144,94 +144,53 @@
                 </div>
                 <div class="review-section">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h4 class="m-0">Testimoni<small><span class="star-rating-s15"></span><span><span class="total-rating-out-five header-average-rating" data-impression-collected="true">5</span></span><span><span class="total-rating header-total-rating" data-impression-collected="true">(28051)</span></span></small></h4>
-                        <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
+                        <h4 class="m-0">Testimoni
+                            <small>
+                                <span class="star-rating-s15"></span>
+                                <span>
+                                    <span class="total-rating-out-five header-average-rating" data-impression-collected="true">{{$widget['st_user']->avg_star_review}}</span>
+                                </span>
+                                <span>
+                                    <span class="total-rating header-total-rating" data-impression-collected="true">({{$widget['st_user']->count_star_review}})</span>
+                                </span>
+                            </small>
+                        </h4>
+                        <!-- <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
                             <option>Paling Relevan</option>
                             <option>Paling Baru</option>
-                        </select>
+                        </select> -->
                     </div>
-                    <div class="breakdown">
+                    <!-- <div class="breakdown">
                         <ul class="header-stars">
                             <li>Komunikasi<small><span class="star-rating-s15"></span><span class="total-rating-out-five">5</span></small></li>
                             <li>Rekomendasi<small><span class="star-rating-s15"></span><span class="total-rating-out-five">5</span></small></li>
                             <li>Pelayanan<small><span class="star-rating-s15"></span><span class="total-rating-out-five">5</span></small></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="review-list">
                     <ul>
+                        @foreach($widget['st_user']->reviews as $review)
                         <li>
                             <div class="d-flex">
-                                <div class="left"><span><img class="profile-pict-img img-fluid" src="/home/images/default_user.jpg" alt="" /></span></div>
+                                <div class="left"><span>
+                                        <img class="profile-pict-img img-fluid" src="{{$review->from_user->photo}}" alt="" /></span>
+                                </div>
                                 <div class="right">
-                                    <h4>Andi Munarman<span class="gig-rating text-body-2">
+                                    <h4>{{$review->from_user->name.' '.$review->from_user->last_name}}<span class="gig-rating text-body-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
                                                 <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                            </svg> 5.0</span></h4>
+                                            </svg> {{$review->star}}</span></h4>
                                     <div class="country d-flex align-items-center"></div>
                                     <div class="review-description">
                                         <p>
-                                            The process was smooth, after providing the required info,
-                                            Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
+                                            {{$review->review_description}}
                                         </p>
-                                    </div><span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
+                                    </div><span class="publish py-3 d-inline-block w-100">{{$review->publish_at}}</span>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="d-flex">
-                                <div class="left"><span><img class="profile-pict-img img-fluid" src="/home/images/default_user.jpg" alt="" /></span></div>
-                                <div class="right">
-                                    <h4>Andi Munarman<span class="gig-rating text-body-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
-                                                <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                            </svg> 5.0</span></h4>
-                                    <div class="country d-flex align-items-center"></div>
-                                    <div class="review-description">
-                                        <p>
-                                            The process was smooth, after providing the required info,
-                                            Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
-                                        </p>
-                                    </div><span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <div class="left"><span><img class="profile-pict-img img-fluid" src="/home/images/default_user.jpg" alt="" /></span></div>
-                                <div class="right">
-                                    <h4>Andi Munarman<span class="gig-rating text-body-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
-                                                <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                            </svg> 5.0</span></h4>
-                                    <div class="country d-flex align-items-center"></div>
-                                    <div class="review-description">
-                                        <p>
-                                            The process was smooth, after providing the required info,
-                                            Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
-                                        </p>
-                                    </div><span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="d-flex">
-                                <div class="left"><span><img class="profile-pict-img img-fluid" src="/home/images/default_user.jpg" alt="" /></span></div>
-                                <div class="right">
-                                    <h4>Andi Munarman<span class="gig-rating text-body-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
-                                                <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                            </svg> 5.0</span></h4>
-                                    <div class="country d-flex align-items-center"></div>
-                                    <div class="review-description">
-                                        <p>
-                                            The process was smooth, after providing the required info,
-                                            Pragyesh sent me an outstanding packet of wireframes. Thank you a lot!
-                                        </p>
-                                    </div><span class="publish py-3 d-inline-block w-100">Published 4 weeks ago</span>
-                                </div>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

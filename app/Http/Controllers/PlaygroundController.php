@@ -21,6 +21,13 @@ class PlaygroundController extends Controller
 {
     public function playground()
     {
+        $asd = new StUserResource(StUser::find());
+        $asd = json_decode(json_encode($asd));
+        return $asd;
+    }
+
+    public function generateStatusContract()
+    {
         $faker = Faker::create('id_ID');
 
         $contract_dones = Contract::all();

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Job;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -45,6 +46,13 @@ class StUserResource extends JsonResource
                 break;
         }
 
+        $reviews = ReviewResource::collection(Review::where('to_id', $user->id)->get());
+        $star_review = [];
+        foreach ($reviews as $review) {
+            array_push($star_review, $review->star);
+        }
+        $avg_star_review = array_sum($star_review) / count($star_review);
+
         return [
             'id' => $this->id,
             'user' => $user ?? '',
@@ -57,6 +65,9 @@ class StUserResource extends JsonResource
             'st_user_namecode' => implode('_', [$this->id, $this->user_id]),
             'member_sejak' => $member_sejak ?? '',
             'level_statistisi' => $level_statistisi,
+            'reviews' => $reviews ?? '',
+            'avg_star_review' => $avg_star_review,
+            'count_star_review' => count($star_review)
         ];
     }
 
