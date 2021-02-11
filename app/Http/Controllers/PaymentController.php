@@ -19,9 +19,28 @@ class PaymentController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
     }
+
     public function getRandomPayment()
     {
-        return $this->createTransaction(Payment::inRandomOrder()->limit(1)->first());
+        $payment = Payment::inRandomOrder()->limit(1)->first();
+        if ($payment->midtrans_token) {
+            return $payment;
+        }
+        $create_transaction = $this->createTransaction($payment);
+        return $payment->refresh();
+    }
+
+    public function getPayment(Request $request)
+    {
+        $payment_id = $request->order_id;
+        $payment_id = urldecode($payment_id);
+
+        $payment = Payment::where('payment_id', $payment_id)->first();
+        if ($payment->midtrans_token) {
+            return $payment;
+        }
+        $create_transaction = $this->createTransaction($payment);
+        return $payment->refresh();
     }
 
     public function createTransaction(Payment $payment)
@@ -50,7 +69,10 @@ class PaymentController extends Controller
         );
         // dd($payment);
         $snapToken = \Midtrans\Snap::createTransaction($params);
-        return response()->json($snapToken);
+
+        $payment->midtrans_token = $snapToken->token;
+        $payment->midtrans_url_payment = $snapToken->redirect_url;
+        $payment->save();
     }
 
     public function handlingNotif(Request $request)
