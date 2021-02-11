@@ -21,43 +21,35 @@ class PaymentController extends Controller
     public function createTransaction()
     {
         $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
+            'transaction_details' => [
+                'order_id' => 'FAS-123123',
                 'gross_amount' => 2000,
-            ),
-            'customer_details' => array(
+            ],
+            'customer_details' => [
                 'first_name' => 'Marde',
                 'last_name' => 'Fasma',
                 'email' => 'mardefasma123up@gmail.com',
                 'phone' => '088226344167',
-            ),
+            ],
+            'enabled_payments' => [
+                "cimb_clicks", "bca_klikbca", "bca_klikpay", "bri_epay",
+                "echannel", "permata_va", "bca_va", "bni_va", "bri_va", "other_va",
+                "gopay", "indomaret", "danamon_online", "akulaku", "shopeepay"
+            ],
         );
         $snapToken = \Midtrans\Snap::createTransaction($params);
         return response()->json($snapToken);
     }
 
-    public function handlingNotif()
+    public function handlingNotif(Request $request)
     {
         $notif = new \Midtrans\Notification();
 
         $transaction = $notif->transaction_status;
         $type = $notif->payment_type;
         $order_id = $notif->order_id;
-        $fraud = $notif->fraud_status;
 
-        if ($transaction == 'capture') {
-            // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-            if ($type == 'credit_card') {
-                if ($fraud == 'challenge') {
-                    // TODO set payment status in merchant's database to 'Challenge by FDS'
-                    // TODO merchant should decide whether this transaction is authorized or not in MAP
-                    echo "Transaction order_id: " . $order_id . " is challenged by FDS";
-                } else {
-                    // TODO set payment status in merchant's database to 'Success'
-                    echo "Transaction order_id: " . $order_id . " successfully captured using " . $type;
-                }
-            }
-        } else if ($transaction == 'settlement') {
+        if ($transaction == 'settlement') {
             // TODO set payment status in merchant's database to 'Settlement'
             echo "Transaction order_id: " . $order_id . " successfully transfered using " . $type;
         } else if ($transaction == 'pending') {
