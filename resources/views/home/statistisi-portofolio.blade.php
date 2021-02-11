@@ -21,7 +21,7 @@
                                 <div class="username-line"><a class="seller-link" href="#">{{$widget['st_user']->user->name.' '.$widget['st_user']->user->last_name}}</a></div>
                                 <div class="oneliner-wrapper"><small class="oneliner">{{$widget['st_user']->level_statistisi}}</small>
                                     <div class="ratings-wrapper">
-                                        <p class="rating-text"><strong>5.0</strong> (1k+ reviews)</p>
+                                        <p class="rating-text"><strong>{{$widget['st_user']->avg_star_review}}</strong> ({{$widget['st_user']->count_star_review}})</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,39 @@
             </div>
             <div class="col-lg-8 right">
                 <h2>Jasa yang Ditawarkan</h2>
-                <div class="recommended">
+                <div class="view services-slider recommended-slider recommended">
+                    @foreach($widget['st_user']->services as $service)
+                    <div class="col-md-12">
+                        <div>
+                            <a href="#">
+                                @switch($service)
+                                @case('Analisis Regresi')
+                                <img class="img-fluid" src="{{asset('home/images/service_analisis-regresi.jpg')}}" />
+                                @break
+                                @case('Olah Data')
+                                <img class="img-fluid" src="{{asset('home/images/service_olah-data.jpg')}}" />
+                                @break
+                                @case('Data Entry')
+                                <img class="img-fluid" src="{{asset('home/images/service_data-entry.jpeg')}}" />
+                                @break
+                                @case('Pembuatan Kuisioner')
+                                <img class="img-fluid" src="{{asset('home/images/service_pembuatan-kuisioner.jpg')}}" />
+                                @break
+                                @case('Konsultasi Statistik')
+                                <img class="img-fluid" src="{{asset('home/images/service_konsultasi.jpg')}}" />
+                                @break
+                                @endswitch
+                            </a>
+                            <div class="inner-slider">
+                                <div class="inner-wrapper">
+                                    <div class="d-flex align-items-center"><span class="seller-name"><a href="#">{{$service}}</a></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- <div class="recommended">
                     <div class="row">
                         <div class="col-md-4">
                             <div><a href="#"><img class="img-fluid" src="/home/images/job1.jpg" /></a>
@@ -141,7 +173,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="review-section">
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h4 class="m-0">Testimoni

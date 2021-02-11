@@ -188,9 +188,15 @@ class HomeController extends Controller
         $st_user = json_decode(json_encode($st_user));
         // dd($st_user);
 
+        $statistisi_terbaik = StUserResource::collection(
+            StUser::where('level', '>', '80')->inRandomOrder()->limit(10)->get()
+        )->response()->getData();
+
         $widget = [
             'title' => "Home",
             'st_user' => $st_user,
+            'statistisi_terbaik' => $statistisi_terbaik,
+
         ];
 
         return view('home.statistisi-portofolio', compact('widget'));

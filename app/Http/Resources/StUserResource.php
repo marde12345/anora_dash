@@ -47,11 +47,16 @@ class StUserResource extends JsonResource
         }
 
         $reviews = ReviewResource::collection(Review::where('to_id', $user->id)->get());
+        $reviews = json_decode(json_encode($reviews));
+        // dd($reviews);
         $star_review = [];
         foreach ($reviews as $review) {
             array_push($star_review, $review->star);
         }
-        $avg_star_review = array_sum($star_review) / count($star_review);
+        // dd(count($star_review));
+        if (count($star_review)) {
+            $avg_star_review = array_sum($star_review) / count($star_review);
+        }
 
         return [
             'id' => $this->id,
@@ -66,7 +71,7 @@ class StUserResource extends JsonResource
             'member_sejak' => $member_sejak ?? '',
             'level_statistisi' => $level_statistisi,
             'reviews' => $reviews ?? '',
-            'avg_star_review' => $avg_star_review,
+            'avg_star_review' => $avg_star_review ?? 0,
             'count_star_review' => count($star_review)
         ];
     }
