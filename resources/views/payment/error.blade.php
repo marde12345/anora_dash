@@ -8,7 +8,7 @@
             <div class="col-lg-4 mx-auto">
                 <div class="osahan-login py-4">
                     <div class="text-center mb-4"><a href="index.html"><img src="/images/logo-horizontal.png" style="width: 200px !important" alt="" /></a>
-                        <h5 class="font-weight-bold mt-3">Berhasil</h5>
+                        <h5 class="font-weight-bold mt-3">Transaksi Error</h5>
                     </div>
                     {{Form::open(['method' => 'GET', 'id'=>'contract_captha'])}}
                     <div class="form-group" style="text-align: -webkit-center;">
