@@ -1,9 +1,10 @@
 @extends('layouts.home')
 
 @section('main-content')
-<p>Klik tombol untuk menemukan koordinat.</p>
+<p>
+    Silahkan aktifkan/ "Allow" notifikasi GPS. Untuk perangkat seperti laptop/komputer tidak akurat dalam menentukan lokasi.
+</p>
 
-<button onclick="getLocation()">Temukan saya</button>
 <select onchange="getCity()" name="city" class="custom-select custom-select-sm border-0 shadow-sm ml-2" id="select2kota">
 </select>
 
@@ -12,31 +13,36 @@
 <div id="mapid"></div>
 
 <script>
-    var current_pos = @json($widget['longlat']);
+    var current_longlat = @json($widget['current_longlat']);
+    var current_pos = current_longlat[0];
+    var is_default_longlat = current_longlat[1];
+    var mymap = L.map('mapid').setView([current_pos[1], current_pos[0]], 8);
 
-    var mymap = L.map('mapid').setView([current_pos[1], current_pos[0]], 10);
+
+    if (!is_default_longlat) {
+        var circle = L.circle([current_pos[1], current_pos[0]], {
+            color: 'green',
+            fillColor: '#f03',
+            fillOpacity: 0.2,
+            radius: 40000
+        }).addTo(mymap);
+        var circle_current_pos = L.circle([current_pos[1], current_pos[0]], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(mymap);
+        circle_current_pos.bindPopup("<b>Anda disini!</b>").openPopup();
+    }
+
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
-        id: 'mapbox/streets-v11',
+        id: 'mapbox/satellite-streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiYW5vcmFhbmFseXN0IiwiYSI6ImNrbDE1bDkxZTE2aG4ycHAwaDBtc2gyeTAifQ.SabAWKKFyWOaXzanmeWRaw'
     }).addTo(mymap);
-
-    var circle = L.circle([current_pos[1], current_pos[0]], {
-        color: 'green',
-        fillColor: '#f03',
-        fillOpacity: 0.2,
-        radius: 40000
-    }).addTo(mymap);
-    var circle_current_pos = L.circle([current_pos[1], current_pos[0]], {
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.5,
-        radius: 500
-    }).addTo(mymap);
-    circle_current_pos.bindPopup("<b>Anda disini!</b>").openPopup();
 
     var users = @json($widget['st_users']);
     users.forEach(element => {
@@ -45,23 +51,6 @@
         marker.bindPopup(popupHtml);
     });
     // console.log(users);
-
-    var x = document.getElementById("demo");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        var url_redirect = "/browse_map?lng=" + position.coords.longitude + "&lat=" + position.coords.latitude;
-        window.location.replace(url_redirect);
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-    }
 
     function getCity() {
         var selectBox = document.getElementById("select2kota");

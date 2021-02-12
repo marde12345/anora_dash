@@ -15,8 +15,8 @@ $(document).ready(function () {
 				return {
 					results: $.map(data, function (item) {
 						return {
-							text: item.city,
-							id: item.city
+							text: item.location,
+							id: item.location
 						}
 					})
 				};

@@ -51,6 +51,9 @@
     }
   </style>
 
+  <!-- LottieFiles -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
   <!-- Custom styles for this template-->
   <link href="/home/stylesheets/landing/style.css" rel="stylesheet">
   <link href="/home/stylesheets/landing/style-adjust.css" rel="stylesheet">

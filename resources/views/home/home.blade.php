@@ -3,15 +3,15 @@
 @section('main-content')
 <section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
     <div class="container">
-        <div class="row py-lg-5">
-            <div class="col-lg-5" style="text-align: center;">
-                <img class="img-fluid" src="/home/images/landing/map.svg" alt="" style="max-width: 80%;" />
+        <div class="row py-lg-5" style="">
+            <div class="col-lg-6" style="margin: auto;">
+                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_P4v6nZ.json" mode="bounce" background="transparent" speed="0.8" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
             </div>
-            <div class="col-lg-7" style="align-self: center">
+            <div class="col-lg-6" style="margin: auto;">
                 <div class="homepage-search-title">
                     <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;">Cobain fitur lokasi kami!!!</h1>
                     <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                        <a href="{{route('root.browse_map')}}"><button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-map"></i> Terdekat</button></a>
+                        <button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" onclick="getLocation()" id="browse_map"><i class="fa fa-map"></i> Terdekat</button>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-5"><img class="img-fluid" src="/home/images/landing/banner.svg" alt="" /></div>
+            <div class="col-lg-5">
+                <!-- <img class="img-fluid" src="/home/images/landing/banner.svg" alt="" /> -->
+                <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_7smeegra.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay style="text-align: -webkit-center;"></lottie-player>
+            </div>
         </div>
     </div>
 </section>
@@ -190,4 +193,22 @@
         </div>
     </div>
 </div> -->
+<script>
+    var x = document.getElementById("browse_map");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        var url_redirect = "/browse_map?lng=" + position.coords.longitude + "&lat=" + position.coords.latitude;
+        window.location.replace(url_redirect);
+        // x.innerHTML = "Latitude: " + position.coords.latitude +
+        //     "<br>Longitude: " + position.coords.longitude;
+    }
+</script>
 @endsection

@@ -212,11 +212,14 @@ class HomeController extends Controller
     public function browseMap(Request $request)
     {
         // dd($request->lng);
-        $longlat = [112.7520883, -7.2574719];
+        $longlat = [112.7520883, -7.8574719];
+        $is_longlat_default = true;
 
         if ($request->lng && $request->lat) {
             $lng = $request->lng;
             $lat = $request->lat;
+            $is_longlat_default = false;
+
             $longlat = [$lng, $lat];
             // DB::enableQueryLog();
             $st_users = StUserResource::collection(
@@ -232,13 +235,17 @@ class HomeController extends Controller
         } elseif ($request->q) {
             $city = $request->q;
 
-            $user = User::where('city', 'LIKE', '%' . $city . '%')->first();
-            $longlat = [$user->longitude - 0.05, $user->latitude - 0.05];
+            $user = User::where('city', 'LIKE', '%' . $city . '%')
+                ->orWhere('state', 'LIKE', '%' . $city . '%')
+                ->orWhere('country', 'LIKE', '%' . $city . '%')->first();
+            // $longlat = [$user->longitude - 0.05, $user->latitude - 0.05];
 
             $st_users = StUserResource::collection(
                 StUser::whereIn('user_id', function ($query) use ($city) {
                     $query->select('id')->from('users')
-                        ->where('city', 'LIKE', '%' . $city . '%');
+                        ->where('city', 'LIKE', '%' . $city . '%')
+                        ->orWhere('state', 'LIKE', '%' . $city . '%')
+                        ->orWhere('country', 'LIKE', '%' . $city . '%');
                 })->get()
             );
             // dd(DB::getQueryLog());
@@ -252,7 +259,7 @@ class HomeController extends Controller
         $widget = [
             'title' => "Map",
             'st_users' => $st_users,
-            'longlat' => $longlat
+            'current_longlat' => [$longlat, $is_longlat_default]
         ];
         return view('coba_map', compact('widget'));
     }
