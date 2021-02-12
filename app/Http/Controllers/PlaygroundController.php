@@ -138,7 +138,7 @@ class PlaygroundController extends Controller
             $temp->save();
         }
     }
-    public function playground()
+    public function generatePhotoBackcover()
     {
         $faker = Faker::create('id_ID');
         $users = StUser::where('is_seeder', 1)->get();
@@ -153,16 +153,17 @@ class PlaygroundController extends Controller
         }
         // return $faker->name;
     }
-    public function updateLongLatUser()
+    public function playground()
     {
+        ini_set('max_execution_time', 360);
         $faker = Faker::create('id_ID');
 
-        $users = User::where('city', '')->get();
+        $users = User::all();
         $res = [];
 
         foreach ($users as $user) {
-            $user->longitude = $faker->longitude(111.6748654, 112.860732);
-            $user->latitude = $faker->latitude(-8.339140, -6.897179);
+            $user->longitude = $faker->longitude(109.6748654, 112.860732);
+            $user->latitude = $faker->latitude(-7.839140, -6.897179);
             $data_osm = Http::get("https://nominatim.openstreetmap.org/reverse?format=json&lat=$user->latitude&lon=$user->longitude");
             $data_osm_json = $data_osm->json();
             $user->city = $data_osm_json['address']['county'] ?? '';
