@@ -2,6 +2,31 @@
 $(document).ready(function () {
 	"use strict";
 
+	$(document).on("click", ".open_jobInfoModal", function () {
+		var jobId = $(this).data('id');
+		$.ajax({
+			type: 'GET',
+			url: '/data/job/' + jobId,
+			success: function (data) {
+				var urlStProfile = '/job/' + data.id;
+				$("#nameJob").text(data.name_job);
+				$("#toolJob").text(data.tool_need);
+				$("#serviceJob").text(data.service_need);
+				$("#descriptionJob").text(data.description);
+				$("#inputFileJob").text(data.input_file_url);
+				$("#openPriceJob").text(data.open_price);
+				$("#durationJob").text(data.bid_duration);
+				if (data.is_home_service) {
+					$("#isHomeServiceJob").text('Home Service');
+				} else {
+					$("#isHomeServiceJob").text('Tidak Home Service');
+				}
+				$("#urlStProfile").attr('href', urlStProfile);
+				console.log(data);
+			}
+		});
+	});
+
 	/* Select2 */
 	$('select').select2();
 

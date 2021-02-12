@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ContractResource;
+use App\Http\Resources\JobResource;
 use App\Http\Resources\StUserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Contract;
+use App\Models\Job;
 use App\Models\StUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -111,25 +113,25 @@ class HomeController extends Controller
             $st = $st->where('services', 'LIKE', '%Konsultasi Statistik%');
             $get_param_link .= "&isService5=on";
         }
-        if ($request->isLevel1) {
+        if ($request->isLevel == 'top') {
             $st = $st->whereBetween('level', [81, 100]);
-            $get_param_link .= "&isLevel1=on";
+            $get_param_link .= "&isLevel=top";
         }
-        if ($request->isLevel2) {
+        if ($request->isLevel == 'tinggi') {
             $st = $st->whereBetween('level', [61, 80]);
-            $get_param_link .= "&isLevel2=on";
+            $get_param_link .= "&isLevel=tinggi";
         }
-        if ($request->isLevel3) {
+        if ($request->isLevel == 'medium') {
             $st = $st->whereBetween('level', [41, 60]);
-            $get_param_link .= "&isLevel3=on";
+            $get_param_link .= "&isLevel=medium";
         }
-        if ($request->isLevel4) {
+        if ($request->isLevel == 'entry') {
             $st = $st->whereBetween('level', [21, 40]);
-            $get_param_link .= "&isLevel4=on";
+            $get_param_link .= "&isLevel=entry";
         }
-        if ($request->isLevel5) {
+        if ($request->isLevel == 'baru') {
             $st = $st->whereBetween('level', [0, 20]);
-            $get_param_link .= "&isLevel5=on";
+            $get_param_link .= "&isLevel=baru";
         }
 
         $st = $st->paginate(15);
@@ -186,6 +188,7 @@ class HomeController extends Controller
                 ->orWhere('state', 'LIKE', '%' . $loc . '%');
             if (config('custom.app_env') == 'local') {
                 $user = $user->orWhere('country', 'LIKE', '%' . $loc . '%');
+                // dd($user);
             }
             $user = $user->first();
             $longlat = [$user->longitude - 0.05, $user->latitude - 0.05];
@@ -268,5 +271,77 @@ class HomeController extends Controller
         ];
 
         return view('home.statistisi-portofolio', compact('widget'));
+    }
+
+    public function jobs(Request $request)
+    {
+        $job = Job::where('type', 'open')->where('status', 'open')->orderBy('created_at', 'desc');
+        $get_param_link = '';
+
+        if ($request->isSpss) {
+            $job = $job->where('tool_need', 'LIKE', '%SPSS%');
+            $get_param_link .= "&isSpss=on";
+        }
+        if ($request->isPython) {
+            $job = $job->where('tool_need', 'LIKE', '%Python%');
+            $get_param_link .= "&isPython=on";
+        }
+        if ($request->isR) {
+            $job = $job->where('tool_need', 'LIKE', '%R%');
+            $get_param_link .= "&isR=on";
+        }
+        if ($request->isService1 || $request->services == 'service1') {
+            $job = $job->where('service_need', 'LIKE', '%Analisis Regresi%');
+            $get_param_link .= "&isService1=on";
+        }
+        if ($request->isService2 || $request->services == 'service2') {
+            $job = $job->where('service_need', 'LIKE', '%Olah Data%');
+            $get_param_link .= "&isService2=on";
+        }
+        if ($request->isService3 || $request->services == 'service3') {
+            $job = $job->where('service_need', 'LIKE', '%Data Entry%');
+            $get_param_link .= "&isService3=on";
+        }
+        if ($request->isService4 || $request->services == 'service4') {
+            $job = $job->where('service_need', 'LIKE', '%Pembuatan Kuisioner%');
+            $get_param_link .= "&isService4=on";
+        }
+        if ($request->isService5 || $request->services == 'service5') {
+            $job = $job->where('service_need', 'LIKE', '%Konsultasi Statistik%');
+            $get_param_link .= "&isService5=on";
+        }
+        if ($request->isLevel == 'top') {
+            $job = $job->where('level_need', 'top');
+            $get_param_link .= "&isLevel=top";
+        }
+        if ($request->isLevel == 'tinggi') {
+            $job = $job->where('level_need', 'tinggi');
+            $get_param_link .= "&isLevel=tinggi";
+        }
+        if ($request->isLevel == 'medium') {
+            $job = $job->where('level_need', 'medium');
+            $get_param_link .= "&isLevel=medium";
+        }
+        if ($request->isLevel == 'entry') {
+            $job = $job->where('level_need', 'entry');
+            $get_param_link .= "&isLevel=entry";
+        }
+        if ($request->isLevel == 'baru') {
+            $job = $job->where('level_need', 'baru');
+            $get_param_link .= "&isLevel=baru";
+        }
+
+        $open_jobs = JobResource::collection($job->paginate(10))->response()->getData();
+
+        $len_meta_links = count($open_jobs->meta->links);
+        $open_jobs->meta->links[0]->label = "Sebelum";
+        $open_jobs->meta->links[$len_meta_links - 1]->label = "Sesudah";
+
+        $widget = [
+            'title' => "Cari Pekerjaan",
+            'open_jobs' => $open_jobs,
+        ];
+
+        return view('home.open_job', compact('widget'));
     }
 }

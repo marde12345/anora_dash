@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1 class="mt-0 mb-3 text-white">Telusuri Statistisi</h1>
+                <h1 class="mt-0 mb-3 text-white">Telusuri Pekerjaan Statistisi</h1>
             </div>
         </div>
     </div>
@@ -20,17 +20,13 @@
                     </div>
                     <div class="filters-body">
                         <div id="accordion">
-                            {{Form::open(['method' => 'GET', 'route' => ['root.browse']])}}
+                            {{Form::open(['method' => 'GET', 'route' => ['root.job']])}}
                             <div class="filters-card border-bottom p-4">
                                 <div class="filters-card-header" id="headingOne">
                                     <h6 class="mb-0"><a class="btn-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Populer <i class="mdi mdi-chevron-down float-right"></i></a></h6>
                                 </div>
                                 <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
-                                        <div class="custom-control ">
-                                            <select name="city" class="custom-select custom-select-sm border-0 shadow-sm ml-2" id="select2kota">
-                                            </select>
-                                        </div>
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" id="cb1" type="checkbox" name="isSpss" @if (request()->get('isSpss')) {{"checked"}} @endif />
                                             <label class="custom-control-label" for="cb1">SPSS</label>
@@ -92,23 +88,23 @@
                                 </div>
                                 <div class="collapse show" id="collapseOffer" aria-labelledby="headingOffer" data-parent="#accordion">
                                     <div class="filters-card-body card-shop-filters">
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control">
                                             <input class="custom-control-input" id="cblevel1" type="radio" name="isLevel" value="top" @if (request()->get('isLevel')=='top') {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cblevel1">Top Rated Statistik <small class="text-danger float-right">81-100</small></label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control">
                                             <input class="custom-control-input" id="cblevel2" type="radio" name="isLevel" value="tinggi" @if (request()->get('isLevel')=='tinggi') {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cblevel2">Statistik Tinggi <small class="text-danger float-right">61-80</small></label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control">
                                             <input class="custom-control-input" id="cblevel3" type="radio" name="isLevel" value="medium" @if (request()->get('isLevel')=='medium') {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cblevel3">Statistik Medium <small class="text-danger float-right">41-60</small></label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control">
                                             <input class="custom-control-input" id="cblevel4" type="radio" name="isLevel" value="entry" @if (request()->get('isLevel')=='entry') {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cblevel4">Statistik Entry <small class="text-danger float-right">21-40</small></label>
                                         </div>
-                                        <div class="custom-control custom-radio">
+                                        <div class="custom-control">
                                             <input class="custom-control-input" id="cblevel5" type="radio" name="isLevel" value="baru" @if (request()->get('isLevel')=='baru') {{"checked"}} @endif/>
                                             <label class="custom-control-label" for="cblevel5">Statistik Baru <small class="text-danger float-right">0-20</small></label>
                                         </div>
@@ -131,7 +127,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="sorting-div d-flex align-items-center justify-content-between">
-                                <p class="mb-2">{{$widget['statistisis']->meta->total}} Statistisi ditemukan</p>
+                                <p class="mb-2">{{$widget['open_jobs']->meta->total}} pekerjaan ditemukan</p>
                                 <!-- <div class="sorting d-flex align-items-center">
                                     <p>Urutkan</p>
                                     <select class="custom-select custom-select-sm border-0 shadow-sm ml-2">
@@ -145,78 +141,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        @foreach($widget['statistisis']->data as $statistisi)
-                        <div class="col-md-4">
-                            <a href="{{route('root.statistisi',['name_code'=>$statistisi->st_user_namecode])}}">
-                                <img class="img-fluid" src="{{$statistisi->photo_backcover}}" />
-                            </a>
-                            <div class="inner-slider">
-                                <div class="inner-wrapper">
-                                    <div class="d-flex align-items-center">
-                                        <span class="seller-image">
-                                            <img class="img-fluid" src="{{$statistisi->user->photo}}" alt="" />
-                                        </span>
-                                        <span class="seller-name">
-                                            <a href="{{route('root.statistisi',['name_code'=>$statistisi->st_user_namecode])}}">{{$statistisi->user->name . " " . $statistisi->user->last_name}}</a>
-                                            <span class="level hint--top level-one-seller">Level {{$statistisi->level}} Statistisi</span>
-                                        </span>
-                                    </div>
-                                    <h3>{{$statistisi->cover_letter}}</h3>
-                                    <div class="content-info">
-                                        <div class="rating-wrapper" style="text-align: center;">
-                                            @foreach ($statistisi->services as $service)
-                                            @switch($service)
-                                            @case('Analisis Regresi')
-                                            <br>
-                                            <button class="badge badge-primary">Analisis Regresi</button>
-                                            @break
-
-                                            @case('Olah Data')
-                                            <br>
-                                            <button class="badge badge-danger">Olah Data</button>
-                                            @break
-
-                                            @case('Data Entry')
-                                            <br>
-                                            <button class="badge badge-secondary">Data Entry</button>
-                                            @break
-
-                                            @case('Pembuatan Kuisioner')
-                                            <br>
-                                            <button class="badge badge-success">Jasa Pembuatan Kuisioner</button>
-                                            @break
-
-                                            @case('Konsultasi Statistik')
-                                            <br>
-                                            <button class="badge badge-info">Konsultasi Statistik</button>
-                                            @break
-
-                                            @endswitch
-                                            @endforeach
-                                            <span class="gig-rating text-body-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1792 1792" width="15" height="15">
-                                                    <path fill="currentColor" d="M1728 647q0 22-26 48l-363 354 86 500q1 7 1 20 0 21-10.5 35.5t-30.5 14.5q-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z"></path>
-                                                </svg> 5.0<span>(7)</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                        @foreach ($statistisi->tools as $tool)
-                                        @switch($tool)
-                                        @case('SPSS')
-                                        <span class="badge badge-primary">SPSS</span>
-                                        @break
-
-                                        @case('R')
-                                        <span class="badge badge-danger">R</span>
-                                        @break
-
-                                        @default
-                                        <span class="badge badge-secondary">Python</span>
-                                        @endswitch
-                                        @endforeach
-                                    </div>
-                                </div>
+                        @foreach($widget['open_jobs']->data as $job)
+                        <div class="card col-md-12 open_jobInfoModal" data-toggle="modal" data-target="#jobInfoModal" data-id="{{$job->id}}" style="margin: 10px;">
+                            <div class="card-body">
+                                <h5 class="card-title"><b>{{$job->name_job}}</b> (Level {{$job->level_need}}+)</h5>
+                                <hr>
+                                <p class="card-text">{{$job->description}}</p>
+                                <h6 class="card-subtitle mb-2" style="font-size: small;font-style: italic;color: blue;">{{$job->tool_need}}</h6>
+                                <h6 class="card-subtitle mb-2" style="font-size: small;font-style: italic;color: blue;">{{$job->service_need}}</h6>
+                                <hr>
+                                <a href="#" class="card-link">{{$job->created_at_time}}</a>
                             </div>
                         </div>
                         @endforeach
@@ -224,7 +158,7 @@
                     <div class="footer-pagination text-center">
                         <nav class="mb-0 mt-0" aria-label="Page navigation example">
                             <ul class="pagination mb-0">
-                                @foreach($widget['statistisis']->meta->links as $link)
+                                @foreach($widget['open_jobs']->meta->links as $link)
                                 @if ($link->active)
                                 <li class="page-item active">
                                     @else
@@ -242,4 +176,37 @@
         </div>
     </div>
 </section>
+
+<!-- Informasi Modal-->
+<div class="modal fade" id="jobInfoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="nameJob">{{ __('Nama Pekerjaan') }}</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="text" id="descriptionJob"></h5>
+                <hr>
+                <a id="inputFileJob" href="#"></a>
+                <span>Rp. <div id="openPriceJob"></div></span>
+                <span>
+                    <i class="fa fa-clock-o">
+                        <div id="durationJob"></div>
+                    </i>
+                </span>
+                <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                <hr>
+                <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="toolJob"></h6>
+                <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="serviceJob"></h6>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Tutup') }}</button>
+                <a class="btn btn-primary" href="#" id="urlStProfile" target="_blank">Detail</a>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

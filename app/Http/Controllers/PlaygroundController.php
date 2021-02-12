@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ContractResource;
+use App\Http\Resources\JobResource;
+use App\Http\Resources\ProposalResource;
 use App\Http\Resources\StUserResource;
 use App\Models\Contract;
 use App\Models\Done_job;
@@ -19,11 +21,28 @@ use PDF;
 
 class PlaygroundController extends Controller
 {
-    public function playground1()
+    public function playground()
     {
-        $asd = new StUserResource(StUser::find());
-        $asd = json_decode(json_encode($asd));
+        // $asd = new StUserResource(StUser::find());
+        $asd = JobResource::collection(Job::where('type', 'open')->orderBy('created_at', 'desc')->paginate(1))->response()->getData();
+        // $asd = ProposalResource::collection(Proposal::inRandomOrder()->limit(20)->get());
+        dd($asd);
         return $asd;
+
+        // $proposal_accs = Proposal::where('status', 'accepted')->get();
+        // foreach ($proposal_accs as $proposal_acc) {
+        //     $job = Job::find($proposal_acc->job_id);
+        //     $job->approval_st_user_id = $proposal_acc->st_user_id;
+        //     $job->status = Job::STATUS[1];
+        //     $job->save();
+        // }
+
+        // $jobs = Job::where('type', 'open')->where('status','!=','accepted')->get();
+        // foreach ($jobs as $job) {
+        //     $job->status = Job::STATUS[rand(0, 1)];
+        //     $job->save();
+        // }
+
     }
 
     public function generateStatusContract()
@@ -153,7 +172,7 @@ class PlaygroundController extends Controller
         }
         // return $faker->name;
     }
-    public function playground()
+    public function generateLonglat()
     {
         ini_set('max_execution_time', 360);
         $faker = Faker::create('id_ID');

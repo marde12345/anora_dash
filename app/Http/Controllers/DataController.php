@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,5 +28,11 @@ class DataController extends Controller
         // dd(DB::getQueryLog());
         $datas = json_decode(json_encode($kotas));
         return response()->json($datas);
+    }
+
+    public function getJob($job_id)
+    {
+        $job = Job::where('id', $job_id)->where('status', 'open')->where('type', 'open')->first();
+        return response()->json($job);
     }
 }
