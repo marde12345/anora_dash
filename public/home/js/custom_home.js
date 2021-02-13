@@ -7,24 +7,40 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'GET',
 			url: '/data/job/' + jobId,
-			success: function (data) {
-				var urlStProfile = '/job/' + data.id;
-				$("#nameJob").text(data.name_job);
-				$("#toolJob").text(data.tool_need);
-				$("#serviceJob").text(data.service_need);
-				$("#descriptionJob").text(data.description);
-				$("#inputFileJob").text(data.input_file_url);
-				$("#openPriceJob").text(data.open_price);
-				$("#durationJob").text(data.bid_duration);
-				if (data.is_home_service) {
-					$("#isHomeServiceJob").text('Home Service');
-				} else {
-					$("#isHomeServiceJob").text('Tidak Home Service');
-				}
-				$("#urlStProfile").attr('href', urlStProfile);
-				console.log(data);
-			}
+			beforeSend: resetData(),
+			success: loadData,
+			complete: function () {
+				$("#loadingModal").hide();
+				$("#modalBody").show();
+			},
 		});
+
+		function resetData() {
+			$("#loadingModal").show();
+			$("#modalBody").hide();
+			$("#urlStProfile").attr('href', "#");
+		}
+
+		function loadData(data) {
+			var urlStProfile = '/job/' + data.id;
+			var urlCreateProposal = '/proposal/' + data.id;
+			$("#nameJob").text(data.name_job);
+			$("#toolJob").text(data.tool_need);
+			$("#serviceJob").text(data.service_need);
+			$("#descriptionJob").text(data.description);
+			$("#inputFileJob").text(data.input_file_url);
+			$("#openPriceJob").text(data.open_price);
+			$("#durationJob").text(data.bid_duration);
+			if (data.is_home_service) {
+				$("#isHomeServiceJob").text('Home Service');
+			} else {
+				$("#isHomeServiceJob").text('Tidak Home Service');
+			}
+			$("#urlStProfile").attr('href', urlStProfile);
+			$("#urlCreateProposal").attr('href', urlCreateProposal);
+			// console.log(data);
+		}
+
 	});
 
 	/* Select2 */

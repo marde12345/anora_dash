@@ -188,23 +188,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5 class="text" id="descriptionJob"></h5>
-                <hr>
-                <a id="inputFileJob" href="#"></a>
-                <span>Rp. <div id="openPriceJob"></div></span>
-                <span>
-                    <i class="fa fa-clock-o">
-                        <div id="durationJob"></div>
-                    </i>
-                </span>
-                <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-                <hr>
-                <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="toolJob"></h6>
-                <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="serviceJob"></h6>
+                <lottie-player id="loadingModal" src="https://assets10.lottiefiles.com/packages/lf20_Gh0AU0.json" background="blue" speed="1" style="width: 100%; height: 300px;" loop autoplay>
+                </lottie-player>
+                <div id="modalBody">
+                    <h5 class="text" id="descriptionJob"></h5>
+                    <hr>
+                    <a id="inputFileJob" href="#"></a>
+                    <span>Rp. <div id="openPriceJob"></div></span>
+                    <span>
+                        <i class="fa fa-clock-o">
+                            <div id="durationJob"></div>
+                        </i>
+                    </span>
+                    <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                    <hr>
+                    <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="toolJob"></h6>
+                    <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="serviceJob"></h6>
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Tutup') }}</button>
-                <a class="btn btn-primary" href="#" id="urlStProfile" target="_blank">Detail</a>
+                <a class="btn btn-warning" href="#" id="urlStProfile" target="_blank">Detail</a>
+                <a class="btn btn-primary" href="#" id="urlCreateProposal" target="_blank">Kirim Proposal</a>
             </div>
         </div>
     </div>
