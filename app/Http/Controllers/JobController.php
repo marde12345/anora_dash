@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobResource;
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    public function __construct()
+    { }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +27,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -34,7 +38,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -45,7 +49,15 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        $job = new JobResource(Job::find($id));
+        $job = json_decode(json_encode($job));
+        // dd($job);
+        $widget = [
+            'title' => "Detail Pekerjaan",
+            'job' => $job,
+        ];
+
+        return view('home.detail_job', compact('widget'));
     }
 
     /**
@@ -56,7 +68,7 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -68,7 +80,7 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -79,6 +91,6 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->middleware(['auth', 'verified']);
     }
 }

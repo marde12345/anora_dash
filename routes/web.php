@@ -46,3 +46,5 @@ Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dash
 Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'));
 
 Route::prefix('payment')->name('payment.')->group(base_path('routes/web_payment.php'));
+
+Route::middleware('auth')->prefix('proposal')->name('proposal.')->group(base_path('routes/web_proposal.php'));

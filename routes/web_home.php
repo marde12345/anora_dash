@@ -6,7 +6,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::resource('job', 'JobController');
 Route::get('/job', 'HomeController@jobs')->name('job');
+Route::prefix('job')->name('job.')->group(base_path('routes/web_job.php'));
 
 Route::get('/browse', 'HomeController@browse')->name('browse');
 Route::get('/browse_map', 'HomeController@browseMap')->name('browse_map');

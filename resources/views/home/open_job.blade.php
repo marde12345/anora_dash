@@ -188,10 +188,50 @@
                 </button>
             </div>
             <div class="modal-body">
-                <lottie-player id="loadingModal" src="https://assets10.lottiefiles.com/packages/lf20_Gh0AU0.json" background="blue" speed="1" style="width: 100%; height: 300px;" loop autoplay>
+                <lottie-player id="loadingModal" src="https://assets10.lottiefiles.com/packages/lf20_Gh0AU0.json" background="#43619d" speed="1" style="width: 100%; height: 300px;" loop autoplay>
                 </lottie-player>
                 <div id="modalBody">
-                    <h5 class="text" id="descriptionJob"></h5>
+                    <div class="form-group">
+                        <label for="level">Level</label>
+                        <input id="levelJob" class="form-control" type="text" name="level" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Jasa</label>
+                        <input id="serviceJob" class="form-control" type="text" name="service" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="tool">Skill</label>
+                        <input id="toolJob" class="form-control" type="text" name="tool" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Deskripsi</label>
+                        <input class="form-control" id="descriptionJob" type="text" name="desc" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="input_file">File yang diberikan</label>
+                        <a id="inputFileJob" href="" name="input_file"></a>
+                    </div>
+                    <div class="form-group">
+                        <label for="open_price">Upah yang ditawarkan</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp</span>
+                            </div>
+                            <input id="openPriceJob" type="text" class="form-control" value="" readonly>
+                            <div class="input-group-append">
+                                <span class="input-group-text">,00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Durasi (hari)</label>
+                        <input id="durationJob" class="form-control" type="text" name="duration" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="home_service">Home Service?</label>
+                        <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                    </div>
+                    <!-- <h5 class="text" id="descriptionJob"></h5>
                     <hr>
                     <a id="inputFileJob" href="#"></a>
                     <span>Rp. <div id="openPriceJob"></div></span>
@@ -203,13 +243,13 @@
                     <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
                     <hr>
                     <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="toolJob"></h6>
-                    <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="serviceJob"></h6>
+                    <h6 class="text" style="font-size: small;font-style: italic;color: blue;" id="serviceJob"></h6> -->
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Tutup') }}</button>
-                <a class="btn btn-warning" href="#" id="urlStProfile" target="_blank">Detail</a>
-                <a class="btn btn-primary" href="#" id="urlCreateProposal" target="_blank">Kirim Proposal</a>
+                <a class="btn btn-link" href="#" id="urlStProfile" target="_blank">Detail</a>
+                <a class="btn btn-primary" href="#" id="urlCreateProposal" target="_blank">Ajukan Proposal</a>
             </div>
         </div>
     </div>

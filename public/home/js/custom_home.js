@@ -25,17 +25,19 @@ $(document).ready(function () {
 			var urlStProfile = '/job/' + data.id;
 			var urlCreateProposal = '/proposal/' + data.id;
 			$("#nameJob").text(data.name_job);
-			$("#toolJob").text(data.tool_need);
-			$("#serviceJob").text(data.service_need);
-			$("#descriptionJob").text(data.description);
-			$("#inputFileJob").text(data.input_file_url);
-			$("#openPriceJob").text(data.open_price);
-			$("#durationJob").text(data.bid_duration);
-			if (data.is_home_service) {
-				$("#isHomeServiceJob").text('Home Service');
-			} else {
-				$("#isHomeServiceJob").text('Tidak Home Service');
-			}
+			$("#levelJob").attr('value', data.level_need);
+			$("#toolJob").attr('value', data.tool_need);
+			$("#serviceJob").attr('value', data.service_need);
+			$("#descriptionJob").attr('value', data.description);
+			$("#inputFileJob").attr('value', data.input_file_url);
+			$("#inputFileJob").attr('href', data.input_file_url);
+			$("#openPriceJob").attr('value', data.open_price);
+			$("#durationJob").attr('value', data.duration + ' Hari');
+			// if (data.is_home_service) {
+			// 	$("#isHomeServiceJob").text('Home Service');
+			// } else {
+			// 	$("#isHomeServiceJob").text('Tidak Home Service');
+			// }
 			$("#urlStProfile").attr('href', urlStProfile);
 			$("#urlCreateProposal").attr('href', urlCreateProposal);
 			// console.log(data);
