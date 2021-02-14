@@ -20,7 +20,7 @@
                     </div>
                     <div class="filters-body">
                         <div id="accordion">
-                            {{Form::open(['method' => 'GET', 'route' => ['root.job']])}}
+                            {{Form::open(['method' => 'GET', 'route' => ['jobs']])}}
                             <div class="filters-card border-bottom p-4">
                                 <div class="filters-card-header" id="headingOne">
                                     <h6 class="mb-0"><a class="btn-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Populer <i class="mdi mdi-chevron-down float-right"></i></a></h6>

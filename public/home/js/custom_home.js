@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 		function loadData(data) {
 			var urlStProfile = '/job/' + data.id;
-			var urlCreateProposal = '/proposal/' + data.id;
+			var urlCreateProposal = '/proposal/create_proposal/' + data.id;
 			$("#nameJob").text(data.name_job);
 			$("#levelJob").attr('value', data.level_need);
 			$("#toolJob").attr('value', data.tool_need);

@@ -18,8 +18,12 @@ use Illuminate\Support\Facades\URL;
 
 Route::get('coba/', 'PlaygroundController@playground');
 Route::get('get_contract/', 'PlaygroundController@getRandomContract');
+
+// Data Controller
 Route::get('data/kota', 'DataController@selectKota');
 Route::get('data/job/{job_id}', 'DataController@getJob');
+
+Route::get('/jobs', 'HomeController@jobs')->name('jobs');
 
 // Auth::routes(['verify' => true]);
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
@@ -46,5 +50,7 @@ Route::prefix('dashboard')->name('dashboard.')->group(base_path('routes/web_dash
 Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'));
 
 Route::prefix('payment')->name('payment.')->group(base_path('routes/web_payment.php'));
+
+Route::prefix('')->name('')->group(base_path('routes/web_job.php'));
 
 Route::middleware('auth')->prefix('proposal')->name('proposal.')->group(base_path('routes/web_proposal.php'));

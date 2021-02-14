@@ -49,6 +49,39 @@
     #mapid {
       height: 400px;
     }
+
+    .wave {
+      opacity: .4;
+      position: absolute;
+      bottom: 3%;
+      left: 50%;
+      background: #0af;
+      width: 300px;
+      height: 300px;
+      margin-left: -150px;
+      margin-bottom: -301px;
+      transform-origin: 50% 48%;
+      border-radius: 43%;
+
+      transition-duration: 0.75s;
+      transition-property: margin-bottom;
+      transition-timing-function: ease;
+    }
+
+    button:hover .wave {
+      margin-bottom: -50px;
+      animation: rotate 2000ms infinite linear;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      from {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 
   <!-- LottieFiles -->
@@ -240,7 +273,10 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown"><a class="nav-link" href="/">Beranda</a></li>
         <li class="nav-item"><a class="nav-link" href="/browse">Telusuri Statistisi</a></li>
-        <li class="nav-item"><a class="nav-link" href="/about">Tentang Kami</a></li>
+        <li class="nav-item"><a class="nav-link" href="/jobs">Telusuri Pekerjaan</a></li>
+        @auth
+        <li class="nav-item"><a class="nav-link" href="/jobs">Buat Pekerjaan</a></li>
+        @endauth
       </ul>
     </div>
     <ul class="navbar-nav ml-auto">

@@ -18,6 +18,8 @@ class JobResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request) + [
+            'tool_need' => $this->tool_need ?? '-',
+            'service_need' => $this->service_need ?? '-',
             'user' => new UserResource(User::find($this->user_id)),
             'approval_st_user' => new StUserResource(StUser::find($this->approval_st_user_id)),
             'proposals' => ProposalResource::collection(Proposal::where('job_id', $this->id)->get()),

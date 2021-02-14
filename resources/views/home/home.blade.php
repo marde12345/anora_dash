@@ -3,15 +3,18 @@
 @section('main-content')
 <section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
     <div class="container">
-        <div class="row py-lg-5" style="">
-            <div class="col-lg-6" style="margin: auto;">
-                <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_P4v6nZ.json" mode="bounce" background="transparent" speed="0.8" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+        <div class="row py-lg-5">
+            <div class="col-lg-6">
+                <lottie-player onclick="getLocation()" class="mx-auto" src="https://assets6.lottiefiles.com/packages/lf20_P4v6nZ.json" mode="bounce" background="transparent" speed="0.8" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
             </div>
             <div class="col-lg-6" style="margin: auto;">
                 <div class="homepage-search-title">
                     <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;">Cobain fitur lokasi kami!!!</h1>
-                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                        <button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" onclick="getLocation()" id="browse_map"><i class="fa fa-map"></i> Terdekat</button>
+                    <div class="form-row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                            <button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" onclick="getLocation()" id="browse_map" style="font-size: 20px; padding: .8em 1em; border: 5px solid #333; border-radius: 10px; overflow: hidden; transform: translate3d(0, 0, 0);">
+                                <span class="wave"></span><i class="fa fa-map"></i> Terdekat</button>
+                        </div>
                     </div>
                 </div>
             </div>
