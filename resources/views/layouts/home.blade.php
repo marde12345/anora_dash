@@ -272,20 +272,20 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav">
         <li class="nav-item dropdown"><a class="nav-link" href="/">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="/browse">Telusuri Statistisi</a></li>
-        <li class="nav-item"><a class="nav-link" href="/jobs">Telusuri Pekerjaan</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('root.browse')}}">Telusuri Statistisi</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('jobs')}}">Telusuri Pekerjaan</a></li>
         @auth
-        <li class="nav-item"><a class="nav-link" href="/jobs">Buat Pekerjaan</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('job.create')}}">Buat Pekerjaan</a></li>
         @endauth
       </ul>
     </div>
     <ul class="navbar-nav ml-auto">
       @guest
-      <li class="nav-item"><a class="nav-link" href="/login"><span>Login</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="{{route('root.login')}}"><span>Login</span></a></li>
       <li class="nav-item"><a class="nav-link" href="/register"><span>Daftar Baru</span></a></li>
       @endguest
       @auth
-      <li class="nav-item"><a class="nav-link" href="/dashboard"><span>Dashboard</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="{{route('dashboard.home')}}"><span>Dashboard</span></a></li>
       @endauth
     </ul>
   </div>

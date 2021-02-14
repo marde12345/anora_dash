@@ -193,19 +193,19 @@
                 <div id="modalBody">
                     <div class="form-group">
                         <label for="level">Level</label>
-                        <input id="levelJob" class="form-control" type="text" name="level" value="" readonly>
+                        <input id="levelJob" class="form-control plaintext" type="text" name="level" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label for="service">Jasa</label>
-                        <input id="serviceJob" class="form-control" type="text" name="service" value="" readonly>
+                        <input id="serviceJob" class="form-control plaintext" type="text" name="service" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label for="tool">Skill</label>
-                        <input id="toolJob" class="form-control" type="text" name="tool" value="" readonly>
+                        <input id="toolJob" class="form-control plaintext" type="text" name="tool" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label for="desc">Deskripsi</label>
-                        <input class="form-control" id="descriptionJob" type="text" name="desc" value="" readonly>
+                        <input class="form-control plaintext" id="descriptionJob" type="text" name="desc" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label for="input_file">File yang diberikan</label>
@@ -217,7 +217,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Rp</span>
                             </div>
-                            <input id="openPriceJob" type="text" class="form-control" value="" readonly>
+                            <input id="openPriceJob" type="text" class="form-control plaintext" value="" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text">,00</span>
                             </div>
@@ -225,7 +225,7 @@
                     </div>
                     <div class="form-group">
                         <label for="duration">Durasi (hari)</label>
-                        <input id="durationJob" class="form-control" type="text" name="duration" value="" readonly>
+                        <input id="durationJob" class="form-control plaintext" type="text" name="duration" value="" readonly>
                     </div>
                     <div class="form-group">
                         <label for="home_service">Home Service?</label>

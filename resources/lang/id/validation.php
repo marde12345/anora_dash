@@ -130,8 +130,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'g-recaptcha-response' => [
+            'required' => 'Anda belum mengisi captha.',
+            'captcha' => 'Captcha error! silahkan coba lagi.',
         ],
     ],
 

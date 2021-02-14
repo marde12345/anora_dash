@@ -24,27 +24,7 @@ class StUserResource extends JsonResource
         $user = new UserResource(User::find($this->user_id));
         $level = (int) $this->level / 20;
         $level = ($level > 4 ? 4 : $level);
-        switch (Job::LEVELS[$level]) {
-            case 'baru':
-                $level_statistisi = 'Statistisi Baru';
-                break;
-            case 'entry':
-                $level_statistisi = 'Statistisi Pemula';
-                break;
-            case 'medium':
-                $level_statistisi = 'Statistisi Menengah';
-                break;
-            case 'tinggi':
-                $level_statistisi = 'Statistisi Berpengalaman';
-                break;
-            case 'top':
-                $level_statistisi = 'Professional Statistisi';
-                break;
-
-            default:
-                $level_statistisi = 'Statistisi';
-                break;
-        }
+        $level_statistisi = $this->getLevelStatistisi($level);
 
         $reviews = ReviewResource::collection(Review::where('to_id', $user->id)->get());
         $reviews = json_decode(json_encode($reviews));
@@ -75,6 +55,24 @@ class StUserResource extends JsonResource
             'count_star_review' => count($star_review),
             'link_profil' => config('custom.app_url') . '/statistisi/' . implode('_', [$this->id, $this->user_id]),
         ];
+    }
+
+    public function getLevelStatistisi($level)
+    {
+        if ($level < 21) {
+            $level_statistisi = 'Statistisi Baru';
+        } elseif ($level < 41) {
+            $level_statistisi = 'Statistisi Pemula';
+        } elseif ($level < 61) {
+            $level_statistisi = 'Statistisi Menengah';
+        } elseif ($level < 81) {
+            $level_statistisi = 'Statistisi Berpengalaman';
+        } elseif ($level >= 81) {
+            $level_statistisi = 'Professional Statistisi';
+        } else {
+            $level_statistisi = 'Statistisi';
+        }
+        return $level_statistisi;
     }
 
     public function getPhotoBackcoverAttribute()

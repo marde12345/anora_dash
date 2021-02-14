@@ -12,12 +12,13 @@
                     <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem;">Cobain fitur lokasi kami!!!</h1>
                     <div class="form-row">
                         <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                            <button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" onclick="getLocation()" id="browse_map" style="font-size: 20px; padding: .8em 1em; border: 5px solid #333; border-radius: 10px; overflow: hidden; transform: translate3d(0, 0, 0);">
+                            <button class="btn btn-danger btn-block btn-lg btn-gradient shadow-sm" onclick="getLocation()" id="browse_map" style="font-size: 20px; padding: .8em 1em; border: 3px solid #333; border-radius: 10px; overflow: hidden; transform: translate3d(0, 0, 0);">
                                 <span class="wave"></span><i class="fa fa-map"></i> Terdekat</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="col-lg-7">
                 <div class="homepage-search-title">
                     <h1 class="mb-3 text-shadow text-gray-900 font-weight-bold" style="color:white;font-size:2.2rem">Olah data Anda dalam sekali klik! </h1>
