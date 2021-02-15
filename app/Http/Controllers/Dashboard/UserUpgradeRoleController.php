@@ -62,9 +62,7 @@ class UserUpgradeRoleController extends Controller
                 ->withError("Anda sudah memiliki role tertinggi");
         }
 
-        $roles = User::getRoles();
-        $pos_from_role = array_search($from_role, $roles, true);
-        $to_role = $roles[$pos_from_role + 1];
+        $to_role = User::getUpgradeRoles($from_role);
 
         if (is_null($user_upgrade)) {
             $status_create = UserUpgradeRole::create([

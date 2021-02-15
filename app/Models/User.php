@@ -15,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     private const DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
     private const DEFAULT_PASSWORD = 'anora12345';
-    private const ROLES = ['customer', 'st_users', 'admin'];
+    public const ROLES = ['customer' => 'Pelanggang', 'st_user' => 'Statistikan', 'admin' => 'Administrator'];
 
 
     protected $fillable = [
@@ -126,6 +126,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function getRoles()
     {
         return self::ROLES;
+    }
+
+    public static function getUpgradeRoles($current_role)
+    {
+        switch ($current_role) {
+            case 'customer':
+                $next_role = 'st_user';
+                break;
+
+            default:
+                $next_role = 'st_user';
+                break;
+        }
+
+        return $next_role;
     }
 
     // Per message an

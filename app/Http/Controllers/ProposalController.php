@@ -14,6 +14,11 @@ class ProposalController extends Controller
 {
     public function createProposal($job_id)
     {
+        if (Auth::user()->role != 'st_user') {
+            return redirect()->back()
+                ->withError("Tidak memiliki akses untuk membuat proposal! Ingin mengajukan proposal? Upgrade akun saya menjadi statistikan difitur \"Jadikan saya mitra\"");
+        }
+
         $st_user = new StUserResource(StUser::where('user_id', Auth::user()->id)->first());
         $st_user = json_decode(json_encode($st_user));
 
