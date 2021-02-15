@@ -46,7 +46,7 @@ $(document).ready(function () {
 	});
 
 	// Format mata uang.
-	$('.uang').mask('000.000.000', { reverse: true });
+	$('.uang').mask('000.000.000.000.000', { reverse: true });
 
 	/* Select2 */
 	$('select').select2();

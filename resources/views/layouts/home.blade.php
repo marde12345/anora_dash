@@ -337,9 +337,11 @@
   </div>
 </div>
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 <!-- Bootstrap core JavaScript-->
 <script src="/home/vendor/jquery/jquery.min.js"></script>
 <script src="/home/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/home/vendor/bootstrap/js/jquery.mask.js"></script>
 
 <!-- Contact form JavaScript-->
 <!-- Do not edit these files! In order to set the email address and subject line for the contact form go to the bin/contact_me.php file.-->

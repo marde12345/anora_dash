@@ -130,7 +130,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Rp. </span>
                             </div>
-                            <input name="open_price" type="number" class="form-control uang" aria-label="1000000" min="100000" step="5000" value='{{old("open_price",100000)}}'>
+                            <input name="open_price" type="text" class="form-control uang" min="100000" step="5000" value='{{old("open_price")}}'>
                             <div class="input-group-append">
                                 <span class="input-group-text">,00</span>
                             </div>

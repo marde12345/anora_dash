@@ -61,6 +61,7 @@ class JobController extends Controller
 
         $tool_need = ($request->tool_need) ? implode('|', $request->tool_need) : null;
         $service_need = ($request->service_need) ? implode('|', $request->service_need) : null;
+        $open_price = str_replace('.', '', $request->open_price);
 
         if (Auth::user()->role != 'customer') {
             return redirect()->back()
@@ -70,6 +71,7 @@ class JobController extends Controller
         $job = Job::create([
             'tool_need' => $tool_need,
             'service_need' => $service_need,
+            'open_price' => $open_price,
             'status' => 'open',
             'user_id' => Auth::user()->id,
             'is_seeder' => 0,
