@@ -17,10 +17,10 @@ class MessageResource extends JsonResource
      */
     public function toArray($request)
     {
-        $count = Message::where([
-            ['from_id', $this->from_id],
-            ['to_id', $this->to_id],
-        ])->whereNull('read_at')->count();
+        // $count = Message::where([
+        //     ['from_id', $this->from_id],
+        //     ['to_id', $this->to_id],
+        // ])->whereNull('read_at')->count();
 
         $created_at = Carbon::parse($this->created_at)->format('d-m-Y');
 
@@ -35,7 +35,7 @@ class MessageResource extends JsonResource
             'content' => $this->content,
             'created_at' => $created_at,
             'time_dif' => $this->created_at->diffForHumans(),
-            'count' => $count
+            // 'count' => $count
         ];
     }
 }

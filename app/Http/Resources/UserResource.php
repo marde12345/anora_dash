@@ -32,7 +32,7 @@ class UserResource extends JsonResource
             ])->orWhere($to)->latest()->first();
 
 
-            $count = Message::where($to)->whereNull('read_at')->count();
+            // $count = Message::where($to)->whereNull('read_at')->count();
 
             // $st_user = new StUserResource(StUser::where('user_id', $this->id)->first());
             // $st_user = json_decode(json_encode($st_user));
@@ -44,7 +44,7 @@ class UserResource extends JsonResource
             'from_id' => $message->from_id ?? '',
             'to_id' => $message->to_id ?? '',
             'content' => $message->content ?? '',
-            'count' => $count ?? '',
+            // 'count' => $count ?? '',
             'county' => $this->city,
         ];
     }

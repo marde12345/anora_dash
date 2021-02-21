@@ -26,7 +26,8 @@
         "laravelcollective/html": "^6.2",
         "midtrans/midtrans-php": "^2.3",
         "milon/barcode": "^8.0",
-        "pusher/pusher-php-server": "^4.1"
+        "munafio/chatify": "^1.0",
+        "pusher/pusher-php-server": "^3.4"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

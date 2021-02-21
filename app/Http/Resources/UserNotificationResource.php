@@ -17,7 +17,7 @@ class UserNotificationResource extends JsonResource
     {
         return [
             // "notifications"=>,
-            "unread_messages" => Message::where('to_id', $this->id)->whereNull('read_at')->get(),
+            // "unread_messages" => Message::where('to_id', $this->id)->whereNull('read_at')->get(),
         ];
     }
 }

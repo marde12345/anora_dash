@@ -20,12 +20,12 @@ class UserUpgradeRoleController extends Controller
     public function index()
     {
         $users = UserUpgradeRoleResource::collection(
-            UserUpgradeRole::orderBy('status', 'asc')
+        UserUpgradeRole::orderBy('status', 'asc')
                 ->get()
         );
         $users = json_decode(json_encode($users));
 
-        UserUpgradeRole::where('read_at', null)->update(["read_at" => now()]);
+        // UserUpgradeRole::where('read_at', null)->update(["read_at" => now()]);
 
         $widget = [
             'title' => 'User Upgrade',
