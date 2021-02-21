@@ -342,6 +342,6 @@ class HomeController extends Controller
             'open_jobs' => $open_jobs,
         ];
 
-        return view('home.open_job', compact('widget'));
+        return view('home.job_open', compact('widget'));
     }
 }

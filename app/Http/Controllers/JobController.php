@@ -97,7 +97,7 @@ class JobController extends Controller
             'job' => $job,
         ];
 
-        return view('home.detail_job', compact('widget'));
+        return view('home.job_detail', compact('widget'));
     }
 
     /**

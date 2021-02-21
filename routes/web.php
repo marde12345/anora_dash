@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProposalController;
 use App\Http\Resources\UserNotificationResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -32,16 +33,22 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 Route::get('redirect/{driver}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
 Route::get('{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.callback');
 
-Route::get('vue', function () {
-    return view('vuem');
-})->name('vuem');
+// Route::get('vue', function () {
+//     return view('vuem');
+// })->name('vuem');
 
-Route::group(['prefix' => 'message'], function () {
-    Route::get('user/{query}', 'MessageController@user');
-    Route::get('user-message/{id}', 'MessageController@message');
-    Route::get('user-message/{id}/read', 'MessageController@read');
-    Route::post('user-message', 'MessageController@send');
-});
+// Route::group(['prefix' => 'message'], function () {
+//     Route::get('user/{query}', 'MessageController@user');
+//     Route::get('user-message/{id}', 'MessageController@message');
+//     Route::get('user-message/{id}/read', 'MessageController@read');
+//     Route::post('user-message', 'MessageController@send');
+// });
+
+Route::resources([
+    'job' => 'JobController',
+    'proposal' => 'ProposalController'
+]);
+
 
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
@@ -51,6 +58,6 @@ Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'))
 
 Route::prefix('payment')->name('payment.')->group(base_path('routes/web_payment.php'));
 
-Route::prefix('')->name('')->group(base_path('routes/web_job.php'));
+// Route::prefix('')->name('')->group(base_path('routes/web_job.php'));
 
-Route::middleware('auth')->prefix('proposal')->name('proposal.')->group(base_path('routes/web_proposal.php'));
+// Route::middleware('auth')->prefix('')->name('')->group(base_path('routes/web_proposal.php'));
