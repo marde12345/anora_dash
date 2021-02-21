@@ -331,7 +331,7 @@ class HomeController extends Controller
             $get_param_link .= "&isLevel=baru";
         }
 
-        $open_jobs = JobResource::collection($job->paginate(5))->response()->getData();
+        $open_jobs = JobResource::collection($job->paginate(2))->response()->getData();
 
         $len_meta_links = count($open_jobs->meta->links);
         $open_jobs->meta->links[0]->label = "Sebelum";

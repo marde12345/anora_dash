@@ -38,9 +38,10 @@ class PaymentController extends Controller
         $payment = Payment::where('payment_id', $payment_id)->first();
         if ($payment->midtrans_token) {
             return $payment;
+        } else {
+            $create_transaction = $this->createTransaction($payment);
+            return $payment->refresh();
         }
-        $create_transaction = $this->createTransaction($payment);
-        return $payment->refresh();
     }
 
     public function createTransaction(Payment $payment)
@@ -136,7 +137,7 @@ class PaymentController extends Controller
     {
 
         $widget = [
-            'title' => "Pembayaran Berhasil",
+            'title' => "Pembayaran Tidak ",
         ];
 
         return view('payment.unfinish', compact('widget'));
@@ -146,7 +147,7 @@ class PaymentController extends Controller
     {
 
         $widget = [
-            'title' => "Pembayaran Berhasil",
+            'title' => "Pembayaran Error",
         ];
 
         return view('payment.error', compact('widget'));

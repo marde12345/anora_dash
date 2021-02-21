@@ -15,7 +15,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     private const DEFAULT_PHOTO_PROFILE = 'default_user.jpg';
     private const DEFAULT_PASSWORD = 'anora12345';
-    public const ROLES = ['customer' => 'Pelanggang', 'st_user' => 'Statistikan', 'admin' => 'Administrator'];
+    public const ROLES = ['customer' => 'Pelanggan', 'st_user' => 'Statistikan', 'admin' => 'Administrator'];
 
 
     protected $fillable = [
