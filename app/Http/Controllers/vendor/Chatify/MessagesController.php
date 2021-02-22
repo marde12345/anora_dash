@@ -85,7 +85,7 @@ class MessagesController extends Controller
         return Response::json([
             'favorite' => $favorite,
             'fetch' => $fetch,
-            'user_avatar' => asset('/storage/' . config('chatify.user_avatar.folder') . '/' . $fetch->avatar),
+            'user_avatar' => $fetch->getPhotoProfileAttribute(),
         ]);
     }
 
@@ -102,7 +102,7 @@ class MessagesController extends Controller
         if (file_exists($path)) {
             return Response::download($path, $fileName);
         } else {
-            return abort(404, "Sorry, File does not exist in our server or may have been deleted!");
+            return abort(404, "Maaf, File tidak ditemukan!");
         }
     }
 
@@ -134,10 +134,10 @@ class MessagesController extends Controller
                     $attachment = Str::uuid() . "." . $file->getClientOriginalExtension();
                     $file->storeAs("public/" . config('chatify.attachments.folder'), $attachment);
                 } else {
-                    $error_msg = "File extension not allowed!";
+                    $error_msg = "File ekstensi tidak diijinkan!";
                 }
             } else {
-                $error_msg = "File size is too long!";
+                $error_msg = "Ukuran file terlalu besar!";
             }
         }
 
@@ -192,10 +192,15 @@ class MessagesController extends Controller
         // if there is a messages
         if ($query->count() > 0) {
             foreach ($messages as $message) {
-                $allMessages .= Chatify::messageCard(
-                    Chatify::fetchMessage($message->id)
-                );
+                $allMessages .= Chatify::messageCard(Chatify::fetchMessage($message->id));
+                // return Response::json([$allMessages]);
             }
+
+            // foreach ($messages as $message) {
+            //     $allMessages .= Chatify::messageCard(
+            //         Chatify::fetchMessage($message->id)
+            //     );
+            // }
             // send the response
             return Response::json([
                 'count' => $query->count(),
@@ -205,7 +210,7 @@ class MessagesController extends Controller
         // send the response
         return Response::json([
             'count' => $query->count(),
-            'messages' => '<p class="message-hint"><span>Say \'hi\' and start messaging</span></p>',
+            'messages' => '<p class="message-hint"><span>Ketik \'halo\' dan mulai percakapan</span></p>',
         ]);
     }
 
@@ -217,8 +222,15 @@ class MessagesController extends Controller
      */
     public function seen(Request $request)
     {
+        // TODO: make read_at
+        // AppMessage::where('from_id', $request['id'])
+        //     ->where('to_id', Auth::user()->id)
+        //     ->where('seen', 0)
+        //     ->update(['read_at' => now()]);
+
         // make as seen
         $seen = Chatify::makeSeen($request['id']);
+
         // send the response
         return Response::json([
             'status' => $seen,
@@ -258,7 +270,7 @@ class MessagesController extends Controller
 
         // send the response
         return Response::json([
-            'contacts' => $users->count() > 0 ? $contacts : '<br><p class="message-hint"><span>Your contatct list is empty</span></p>',
+            'contacts' => $users->count() > 0 ? $contacts : '<br><p class="message-hint"><span>Daftar kontak kosong</span></p>',
         ], 200);
     }
 
@@ -326,7 +338,7 @@ class MessagesController extends Controller
         return Response::json([
             'favorites' => $favorites->count() > 0
                 ? $favoritesList
-                : '<p class="message-hint"><span>Your favorite list is empty</span></p>',
+                : '<p class="message-hint"><span>Daftar favorit kosong</span></p>',
         ], 200);
     }
 
@@ -354,7 +366,7 @@ class MessagesController extends Controller
         return Response::json([
             'records' => $records->count() > 0
                 ? $getRecords
-                : '<p class="message-hint"><span>Nothing to show.</span></p>',
+                : '<p class="message-hint"><span>Tidak ada yang ditampilkan.</span></p>',
             'addData' => 'html'
         ], 200);
     }
@@ -379,7 +391,7 @@ class MessagesController extends Controller
         }
         // send the response
         return Response::json([
-            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Nothing shared yet</span></p>',
+            'shared' => count($shared) > 0 ? $sharedPhotos : '<p class="message-hint"><span>Belum ada yang dibagikan</span></p>',
         ], 200);
     }
 
@@ -442,11 +454,11 @@ class MessagesController extends Controller
                     $file->storeAs("public/" . config('chatify.user_avatar.folder'), $avatar);
                     $success = $update ? 1 : 0;
                 } else {
-                    $msg = "File extension not allowed!";
+                    $msg = "File ekstensi tidak diijinkan!";
                     $error = 1;
                 }
             } else {
-                $msg = "File extension not allowed!";
+                $msg = "Ukuran file terlalu besar!";
                 $error = 1;
             }
         }

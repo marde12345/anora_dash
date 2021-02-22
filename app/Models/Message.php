@@ -8,22 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'from_id', 'to_id', 'content', 'read_at'
-    ];
     protected $casts = [
         'read_at' => 'datetime',
     ];
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'from_id');
-    }
-    public function userFrom()
-    {
-        return $this->belongsTo(User::class, 'from_id');
-    }
-    public function userTo()
-    {
-        return $this->belongsTo(User::class, 'to_id');
-    }
+    protected $guarded = []; //tambahkan baris ini
+
 }
