@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\vendor\Chatify;
 
+use App\Models\Message as AppMessage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -186,21 +187,22 @@ class MessagesController extends Controller
         $allMessages = null;
 
         // fetch messages
-        $query = Chatify::fetchMessagesQuery($request['id'])->orderBy('created_at', 'asc');
+        // $query = Chatify::fetchMessagesQuery($request['id'])->orderBy('created_at', 'asc');
+        $query = AppMessage::where('to_id', $request['id'])->orderBy('created_at', 'asc');
         $messages = $query->get();
+        // return response()->json([$messages]);
 
         // if there is a messages
         if ($query->count() > 0) {
             foreach ($messages as $message) {
-                $allMessages .= Chatify::messageCard(Chatify::fetchMessage($message->id));
-                // return Response::json([$allMessages]);
+                if (AppMessage::find($message->id)) {
+                    $allMessages .= Chatify::messageCard(
+                        Chatify::fetchMessage($message->id)
+                    );
+                } else {
+                    continue;
+                }
             }
-
-            // foreach ($messages as $message) {
-            //     $allMessages .= Chatify::messageCard(
-            //         Chatify::fetchMessage($message->id)
-            //     );
-            // }
             // send the response
             return Response::json([
                 'count' => $query->count(),

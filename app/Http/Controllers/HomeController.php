@@ -259,15 +259,9 @@ class HomeController extends Controller
         $st_user = json_decode(json_encode($st_user));
         // dd($st_user);
 
-        $statistisi_terbaik = StUserResource::collection(
-            StUser::where('level', '>', '80')->inRandomOrder()->limit(10)->get()
-        )->response()->getData();
-
         $widget = [
-            'title' => "Home",
+            'title' => $st_user->user->name,
             'st_user' => $st_user,
-            'statistisi_terbaik' => $statistisi_terbaik,
-
         ];
 
         return view('home.statistisi-portofolio', compact('widget'));
@@ -331,7 +325,7 @@ class HomeController extends Controller
             $get_param_link .= "&isLevel=baru";
         }
 
-        $open_jobs = JobResource::collection($job->paginate(2))->response()->getData();
+        $open_jobs = JobResource::collection($job->paginate(10))->response()->getData();
 
         $len_meta_links = count($open_jobs->meta->links);
         $open_jobs->meta->links[0]->label = "Sebelum";

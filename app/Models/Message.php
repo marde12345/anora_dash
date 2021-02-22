@@ -10,6 +10,7 @@ class Message extends Model
     use HasFactory;
     protected $casts = [
         'read_at' => 'datetime',
+        'id' => 'string'
     ];
     protected $guarded = []; //tambahkan baris ini
 

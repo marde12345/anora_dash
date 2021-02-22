@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="buttons-wrapper"><a class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join" href="#">
+                        <div class="buttons-wrapper"><a class="btn-lrg-standard btn-contact-me js-contact-me js-open-popup-join" href="{{route('user',$widget['st_user']->user->id)}}">
                                 Hubungi
                                 Saya</a>
                             <div class="btn-lrg-standard btn-white btn-custom-order">Pesan Jasa</div>

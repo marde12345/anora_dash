@@ -423,6 +423,7 @@ function fetchMessages(id, type) {
                 // remove loading bar
                 NProgress.done();
                 NProgress.remove();
+                console.log(data);
 
                 // trigger seen event
                 makeSeen(true);
