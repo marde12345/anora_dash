@@ -225,10 +225,10 @@ class MessagesController extends Controller
     public function seen(Request $request)
     {
         // TODO: make read_at
-        // AppMessage::where('from_id', $request['id'])
-        //     ->where('to_id', Auth::user()->id)
-        //     ->where('seen', 0)
-        //     ->update(['read_at' => now()]);
+        AppMessage::where('from_id', $request['id'])
+            ->where('to_id', Auth::user()->id)
+            ->where('seen', 0)
+            ->update(['read_at' => now()]);
 
         // make as seen
         $seen = Chatify::makeSeen($request['id']);
