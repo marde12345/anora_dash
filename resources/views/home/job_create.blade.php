@@ -148,7 +148,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="form-group col-md-4 mx-auto">
+                <div class="form-group col-md-12 mx-auto" style="text-align: -webkit-center;">
                     {!! NoCaptcha::display() !!}
                 </div>
                 <div class="card-footer text-center">

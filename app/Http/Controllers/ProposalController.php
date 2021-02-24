@@ -68,16 +68,25 @@ class ProposalController extends Controller
 
     public function createProposal($job_id)
     {
-        if (Auth::user()->role != 'st_user') {
+        if (Auth::user()->role != 'st_user' && Auth::user()->role != 'admin') {
             return redirect()->back()
                 ->withError("Tidak memiliki akses untuk membuat proposal! Ingin mengajukan proposal? Upgrade akun saya menjadi statistikan difitur \"Jadikan saya mitra\"");
         }
 
-        $st_user = new StUserResource(StUser::where('user_id', Auth::user()->id)->first());
-        $st_user = json_decode(json_encode($st_user));
+        // $st_user = new StUserResource(StUser::where('user_id', Auth::user()->id)->first());
+        // $st_user = json_decode(json_encode($st_user));
 
         $job = new JobResource(Job::find($job_id));
         $job = json_decode(json_encode($job));
-        dd($job);
+
+        $widget = [
+            'title' => "Buat Proposal",
+            'job' => $job,
+            'services' => Job::SERVICES,
+            'tools' => Job::TOOLS,
+            'levels' => Job::LEVELS,
+        ];
+
+        return view('home/proposal_create', compact('widget'));
     }
 }

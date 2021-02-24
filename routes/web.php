@@ -48,7 +48,7 @@ Route::resources([
     'job' => 'JobController',
     'proposal' => 'ProposalController'
 ]);
-
+Route::middleware('auth')->prefix('proposal')->name('proposal.')->group(base_path('routes/web_proposal.php'));
 
 Route::prefix('')->name('root.')->group(base_path('routes/web_home.php'));
 
@@ -59,5 +59,3 @@ Route::prefix('admin')->name('admin.')->group(base_path('routes/web_admin.php'))
 Route::prefix('payment')->name('payment.')->group(base_path('routes/web_payment.php'));
 
 // Route::prefix('')->name('')->group(base_path('routes/web_job.php'));
-
-// Route::middleware('auth')->prefix('')->name('')->group(base_path('routes/web_proposal.php'));
