@@ -72,6 +72,11 @@
             </div>
             <div class="col-md-6">
                 <div class="card shadow mx-auto">
+                    <div class="card-header">
+                        <h4>
+                            Buat Proposal Pekerjaan
+                        </h4>
+                    </div>
                     <div class="card-body">
                         {{Form::open(['method' => 'POST', 'route' => ['proposal.store']])}}
                         <!-- Type -->
@@ -209,7 +214,7 @@
                             {!! NoCaptcha::display() !!}
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-primary col-md-6 " type="submit">Buat</button>
+                            <button class="btn btn-primary col-md-6" type="submit">Buat</button>
                             {{Form::close()}}
                         </div>
                     </div>
