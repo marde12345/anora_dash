@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    public $widgetController;
     /**
      * Create a new controller instance.
      *
@@ -24,6 +25,9 @@ class HomeController extends Controller
     public function __construct()
     {
         // $this->middleware('auth');
+        $this->widgetController = [
+            'marquees' => "Home1"
+        ];
     }
 
     /**
@@ -42,7 +46,7 @@ class HomeController extends Controller
         $widget = [
             'title' => "Home",
             'statistisi_terbaik' => $statistisi_terbaik,
-        ];
+        ] + $this->widgetController;
 
         return view('home.home', compact('widget'));
     }

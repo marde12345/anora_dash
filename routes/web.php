@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProposalController;
 use App\Http\Resources\UserNotificationResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
@@ -19,6 +20,16 @@ use Illuminate\Support\Facades\URL;
 
 Route::get('coba/', 'PlaygroundController@playground');
 Route::get('get_contract/', 'PlaygroundController@getRandomContract');
+Route::get('coba_cache/', function () {
+    // return Cache::get('users_all');
+    return response()->json(Cache::remember(
+        'users_all',
+        60,
+        function () {
+            return User::all();
+        }
+    ));
+});
 
 // Data Controller
 Route::get('data/kota', 'DataController@selectKota');

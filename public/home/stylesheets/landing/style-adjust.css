@@ -6,3 +6,13 @@
 .btn-success:hover {
   border-color: #57a4ff;
 }
+
+.card-header{
+  background-color: skyblue;
+  color: white;
+  font-family: system-ui;
+}
+
+.card-header.card-success{
+  background-color: mediumseagreen;
+}

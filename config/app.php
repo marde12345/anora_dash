@@ -178,6 +178,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         \Chatify\ChatifyServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Chatify' => Chatify\Facades\ChatifyMessenger::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

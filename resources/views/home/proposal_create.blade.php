@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card shadow mx-auto">
-                    <div class="card-header">
+                    <div class="card-header card-success">
                         <h4>
                             Buat Proposal Pekerjaan
                         </h4>
@@ -80,6 +80,7 @@
                     <div class="card-body">
                         {{Form::open(['method' => 'POST', 'route' => ['proposal.store']])}}
                         <!-- Type -->
+                        <input type="hidden" name="job_id" value="{{$widget['job']->id}}">
                         <fieldset class="form-group col-md-12">
                             <div class="row">
                                 <legend class="col-form-label col-sm-2 pt-0">Tipe pekerjaan</legend>

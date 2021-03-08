@@ -26,6 +26,18 @@ class ProposalController extends Controller
 
     public function store(Request $request)
     {
+        $job = new JobResource(Job::find($request->job_id));
+        dd($job->open_price);
+
+        $validate = $request->validate([
+            'g-recaptcha-response' => 'required|captcha',
+            'bid_price' => 'required|lte:' . strval($job->open_price)
+        ]);
+
+        $proposal = [
+            'status' => Proposal::STATUS['submitted'],
+        ];
+
         // dd($request->all());
         $validate = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
@@ -64,6 +76,21 @@ class ProposalController extends Controller
 
         // return redirect()->route('job.show', [$job->id])
         //     ->with('success', 'Proposal berhasil diajukan! Silahkan tunggu hasilnya');
+    }
+
+    public function storeProposal(Request $request)
+    {
+        $job = new JobResource(Job::find($request->job_id));
+        dd($job);
+
+        $validate = $request->validate([
+            'g-recaptcha-response' => 'required|captcha',
+            'bid_price' => 'required|lte:' . strval($job->open_price)
+        ]);
+
+        $proposal = [
+            'status' => Proposal::STATUS['submitted'],
+        ];
     }
 
     public function createProposal($job_id)
