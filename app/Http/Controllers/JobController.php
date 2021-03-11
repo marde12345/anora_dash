@@ -63,7 +63,7 @@ class JobController extends Controller
         $service_need = ($request->service_need) ? implode('|', $request->service_need) : null;
         $open_price = str_replace('.', '', $request->open_price);
 
-        if (Auth::user()->role != 'customer') {
+        if (!in_array(Auth::user()->role, ['customer', 'admin'])) {
             return redirect()->back()
                 ->withError("Tidak memiliki akses untuk membuat pekerjaan!");
         }

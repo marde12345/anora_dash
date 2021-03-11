@@ -1,7 +1,15 @@
 .btn-success {
-  background: linear-gradient(to right, #6ff663 0%, #5dff57 100%) !important;
-  border-color: #63cdf6;
-  color:green;
+  background-color: mediumseagreen;
+  color: white;
+  font-family: system-ui;
+}
+
+.input-group-append{
+  height: calc(1.5em + .75rem + 2px);
+}
+
+.input-group-prepend{
+  height: calc(1.5em + .75rem + 2px);
 }
 
 .card-header{

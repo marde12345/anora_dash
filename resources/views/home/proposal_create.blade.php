@@ -51,7 +51,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="text" class="form-control" value="{{$widget['job']->open_price}}" readonly>
+                                <input type="text" class="form-control uang" value="{{$widget['job']->open_price}}" readonly>
                                 <div class="input-group-append">
                                     <span class="input-group-text">,00</span>
                                 </div>
@@ -63,6 +63,11 @@
                         </div>
                         <div class="form-group">
                             <label for="home_service">Home Service?</label>
+                            @if($widget['job']->is_home_service==1)
+                            <button class="badge badge-primary">Bersedia</button>
+                            @else if($widget['job']->is_home_service==0)
+                            <button class="badge badge-danger">Tidak bersedia</button>
+                            @endif
                             <lottie-player id="isHomeServiceJob" src="https://assets3.lottiefiles.com/packages/lf20_sxrbhrtx.json" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
                         </div>
                         <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -81,119 +86,25 @@
                         {{Form::open(['method' => 'POST', 'route' => ['proposal.store']])}}
                         <!-- Type -->
                         <input type="hidden" name="job_id" value="{{$widget['job']->id}}">
-                        <fieldset class="form-group col-md-12">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Tipe pekerjaan</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="type1" value="open" checked>
-                                        <label class="form-check-label" for="type1">
-                                            Pekerjaan terbuka
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="type2" value="direct">
-                                        <label class="form-check-label" for="type2">
-                                            Pekerjaan langsung
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
+                        <h4>Penawaran</h4>
                         <hr>
-                        <!-- Level -->
-                        <fieldset class="form-group col-md-12">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Level minimal</legend>
-                                <div class="col-sm-10">
-                                    @foreach($widget['levels'] as $key => $level)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="level_need" id="{{$key}}" value="{{$key}}">
-                                        <label class="form-check-label" for="{{$key}}">
-                                            {{$level}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </fieldset>
-                        <!-- Tool -->
-                        <fieldset class="form-group col-md-12">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Teknologi yang digunakan</legend>
-                                <div class="col-sm-10">
-                                    @foreach($widget['tools'] as $key => $tool)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="tool_need[]" id="{{$key}}" value="{{$key}}">
-                                        <label class="form-check-label" for="{{$key}}">
-                                            {{$tool}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </fieldset>
-                        <!-- Service -->
-                        <fieldset class="form-group col-md-12">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Layanan yang digunakan</legend>
-                                <div class="col-sm-10">
-                                    @foreach($widget['services'] as $key => $service)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="service_need[]" id="{{$key}}" value="{{$key}}">
-                                        <label class="form-check-label" for="{{$key}}">
-                                            {{$service}}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </fieldset>
-                        <hr>
-                        <!-- job_name -->
-                        <div class="form-group">
-                            <label for="name_job">Nama pekerjaan</label>
-                            <input class="form-control" type="text" name="name_job" value='{{old("name_job")}}' placeholder="Nama Pekerjaan...">
-                        </div>
                         <!-- desc -->
                         <div class="form-group">
-                            <label for="description">Deskripsi pekerjaan</label>
-                            <textarea class="form-control" name="description" value='{{old("description")}}' placeholder="Saya butuh seseorang untuk melakukan data entry">{{old("description")}}</textarea>
+                            <label for="description">Surat pengantar</label>
+                            <textarea class="form-control" name="cover_letter" value='{{old("cover_letter")}}' placeholder="Yang saya hormati bapak/ibu ditempat...">{{old("cover_letter")}}</textarea>
                         </div>
-                        <!-- file_url -->
-                        <div class="form-group">
-                            <label for="input_file_url">Link file yang dibutuhkan</label>
-                            <input class="form-control" type="text" name="input_file_url" value='{{old("input_file_url")}}' placeholder="https://drive.google.com">
-                        </div>
-                        <!-- home_service -->
-                        <fieldset class="form-group col-md-12">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Home service?</legend>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_home_service" id="is_home_service1" value="1" checked>
-                                        <label class="form-check-label" for="is_home_service1">
-                                            Iya
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="is_home_service" id="is_home_service2" value="0">
-                                        <label class="form-check-label" for="is_home_service2">
-                                            Tidak
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
                         <div class="form-row">
                             <!-- open price -->
                             <div class="form-group col-md-6">
-                                <label for="duration">Upah maksimal</label>
+                                <label for="duration">Upah</label>
                                 <div class="input-group">
+                                    <small id="bidPrice" style="color: red;">
+                                        Upah minimal Rp. 100.000,00 dan maksimal Rp. {{$widget['job']->open_price}},00
+                                    </small>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Rp. </span>
                                     </div>
-                                    <input name="open_price" type="text" class="form-control uang" min="100000" step="5000" value='{{old("open_price")}}'>
+                                    <input name="bid_price" type="number" class="form-control uang" value='{{old("bid_price",$widget["job"]->open_price)}}' aria-describedby="bidPrice">
                                     <div class="input-group-append">
                                         <span class="input-group-text">,00</span>
                                     </div>
@@ -203,7 +114,10 @@
                             <div class="form-group col-md-6">
                                 <label for="duration">Lama pengerjaan ( Hari )</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="number" name="duration" value='{{old("duration",1)}}' min="1" step="1" aria-label="3">
+                                    <small id="bidDuration" style="color: red;">
+                                        Lama pengerjaan paling cepat 1 hari dan paling lama {{$widget['job']->duration}} hari
+                                    </small>
+                                    <input class="form-control" type="number" name="bid_duration" value='{{old("bid_duration",1)}}' aria-label="3" aria-describedby="bidDuration">
                                     <div class="input-group-append">
                                         <span class="input-group-text"> Hari</span>
                                     </div>
@@ -215,7 +129,7 @@
                             {!! NoCaptcha::display() !!}
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-primary col-md-6" type="submit">Buat</button>
+                            <button class="btn btn-success col-md-6" type="submit">Buat proposal</button>
                             {{Form::close()}}
                         </div>
                     </div>

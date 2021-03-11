@@ -27,77 +27,43 @@ class ProposalController extends Controller
     public function store(Request $request)
     {
         $job = new JobResource(Job::find($request->job_id));
-        dd($job->open_price);
 
-        $validate = $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
-            'bid_price' => 'required|lte:' . strval($job->open_price)
-        ]);
-
-        $proposal = [
-            'status' => Proposal::STATUS['submitted'],
-        ];
-
-        // dd($request->all());
-        $validate = $request->validate([
-            'g-recaptcha-response' => 'required|captcha',
-            'name_job' => 'required',
-            'description' => 'required',
-            'input_file_url' => 'required|active_url',
-            'open_price' => 'required|numeric|min:100000',
-            'duration' => 'required|numeric|min:1',
-        ]);
-        unset($request['g-recaptcha-response']);
-
-        $tool_need = ($request->tool_need) ? implode('|', $request->tool_need) : null;
-        $service_need = ($request->service_need) ? implode('|', $request->service_need) : null;
-        $open_price = str_replace('.', '', $request->open_price);
-
-        if (Auth::user()->role != 'st_user') {
+        if (!in_array(Auth::user()->role, ['st_user', 'admin'])) {
             return redirect()->back()
                 ->withError("Tidak memiliki akses untuk mengajukan proposal!");
         }
 
-        $st_user = StUser::where('user_id', Auth::user()->id)->first();
-
-        if (Proposal::where('st_user_id', $st_user->id)->where('job_id', $request->job_id)->first()) {
+        if (Proposal::where('st_user_id', Auth::user()->id)->where('job_id', $request->job_id)->first()) {
             return redirect()->back()
                 ->withError("Anda sudah mengajukan proposal pada sayembara ini!");
         }
 
-        // $job = Job::create([
-        //     'tool_need' => $tool_need,
-        //     'service_need' => $service_need,
-        //     'open_price' => $open_price,
-        //     'status' => 'open',
-        //     'user_id' => Auth::user()->id,
-        //     'is_seeder' => 0,
-        // ] + $request->all());
-
-        // return redirect()->route('job.show', [$job->id])
-        //     ->with('success', 'Proposal berhasil diajukan! Silahkan tunggu hasilnya');
-    }
-
-    public function storeProposal(Request $request)
-    {
-        $job = new JobResource(Job::find($request->job_id));
-        dd($job);
+        $request->merge(['bid_price' => str_replace('.', '', $request->bid_price)]);
 
         $validate = $request->validate([
             'g-recaptcha-response' => 'required|captcha',
-            'bid_price' => 'required|lte:' . strval($job->open_price)
+            'bid_price' => 'required|lte:' . strval($job->open_price),
+            'bid_duration' => 'required|lte:' . strval($job->duration),
         ]);
+        unset($request['g-recaptcha-response']);
 
         $proposal = [
-            'status' => Proposal::STATUS['submitted'],
-        ];
+            'st_user_id' => Auth::user()->id,
+            'status' => 'submitted',
+            'is_seeder' => 0
+        ] + $request->all();
+
+        $createProposal = Proposal::create($proposal);
+
+        return redirect()->route('job.show', [$job->id])
+            ->with('success', 'Proposal berhasil diajukan! Silahkan tunggu hasilnya');
     }
 
     public function createProposal($job_id)
     {
-        if (Auth::user()->role != 'st_user' && Auth::user()->role != 'admin') {
+        if (!in_array(Auth::user()->role, ['st_user', 'admin'])) {
             return redirect()->back()
-                ->withError("Tidak memiliki akses untuk membuat proposal! Ingin mengajukan proposal? Upgrade akun saya menjadi statistikan difitur \"Jadikan saya mitra\"");
+                ->withError("Tidak memiliki akses untuk mengajukan proposal!");
         }
 
         // $st_user = new StUserResource(StUser::where('user_id', Auth::user()->id)->first());

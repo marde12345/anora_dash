@@ -20,7 +20,7 @@ class ContractResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request) + [
+        return [
             'created_at_isoformat' => $this->created_at->isoFormat('dddd, D MMMM Y'),
 
             'user' => User::find($this->user_id),
@@ -28,6 +28,6 @@ class ContractResource extends JsonResource
             'job' => Job::find($this->job_id),
             'payment' => Payment::find($this->payment_id) ?? '',
             'done_job' => Done_job::find($this->done_job_id) ?? '',
-        ];
+        ] + parent::toArray($request);
     }
 }
