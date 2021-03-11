@@ -100,7 +100,7 @@
     <div class="input-group">
       <input class="form-control bg-white small" name="q" type="text" placeholder="Cari Statistisi..." aria-label="Search" aria-describedby="basic-addon2">
       <div class="input-group-append">
-        <button class="btn btn-success" type="submit"><i class="fa fa-search fa-sm"></i></button>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-search fa-sm"></i></button>
       </div>
     </div>
     {{Form::close()}}

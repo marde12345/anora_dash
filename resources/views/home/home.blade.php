@@ -43,7 +43,7 @@
                             <input class="form-control border-0 form-control-lg shadow-sm" type="text" name="q" placeholder="Cari Statistisi atau Keahliannya..." />
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 form-group">
-                            <button class="btn btn-success btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-primary btn-block btn-lg btn-gradient shadow-sm" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                     {{Form::close()}}
@@ -185,7 +185,7 @@
         </div>
         <div class="content">
             <h2 class="text-white">Cari Statistisi untuk Pekerjaan Anda Sekarang</h2>
-            <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm" href="{{route('root.browse')}}">Mulai Sekarang</a>
+            <p class="text-white">Kami dapat membantu pengolahan data anda menjadi lebih berkualitas</p><a class="c-btn btn btn-primary btn-lg btn-gradient shadow-sm" href="{{route('root.browse')}}">Mulai Sekarang</a>
         </div>
     </div>
 </section>

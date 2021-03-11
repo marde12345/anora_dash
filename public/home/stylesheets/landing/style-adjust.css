@@ -1,10 +1,7 @@
 .btn-success {
-  background: linear-gradient(to right, #63cdf6 0%, #57a4ff 100%) !important;
+  background: linear-gradient(to right, #6ff663 0%, #5dff57 100%) !important;
   border-color: #63cdf6;
-}
-
-.btn-success:hover {
-  border-color: #57a4ff;
+  color:green;
 }
 
 .card-header{
@@ -15,4 +12,5 @@
 
 .card-header.card-success{
   background-color: mediumseagreen;
+  font-family: system-ui;
 }
