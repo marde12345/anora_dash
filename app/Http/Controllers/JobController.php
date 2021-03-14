@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\JobResource;
+use App\Http\Resources\ProposalResource;
 use App\Models\Job;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,10 +93,15 @@ class JobController extends Controller
     {
         $job = new JobResource(Job::find($id));
         $job = json_decode(json_encode($job));
-        // dd($job);
+
+        $proposals = ProposalResource::collection(Proposal::where('job_id', $id)->get())->response()->getData();
+
+        // dd($proposals);
         $widget = [
             'title' => "Detail Pekerjaan",
             'job' => $job,
+            'proposals' => $proposals,
+
         ];
 
         return view('home.job_detail', compact('widget'));

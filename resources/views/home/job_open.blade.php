@@ -142,7 +142,7 @@
                     </div>
                     <div class="row">
                         @foreach($widget['open_jobs']->data as $job)
-                        <div class="card col-md-12 open_jobInfoModal" data-toggle="modal" data-target="#jobInfoModal" data-id="{{$job->id}}" style="margin: 10px;">
+                        <div class="card shadow-sm col-md-12 open_jobInfoModal" data-toggle="modal" data-target="#jobInfoModal" data-id="{{$job->id}}" style="margin: 10px;">
                             <div class="card-body">
                                 <h5 class="card-title"><b>{{$job->name_job}}</b> (Level {{$job->level_need}}+)</h5>
                                 <hr>

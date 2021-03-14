@@ -13,12 +13,38 @@
 }
 
 .card-header{
-  background-color: skyblue;
+  background-color: cornflowerblue;
   color: white;
   font-family: system-ui;
 }
 
 .card-header.card-success{
   background-color: mediumseagreen;
+  font-family: system-ui;
+}
+
+.card-header.card-warning{
+  background-color: goldenrod;
+  font-family: system-ui;
+}
+
+.card-header.card-proposal-submitted{
+  background-color: thistle;
+  font-family: system-ui;
+}
+.card-header.card-proposal-review{
+  background-color: cadetblue;
+  font-family: system-ui;
+}
+.card-header.card-proposal-invited{
+  background-color: darkgray;
+  font-family: system-ui;
+}
+.card-header.card-proposal-accepted{
+  background-color: forestgreen;
+  font-family: system-ui;
+}
+.card-header.card-proposal-rejected{
+  background-color: crimson;
   font-family: system-ui;
 }
