@@ -11,20 +11,20 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Verify Your Email Address') }}</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{ __('Verifikasi Email Anda') }}</h1>
                                 </div>
 
                                 @if (session('resent'))
                                 <div class="alert alert-success border-left-success" role="alert">
-                                    {{ __('A fresh verification link has been sent to your email address.') }}
+                                    {{ __('Link verifikasi baru berhasil dikirim') }}
                                 </div>
                                 @endif
 
-                                {{ __('Before proceeding, please check your email for a verification link.') }}
-                                {{ __('If you did not receive the email') }},
+                                {{ __('Sebelum melanjutkan, silahkan verifikasi email terlebih dahulu.') }}
+                                {{ __('Jika tidak menerima email verifikasi') }},
                                 <form id="my_form" method="post" action="{{ route('verification.resend')}}">
                                     {{ csrf_field() }}
-                                    <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"> {{ __('click here to request another') }}</a>.
+                                    <a href="javascript:{}" onclick="document.getElementById('my_form').submit();"> {{ __('Klik untuk mengirim ulang') }}</a>.
                                 </form>
                             </div>
                         </div>

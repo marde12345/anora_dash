@@ -71,7 +71,9 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => $data['password'],
+
             'role' => 'customer',
+            'avatar' => asset('storage/images/PhotoProfile/300/default_user.jpg'),
         ]);
     }
 }
