@@ -59,7 +59,7 @@ class LoginController extends Controller
                 break;
             case 'st_user':
                 session()->flash('success', 'Selamat datang!');
-                return '/dashboard';
+                return '/';
                 break;
             case 'customer':
                 session()->flash('success', 'Selamat datang!');

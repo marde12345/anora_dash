@@ -64,11 +64,21 @@
                         <div class="text-center mt-3 border-bottom pb-3">
                             <p class="small text-muted">Atau login menggunakan</p>
                             <div class="row">
-                                <div class="col-6">
-                                    <button class="btn btn-outline-instagram btn-block" type="button"><i class="mdi mdi-instagram"></i> Instagram</button>
+                                <div class="col-12">
+                                    <a href="{{ route('login.provider', 'google') }}">
+                                        <button class="btn btn-outline-google btn-block" type="button"><i class="mdi mdi-google"></i>
+                                            Google
+                                        </button>
+                                    </a>
                                 </div>
-                                <div class="col-6">
-                                    <button class="btn btn-outline-facebook btn-block" type="button"><i class="mdi mdi-facebook"></i> Facebook</button>
+                            </div><br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{{ route('login.provider', 'facebook') }}">
+                                        <button class="btn btn-outline-facebook btn-block" type="button"><i class="mdi mdi-facebook"></i>
+                                            Facebook
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

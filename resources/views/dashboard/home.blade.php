@@ -2,8 +2,27 @@
 
 @section('main-content')
 
+@if(auth()->user()->role != 'admin')
+<div class="container">
+    <div class="col-xl-3 col-md-6 mb-4 mx-auto">
+        <a href="{{route('root.home')}}">
+            <div class="card border-left-primary shadow h-100 py-2 pulse">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2 " style="text-align: center;">
+                            <img src="{{asset('img/anora_small.png')}}">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Menuju platform ANORA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+@endif
+
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Dashboard') }}</h1>
+<h1 class="h3 mb-4 text-gray-800">{{ __('Contoh Dashboard') }}</h1>
 
 <div class="row">
 

@@ -25,6 +25,7 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/dashboard/style-custom.css')}}" rel="stylesheet">
 
     <!-- Favicon -->
     <link href="{{ asset('img/anora_small.png') }}" rel="icon" type="image/png">
@@ -82,6 +83,7 @@
             </li>
             @endif
 
+            @if(auth()->user()->role == 'admin'))
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -128,7 +130,7 @@
                     <span>{{ __('User Chat') }}</span>
                 </a>
             </li>
-
+            @endif
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
