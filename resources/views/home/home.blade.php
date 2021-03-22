@@ -1,6 +1,17 @@
 @extends('layouts.home')
 
 @section('main-content')
+@if(auth()->user()->role == 'customer')
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="col-md-12 mx-auto" style="text-align: center;">
+            <h2>Buat pekerjaan, Cari Statistikan!</h2> <br>
+            <a class="c-btn btn btn-success btn-lg btn-gradient shadow-sm pulse" href="{{route('job.create')}}">Buat Pekerjaan</a>
+        </div>
+    </div>
+</section>
+@endif
+
 <section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
     <div class="container">
         <div class="row py-lg-5">

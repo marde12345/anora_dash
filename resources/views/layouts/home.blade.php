@@ -207,7 +207,7 @@
             </svg> Kotak Pesan
           </h6>
           @foreach(auth()->user()->countMessageUnread as $message)
-          <a class="dropdown-item dropdown-notifications-item" href="#!">
+          <a class="dropdown-item dropdown-notifications-item" href="{{route('chat')}}">
             <img class="dropdown-notifications-item-img" src="{{$message->from->photo_url}}">
             <div class="dropdown-notifications-item-content">
               <div class="dropdown-notifications-item-content-text">{{$message->content}}</div>
@@ -215,7 +215,7 @@
             </div>
           </a>
           @endforeach
-          <a class="dropdown-item dropdown-notifications-footer" href="/user/message">Baca Semua Pesan</a>
+          <a class="dropdown-item dropdown-notifications-footer" href="{{route('chat')}}">Baca Semua Pesan</a>
         </div>
       </li>
       <li class="nav-item dropdown no-arrow no-caret dropdown-user"><a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="{{ auth()->user()->photoProfile }}"></a>
