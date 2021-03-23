@@ -1,6 +1,7 @@
 @extends('layouts.home')
 
 @section('main-content')
+@auth
 @if(auth()->user()->role == 'customer')
 <section class="py-5 bg-white">
     <div class="container">
@@ -11,6 +12,7 @@
     </div>
 </section>
 @endif
+@endauth
 
 <section class="py-5 homepage-search-block position-relative" style="background: linear-gradient(to right, #63CDF6 0%, #1B1464 100%)">
     <div class="container">
